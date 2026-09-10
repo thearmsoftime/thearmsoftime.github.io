@@ -1,0 +1,24 @@
+{
+  "name": "thearmsoftime",
+  "version": "0.1.0",
+  "description": "Deep time laid out across your outstretched arms.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "solid-js": "^1.9.15"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "daisyui": "^5.7.32",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.2",
+    "vite-plugin-solid": "^2.11.14"
+  },
+  "private": true,
+  "type": "module"
+}

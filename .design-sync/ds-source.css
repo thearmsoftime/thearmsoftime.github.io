@@ -1,0 +1,68 @@
+/*
+ * design-sync source stylesheet for The Arms of Time.
+ * Compiled to .design-sync/.cache/ds-styles.css and shipped to claude.ai/design
+ * as the design system's styles.css. It carries: the three themes and their
+ * tokens (from src/index.css), the whole daisyUI component layer, and the
+ * palette + layout utilities a design may use, baked in so nothing depends on
+ * Tailwind running at render time.
+ */
+
+@import "../src/index.css";
+
+/* The app's own vocabulary comes from its source. */
+@source "../src";
+
+/* Every daisyUI component and modifier class. */
+@source inline("alert alert-dash alert-error alert-horizontal alert-info alert-outline alert-soft alert-success alert-vertical alert-warning aura aura-dual aura-glow aura-gold aura-holo aura-lg aura-md aura-rainbow aura-silver aura-sm aura-xl aura-xs avatar avatar-group avatar-offline avatar-online avatar-placeholder badge badge-accent badge-dash badge-error badge-ghost badge-info badge-lg badge-md badge-neutral badge-outline badge-primary badge-secondary badge-sm");
+@source inline("badge-soft badge-success badge-warning badge-xl badge-xs breadcrumbs btn btn-accent btn-active btn-block btn-circle btn-dash btn-disabled btn-error btn-ghost btn-info btn-lg btn-link btn-md btn-neutral btn-outline btn-primary btn-secondary btn-sm btn-soft btn-square btn-success btn-warning btn-wide btn-xl btn-xs cally card card-actions card-body card-border card-dash card-lg card-md card-side");
+@source inline("card-sm card-title card-xl card-xs carousel carousel-center carousel-end carousel-horizontal carousel-item carousel-start carousel-vertical chat chat-bubble chat-bubble-accent chat-bubble-error chat-bubble-info chat-bubble-neutral chat-bubble-primary chat-bubble-secondary chat-bubble-success chat-bubble-warning chat-end chat-footer chat-header chat-image chat-start checkbox checkbox-accent checkbox-error checkbox-info checkbox-lg checkbox-md checkbox-neutral checkbox-primary checkbox-secondary checkbox-sm checkbox-success checkbox-warning checkbox-xl checkbox-xs");
+@source inline("collapse collapse-arrow collapse-close collapse-content collapse-open collapse-plus collapse-title countdown diff diff-item-1 diff-item-2 diff-resizer disabled divider divider-accent divider-end divider-error divider-horizontal divider-info divider-neutral divider-primary divider-secondary divider-start divider-success divider-vertical divider-warning dock dock-active dock-label dock-lg dock-md dock-sm dock-xl dock-xs drawer drawer-button drawer-content drawer-end drawer-open drawer-overlay");
+@source inline("drawer-side drawer-toggle dropdown dropdown-bottom dropdown-center dropdown-close dropdown-content dropdown-end dropdown-hover dropdown-left dropdown-open dropdown-right dropdown-start dropdown-top fab fab-close fab-flower fab-main-action fieldset fieldset-label fieldset-legend file-input file-input-accent file-input-error file-input-ghost file-input-info file-input-lg file-input-md file-input-neutral file-input-primary file-input-secondary file-input-sm file-input-success file-input-warning file-input-xl file-input-xs filter filter-reset floating-label footer");
+@source inline("footer-center footer-horizontal footer-title footer-vertical glass has-event hero hero-content hero-overlay hover-3d hover-gallery image-full indicator indicator-bottom indicator-center indicator-end indicator-item indicator-middle indicator-start indicator-top input input-accent input-error input-ghost input-info input-lg input-md input-neutral input-primary input-secondary input-sm input-success input-warning input-xl input-xs is-bound is-disabled is-endrange is-hidden is-inrange");
+@source inline("is-outside-current-month is-selected is-selection-disabled is-startrange is-today join join-horizontal join-item join-vertical kbd kbd-lg kbd-md kbd-sm kbd-xl kbd-xs l1 l2 l3 l4 label lg link link-accent link-error link-hover link-info link-neutral link-primary link-secondary link-success link-warning list list-col-grow list-col-wrap list-row loading loading-ball loading-bars loading-dots loading-infinity");
+@source inline("loading-lg loading-md loading-ring loading-sm loading-spinner loading-xl loading-xs mask mask-circle mask-decagon mask-diamond mask-half-1 mask-half-2 mask-heart mask-hexagon mask-hexagon-2 mask-pentagon mask-squircle mask-star mask-star-2 mask-triangle mask-triangle-2 mask-triangle-3 mask-triangle-4 md megamenu megamenu-active megamenu-full megamenu-lg megamenu-md megamenu-sm megamenu-vertical megamenu-wide megamenu-xl megamenu-xs menu menu-active menu-disabled menu-dropdown menu-dropdown-show");
+@source inline("menu-dropdown-toggle menu-focus menu-horizontal menu-lg menu-md menu-paged menu-sm menu-title menu-vertical menu-xl menu-xs mockup-browser mockup-browser-toolbar mockup-code mockup-phone mockup-phone-camera mockup-phone-display mockup-window modal modal-action modal-backdrop modal-bottom modal-box modal-end modal-middle modal-open modal-start modal-toggle modal-top navbar navbar-center navbar-end navbar-start org otp otp-accent otp-error otp-info otp-joined otp-lg");
+@source inline("otp-md otp-neutral otp-primary otp-secondary otp-sm otp-success otp-warning otp-xl otp-xs pick-whole-week pika-button pika-label pika-lendar pika-next pika-prev pika-row pika-select pika-single pika-table pika-title pika-week progress progress-accent progress-error progress-info progress-neutral progress-primary progress-secondary progress-success progress-warning prose radial-progress radio radio-accent radio-error radio-info radio-lg radio-md radio-neutral radio-primary");
+@source inline("radio-secondary radio-sm radio-success radio-warning radio-xl radio-xs range range-accent range-error range-info range-lg range-md range-neutral range-primary range-secondary range-sm range-success range-vertical range-warning range-xl range-xs rating rating-half rating-hidden rating-lg rating-md rating-sm rating-xl rating-xs rdp-button_next rdp-button_previous rdp-caption_label rdp-chevron rdp-day rdp-day_button rdp-disabled rdp-dropdown rdp-dropdown_root rdp-dropdowns rdp-focusable");
+@source inline("rdp-footer rdp-hidden rdp-month_caption rdp-month_grid rdp-months rdp-nav rdp-outside rdp-range_end rdp-range_middle rdp-range_start rdp-selected rdp-today rdp-weekday rdp-week_number react-day-picker rounded-b-box rounded-b-field rounded-bl-box rounded-bl-field rounded-bl-selector rounded-box rounded-br-box rounded-br-field rounded-br-selector rounded-b-selector rounded-field rounded-l-box rounded-l-field rounded-l-selector rounded-r-box rounded-r-field rounded-r-selector rounded-selector rounded-t-box rounded-t-field rounded-tl-box rounded-tl-field rounded-tl-selector rounded-tr-box rounded-tr-field");
+@source inline("rounded-tr-selector rounded-t-selector row-hover select select-accent select-error select-ghost select-info select-lg select-md select-neutral select-primary select-secondary select-sm select-success select-warning select-xl select-xs skeleton skeleton-text sm stack stack-bottom stack-end stack-start stack-top stat stat-actions stat-desc stat-figure stats stats-horizontal stats-vertical stat-title status status-accent status-error status-info status-lg status-md");
+@source inline("status-neutral status-primary status-secondary status-sm status-success status-warning status-xl status-xs stat-value step step-accent step-error step-icon step-info step-neutral step-primary steps step-secondary steps-horizontal step-success steps-vertical step-warning swap swap-active swap-flip swap-indeterminate swap-off swap-on swap-rotate tab tab-active tab-content tab-disabled table table-lg table-md table-pin-cols table-pin-rows table-sm table-xl");
+@source inline("table-xs table-zebra tabs tabs-border tabs-bottom tabs-box tabs-lg tabs-lift tabs-md tabs-sm tabs-top tabs-xl tabs-xs textarea textarea-accent textarea-error textarea-ghost textarea-info textarea-lg textarea-md textarea-neutral textarea-primary textarea-secondary textarea-sm textarea-success textarea-warning textarea-xl textarea-xs text-rotate timeline timeline-box timeline-compact timeline-end timeline-horizontal timeline-middle timeline-snap-icon timeline-start timeline-vertical toast toast-bottom");
+@source inline("toast-center toast-end toast-middle toast-start toast-top toggle toggle-accent toggle-error toggle-info toggle-lg toggle-md toggle-neutral toggle-primary toggle-secondary toggle-sm toggle-success toggle-warning toggle-xl toggle-xs tooltip tooltip-accent tooltip-bottom tooltip-center tooltip-content tooltip-end tooltip-error tooltip-info tooltip-left tooltip-open tooltip-primary tooltip-right tooltip-secondary tooltip-start tooltip-success tooltip-top tooltip-warning validator validator-hint vc vc-arrow");
+@source inline("vc-date vc-date__btn vc-date__popup vc-date-range-tooltip vc-header__content vc-month vc-months__month vc-time vc-time__hour vc-time__keeping vc-time__minute vc-time__range vc-week__day vc-week-number vc-week-numbers__title vc-year vc-years__year w3 xl");
+
+/* The semantic palette: solid, and at the opacity steps the design may want. */
+@source inline("{bg,text,border,ring,fill,stroke,decoration,outline,divide,from,via,to,shadow,caret,accent}-{base-100,base-200,base-300,base-content,primary,primary-content,secondary,secondary-content,accent,accent-content,neutral,neutral-content,info,info-content,success,success-content,warning,warning-content,error,error-content}");
+@source inline("{bg,text,border,ring,fill,stroke,from,via,to}-{base-100,base-200,base-300,base-content,primary,primary-content,secondary,secondary-content,accent,accent-content,neutral,neutral-content,info,info-content,success,success-content,warning,warning-content,error,error-content}/{5,10,15,20,25,30,35,40,50,60,70,80,90}");
+@source inline("{hover,focus,active,disabled,focus-visible}:{bg,text,border,ring}-{base-100,base-200,base-300,base-content,primary,primary-content,secondary,secondary-content,accent,accent-content,neutral,neutral-content,info,info-content,success,success-content,warning,warning-content,error,error-content}");
+
+/* The system's own radii, font, and band colours. */
+@source inline("rounded-{box,field,selector}");
+@source inline("{rounded,rounded-t,rounded-b,rounded-l,rounded-r,rounded-tl,rounded-tr,rounded-bl,rounded-br}-{none,xs,sm,md,lg,xl,2xl,3xl,full}");
+@source inline("font-{display,sans,serif,mono}");
+
+/* Layout, spacing and type utilities, so a design can build its own glue. */
+@source inline("{p,px,py,pt,pb,pl,pr,m,mx,my,mt,mb,ml,mr,gap,gap-x,gap-y,space-x,space-y,w,h,min-w,min-h,max-w,max-h,size,top,bottom,left,right,inset,translate-x,translate-y}-{0,px,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,48,56,64,72,80,96}");
+@source inline("{w,h,max-w,min-w,max-h,min-h}-{auto,full,screen,min,max,fit,dvh,svh,prose,xs,sm,md,lg,xl,2xl,3xl,4xl,5xl,6xl,7xl,1/2,1/3,2/3,1/4,3/4}");
+@source inline("{flex,inline-flex,grid,inline-grid,block,inline-block,inline,hidden,contents,table,flow-root}");
+@source inline("{flex-row,flex-col,flex-row-reverse,flex-col-reverse,flex-wrap,flex-nowrap,flex-1,flex-auto,flex-initial,flex-none,shrink,shrink-0,grow,grow-0,basis-0,basis-auto,basis-full}");
+@source inline("{items,self,place-items,place-self}-{start,end,center,baseline,stretch}");
+@source inline("{justify,place-content,content}-{start,end,center,between,around,evenly,stretch}");
+@source inline("grid-cols-{1,2,3,4,5,6,7,8,9,10,11,12,none}");
+@source inline("grid-rows-{1,2,3,4,5,6,none}");
+@source inline("{col,row}-span-{1,2,3,4,5,6,7,8,9,10,11,12,full}");
+@source inline("text-{xs,sm,base,lg,xl,2xl,3xl,4xl,5xl,6xl,7xl,8xl,9xl,left,center,right,justify,balance,pretty,nowrap,wrap,ellipsis,clip}");
+@source inline("font-{thin,extralight,light,normal,medium,semibold,bold,extrabold,black,italic}");
+@source inline("{leading,tracking}-{none,tight,snug,normal,relaxed,loose,tighter,wide,wider,widest}");
+@source inline("{uppercase,lowercase,capitalize,normal-case,underline,line-through,no-underline,truncate,tabular-nums,whitespace-nowrap,whitespace-pre-line,break-words,italic,not-italic}");
+@source inline("{absolute,relative,fixed,sticky,static}");
+@source inline("{overflow,overflow-x,overflow-y}-{auto,hidden,visible,scroll,clip}");
+@source inline("{border,border-t,border-b,border-l,border-r,border-x,border-y}-{0,2,4,8}");
+@source inline("{border,border-t,border-b,border-l,border-r,border-x,border-y}");
+@source inline("{shadow,shadow-xs,shadow-sm,shadow-md,shadow-lg,shadow-xl,shadow-2xl,shadow-none,shadow-inner}");
+@source inline("opacity-{0,5,10,20,25,30,40,50,60,70,75,80,90,95,100}");
+@source inline("{cursor-pointer,cursor-default,cursor-not-allowed,select-none,pointer-events-none,pointer-events-auto,isolate,z-0,z-10,z-20,z-30,z-40,z-50}");
+@source inline("{transition,transition-all,transition-colors,transition-opacity,transition-transform,duration-150,duration-200,duration-300,duration-500,ease-in,ease-out,ease-in-out,animate-pulse,animate-spin}");
+@source inline("{sm,md,lg,xl,2xl}:{flex,grid,hidden,block,flex-row,flex-col}");
+@source inline("{sm,md,lg,xl}:grid-cols-{1,2,3,4,5,6}");
+@source inline("{sm,md,lg,xl}:{p,px,py,gap,text}-{2,4,6,8,10,12,16,sm,base,lg,xl,2xl}");
