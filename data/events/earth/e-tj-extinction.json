@@ -1,0 +1,20 @@
+{
+  "id": "e-tj-extinction",
+  "label": "Triassic extinction",
+  "description": "Volcanism as Pangaea starts to split. It clears the way for dinosaurs to take over.",
+  "yearsAgo": 201400000,
+  "uncertaintyYears": 200000,
+  "generationsAgo": 7486989,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Triassic%E2%80%93Jurassic_extinction",
+  "source": "https://stratigraphy.org/chart",
+  "sourceTitle": "ICS Chronostratigraphic Chart",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

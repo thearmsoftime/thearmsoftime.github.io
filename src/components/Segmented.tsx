@@ -3,8 +3,8 @@ import { For } from 'solid-js'
 export interface SegmentedOption<T extends string> {
   value: T
   label: string
-  /** Shown on hover, used for the zone's data note. */
-  title?: string
+  /** One short line in the tooltip. Left off, the button has no tooltip. */
+  tip?: string
 }
 
 interface Props<T extends string> {
@@ -13,6 +13,11 @@ interface Props<T extends string> {
   options: readonly SegmentedOption<T>[]
   value: T
   onChange: (value: T) => void
+  /**
+   * The option the pointer or the keyboard is on, null when it leaves. Lets a
+   * caller preview what picking it would do. Optional.
+   */
+  onHover?: (value: T | null) => void
 }
 
 /** One small pill of buttons. Used for both the timeline and the theme. */
@@ -31,13 +36,21 @@ export default function Segmented<T extends string>(props: Props<T>) {
               type="button"
               role="radio"
               aria-checked={active()}
-              title={option.title}
-              class="focus-visible:ring-accent/50 rounded-full px-2.5 py-1 text-[0.7rem] font-medium tracking-wide whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:outline-none sm:px-3 sm:text-xs"
+              data-tip={option.tip}
+              // Lets an overlay find this button and draw a line from it.
+              data-segment={option.value}
+              // The bar is stuck to the top, so the note opens downwards.
+              class="tooltip tooltip-bottom focus-visible:ring-accent/50 rounded-full px-2.5 py-1 text-[0.7rem] font-medium tracking-wide whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:outline-none sm:px-3 sm:text-xs"
               classList={{
                 'bg-accent text-accent-content': active(),
                 'text-base-content/55 hover:text-base-content': !active(),
               }}
               onClick={() => props.onChange(option.value)}
+              // Focus counts as hover, so the preview works from the keyboard.
+              onPointerEnter={() => props.onHover?.(option.value)}
+              onPointerLeave={() => props.onHover?.(null)}
+              onFocus={() => props.onHover?.(option.value)}
+              onBlur={() => props.onHover?.(null)}
             >
               {option.label}
             </button>

@@ -1,0 +1,20 @@
+{
+  "id": "h-rome",
+  "label": "Roman Empire",
+  "description": "About 74 generations ago. Closer to us than to the first writing.",
+  "yearsAgo": 2000,
+  "uncertaintyYears": 50,
+  "generationsAgo": 74,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Roman_Empire",
+  "source": "https://en.wikipedia.org/wiki/Roman_Empire",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "humans": {
+      "simple": true
+    },
+    "modern": {
+      "simple": true
+    }
+  }
+}

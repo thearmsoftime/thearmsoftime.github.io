@@ -1,0 +1,13 @@
+{
+  "id": "life",
+  "label": "Life",
+  "spanYears": 3700000000,
+  "spanUncertaintyYears": 100000000,
+  "spanGenerations": 137546468,
+  "startLabel": "First life",
+  "endLabel": "Now",
+  "note": "Start set at the oldest claimed traces of life, about 3.7 Ga in Greenland rock. Bands are the geological eons, eras and periods, cut at the same dates as the Earth timeline.",
+  "wikipedia": "https://en.wikipedia.org/wiki/Timeline_of_the_evolutionary_history_of_life",
+  "source": "https://www.nature.com/articles/nature19355",
+  "sourceTitle": "Nutman et al. 2016, Nature"
+}

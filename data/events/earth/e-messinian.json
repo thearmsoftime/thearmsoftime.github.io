@@ -1,0 +1,17 @@
+{
+  "id": "e-messinian",
+  "label": "The Mediterranean refills",
+  "description": "The sea had dried down to salt flats. Water pours back in through Gibraltar.",
+  "yearsAgo": 5333000,
+  "uncertaintyYears": 10000,
+  "generationsAgo": 198253,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Messinian_salinity_crisis",
+  "source": "https://stratigraphy.org/chart",
+  "sourceTitle": "ICS Chronostratigraphic Chart",
+  "timelines": {
+    "earth": {
+      "simple": false
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "u-writing",
+  "label": "Writing",
+  "description": "Clay tablets in Uruk. All of recorded history is a hundredth of a hair's width on this arm.",
+  "yearsAgo": 5300,
+  "uncertaintyYears": 200,
+  "generationsAgo": 197,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Cuneiform",
+  "source": "https://www.metmuseum.org/essays/the-origins-of-writing",
+  "sourceTitle": "The Met: The Origins of Writing",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "u-dark-energy",
+  "label": "Expansion speeds up",
+  "description": "Gravity loses to dark energy, and the universe starts expanding faster instead of slower.",
+  "yearsAgo": 6000000000,
+  "uncertaintyYears": 1000000000,
+  "generationsAgo": 223048327,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Accelerating_expansion_of_the_universe",
+  "source": "https://arxiv.org/abs/1807.06209",
+  "sourceTitle": "Planck 2018 results VI",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

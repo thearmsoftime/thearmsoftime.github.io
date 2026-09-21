@@ -1,0 +1,17 @@
+{
+  "id": "e-oceans",
+  "label": "Oceans",
+  "description": "Surface water, far earlier than anyone expected for a planet this young.",
+  "yearsAgo": 4400000000,
+  "uncertaintyYears": 100000000,
+  "generationsAgo": 163568773,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Origin_of_water_on_Earth",
+  "source": "https://www.nature.com/articles/35051550",
+  "sourceTitle": "Wilde et al. 2001, Nature",
+  "timelines": {
+    "earth": {
+      "simple": false
+    }
+  }
+}

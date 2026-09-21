@@ -1,0 +1,17 @@
+{
+  "id": "h-holocene",
+  "label": "The climate settles",
+  "description": "The ice age ends. A warm, steady climate for the first time in a hundred thousand years.",
+  "yearsAgo": 11700,
+  "uncertaintyYears": 100,
+  "generationsAgo": 435,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Holocene",
+  "source": "https://stratigraphy.org/chart",
+  "sourceTitle": "ICS Chronostratigraphic Chart",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

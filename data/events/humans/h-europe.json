@@ -1,0 +1,17 @@
+{
+  "id": "h-europe",
+  "label": "Modern humans in Europe",
+  "description": "We arrive in a continent Neanderthals have had to themselves for hundreds of thousands of years.",
+  "yearsAgo": 45000,
+  "uncertaintyYears": 3000,
+  "generationsAgo": 1673,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Cro-Magnon",
+  "source": "https://en.wikipedia.org/wiki/Cro-Magnon",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

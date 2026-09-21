@@ -1,0 +1,17 @@
+{
+  "id": "h-neanderthal-split",
+  "label": "Neanderthals split off",
+  "description": "Their line and ours part. They go north into Europe and Asia, we stay in Africa.",
+  "yearsAgo": 600000,
+  "uncertaintyYears": 100000,
+  "generationsAgo": 22305,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Neanderthal",
+  "source": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-neanderthalensis",
+  "sourceTitle": "Smithsonian Human Origins",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

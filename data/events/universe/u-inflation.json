@@ -1,0 +1,17 @@
+{
+  "id": "u-inflation",
+  "label": "Inflation",
+  "description": "In the first sliver of a second the universe grows enormously. Still theory, but it fits the data.",
+  "yearsAgo": 13787000000,
+  "uncertaintyYears": 20000000,
+  "generationsAgo": 512527881,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Cosmic_inflation",
+  "source": "https://arxiv.org/abs/1807.06209",
+  "sourceTitle": "Planck 2018 results VI",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "h-lomekwi",
+  "label": "Oldest stone tools",
+  "description": "Sharp flakes struck at Lomekwi, Kenya, 700,000 years before anyone in our own genus existed.",
+  "yearsAgo": 3300000,
+  "uncertaintyYears": 100000,
+  "generationsAgo": 122677,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Lomekwi",
+  "source": "https://www.nature.com/articles/nature14464",
+  "sourceTitle": "Harmand et al. 2015, Nature",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "h-acheulean",
+  "label": "Hand axes",
+  "description": "A tool shaped to a plan, and the same plan everywhere for over a million years.",
+  "yearsAgo": 1760000,
+  "uncertaintyYears": 50000,
+  "generationsAgo": 65428,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Acheulean",
+  "source": "https://humanorigins.si.edu/human-characteristics/tools-food",
+  "sourceTitle": "Smithsonian Human Origins: Tools & Food",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

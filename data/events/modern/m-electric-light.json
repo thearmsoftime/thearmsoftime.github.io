@@ -1,0 +1,17 @@
+{
+  "id": "m-electric-light",
+  "label": "Electric light",
+  "description": "Edison's lamp. The day stops ending at sunset.",
+  "yearsAgo": 147,
+  "uncertaintyYears": 2,
+  "generationsAgo": 5.46,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Incandescent_light_bulb",
+  "source": "https://en.wikipedia.org/wiki/Incandescent_light_bulb",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "modern": {
+      "simple": false
+    }
+  }
+}

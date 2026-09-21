@@ -1,0 +1,17 @@
+{
+  "id": "h-blombos",
+  "label": "A paint workshop",
+  "description": "Ground ochre mixed and stored in shells at Blombos Cave, South Africa.",
+  "yearsAgo": 100000,
+  "uncertaintyYears": 10000,
+  "generationsAgo": 3717,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Blombos_Cave",
+  "source": "https://en.wikipedia.org/wiki/Blombos_Cave",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

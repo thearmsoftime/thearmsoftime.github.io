@@ -1,0 +1,17 @@
+{
+  "id": "h-sulawesi",
+  "label": "Oldest picture of a story",
+  "description": "A cave wall in Sulawesi shows human figures and a wild pig, doing something together.",
+  "yearsAgo": 51200,
+  "uncertaintyYears": 2200,
+  "generationsAgo": 1903,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Caves_in_the_Maros-Pangkep_karst",
+  "source": "https://www.nature.com/articles/s41586-024-07541-7",
+  "sourceTitle": "Oktaviana et al. 2024, Nature",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

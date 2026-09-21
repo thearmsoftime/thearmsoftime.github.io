@@ -1,0 +1,17 @@
+{
+  "id": "u-rome",
+  "label": "Roman Empire",
+  "description": "Two thousand years ago sits about a quarter of a micrometre from the fingertip.",
+  "yearsAgo": 2000,
+  "uncertaintyYears": 50,
+  "generationsAgo": 74,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Roman_Empire",
+  "source": "https://en.wikipedia.org/wiki/Roman_Empire",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

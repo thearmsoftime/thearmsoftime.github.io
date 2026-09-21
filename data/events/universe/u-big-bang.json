@@ -1,0 +1,17 @@
+{
+  "id": "u-big-bang",
+  "label": "Big Bang",
+  "description": "Space, time, matter and energy all start here. This is the left fingertip.",
+  "yearsAgo": 13787000000,
+  "uncertaintyYears": 20000000,
+  "generationsAgo": 512527881,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Big_Bang",
+  "source": "https://arxiv.org/abs/1807.06209",
+  "sourceTitle": "Planck 2018 results VI",
+  "timelines": {
+    "universe": {
+      "simple": true
+    }
+  }
+}

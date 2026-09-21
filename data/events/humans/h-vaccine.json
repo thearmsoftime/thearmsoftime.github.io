@@ -1,0 +1,20 @@
+{
+  "id": "h-vaccine",
+  "label": "Vaccination",
+  "description": "Jenner's smallpox vaccine. The first disease we would go on to wipe out.",
+  "yearsAgo": 230,
+  "uncertaintyYears": 2,
+  "generationsAgo": 8.55,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Smallpox_vaccine",
+  "source": "https://en.wikipedia.org/wiki/Smallpox_vaccine",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "humans": {
+      "simple": false
+    },
+    "modern": {
+      "simple": false
+    }
+  }
+}

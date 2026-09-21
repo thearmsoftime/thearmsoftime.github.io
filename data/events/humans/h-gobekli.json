@@ -1,0 +1,17 @@
+{
+  "id": "h-gobekli",
+  "label": "Gobekli Tepe",
+  "description": "Carved stone circles in Turkey, built by people who had not started farming yet.",
+  "yearsAgo": 11500,
+  "uncertaintyYears": 200,
+  "generationsAgo": 428,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/G%C3%B6bekli_Tepe",
+  "source": "https://www.dainst.blog/the-tepe-telegrams/2016/06/22/how-old-ist-it-dating-gobekli-tepe/",
+  "sourceTitle": "German Archaeological Institute: dating Gobekli Tepe",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

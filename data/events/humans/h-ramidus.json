@@ -1,0 +1,17 @@
+{
+  "id": "h-ramidus",
+  "label": "Ardi",
+  "description": "Ardipithecus ramidus: a nearly complete skeleton. It climbed trees and walked on the ground.",
+  "yearsAgo": 4400000,
+  "uncertaintyYears": 100000,
+  "generationsAgo": 163569,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Ardipithecus_ramidus",
+  "source": "https://humanorigins.si.edu/evidence/human-fossils/species/ardipithecus-ramidus",
+  "sourceTitle": "Smithsonian Human Origins",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

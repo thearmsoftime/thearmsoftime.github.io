@@ -1,0 +1,17 @@
+{
+  "id": "m-paper",
+  "label": "Paper",
+  "description": "Cai Lun writes down the recipe in China. Writing gets cheap.",
+  "yearsAgo": 1920,
+  "uncertaintyYears": 20,
+  "generationsAgo": 71,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/History_of_paper",
+  "source": "https://en.wikipedia.org/wiki/History_of_paper",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "modern": {
+      "simple": false
+    }
+  }
+}

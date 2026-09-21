@@ -1,0 +1,20 @@
+{
+  "id": "e-sapiens",
+  "label": "Homo sapiens",
+  "description": "Fossils from Jebel Irhoud, Morocco. Our whole species is 0.13 mm on this arm.",
+  "yearsAgo": 315000,
+  "uncertaintyYears": 34000,
+  "generationsAgo": 11710,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Homo_sapiens",
+  "source": "https://www.nature.com/articles/nature22335",
+  "sourceTitle": "Richter et al. 2017, Nature",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": true
+    }
+  }
+}

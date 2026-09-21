@@ -1,0 +1,20 @@
+{
+  "id": "h-dna",
+  "label": "The double helix",
+  "description": "We work out how the instructions are written down, and later how to read them.",
+  "yearsAgo": 73,
+  "uncertaintyYears": 1,
+  "generationsAgo": 2.71,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Nucleic_acid_double_helix",
+  "source": "https://en.wikipedia.org/wiki/Nucleic_acid_double_helix",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "humans": {
+      "simple": false
+    },
+    "modern": {
+      "simple": false
+    }
+  }
+}

@@ -1,0 +1,428 @@
+[
+  {
+    "id": "e-hadean",
+    "label": "Hadean",
+    "kind": "eon",
+    "fromYearsAgo": 4540000000,
+    "toYearsAgo": 4031000000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Hadean",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth"
+    ]
+  },
+  {
+    "id": "e-archean",
+    "label": "Archean",
+    "kind": "eon",
+    "fromYearsAgo": 4031000000,
+    "toYearsAgo": 2500000000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Archean",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-proterozoic",
+    "label": "Proterozoic",
+    "kind": "eon",
+    "fromYearsAgo": 2500000000,
+    "toYearsAgo": 538800000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Proterozoic",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-phanerozoic",
+    "label": "Phanerozoic",
+    "kind": "eon",
+    "fromYearsAgo": 538800000,
+    "toYearsAgo": 0,
+    "wikipedia": "https://en.wikipedia.org/wiki/Phanerozoic",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-paleoproterozoic",
+    "label": "Palaeoproterozoic",
+    "kind": "era",
+    "fromYearsAgo": 2500000000,
+    "toYearsAgo": 1600000000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Paleoproterozoic",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-mesoproterozoic",
+    "label": "Mesoproterozoic",
+    "kind": "era",
+    "fromYearsAgo": 1600000000,
+    "toYearsAgo": 1000000000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Mesoproterozoic",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-neoproterozoic",
+    "label": "Neoproterozoic",
+    "kind": "era",
+    "fromYearsAgo": 1000000000,
+    "toYearsAgo": 538800000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Neoproterozoic",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-paleozoic",
+    "label": "Palaeozoic",
+    "kind": "era",
+    "fromYearsAgo": 538800000,
+    "toYearsAgo": 251902000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Paleozoic",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-mesozoic",
+    "label": "Mesozoic",
+    "kind": "era",
+    "fromYearsAgo": 251902000,
+    "toYearsAgo": 66000000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Mesozoic",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-cenozoic",
+    "label": "Cenozoic",
+    "kind": "era",
+    "fromYearsAgo": 66000000,
+    "toYearsAgo": 0,
+    "wikipedia": "https://en.wikipedia.org/wiki/Cenozoic",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-cryogenian",
+    "label": "Cryogenian",
+    "kind": "period",
+    "fromYearsAgo": 720000000,
+    "toYearsAgo": 635000000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Cryogenian",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-ediacaran",
+    "label": "Ediacaran",
+    "kind": "period",
+    "fromYearsAgo": 635000000,
+    "toYearsAgo": 538800000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Ediacaran",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-cambrian",
+    "label": "Cambrian",
+    "kind": "period",
+    "fromYearsAgo": 538800000,
+    "toYearsAgo": 486850000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Cambrian",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-ordovician",
+    "label": "Ordovician",
+    "kind": "period",
+    "fromYearsAgo": 486850000,
+    "toYearsAgo": 443100000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Ordovician",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-silurian",
+    "label": "Silurian",
+    "kind": "period",
+    "fromYearsAgo": 443100000,
+    "toYearsAgo": 419620000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Silurian",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-devonian",
+    "label": "Devonian",
+    "kind": "period",
+    "fromYearsAgo": 419620000,
+    "toYearsAgo": 358860000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Devonian",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-carboniferous",
+    "label": "Carboniferous",
+    "kind": "period",
+    "fromYearsAgo": 358860000,
+    "toYearsAgo": 298900000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Carboniferous",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-permian",
+    "label": "Permian",
+    "kind": "period",
+    "fromYearsAgo": 298900000,
+    "toYearsAgo": 251902000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Permian",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-triassic",
+    "label": "Triassic",
+    "kind": "period",
+    "fromYearsAgo": 251902000,
+    "toYearsAgo": 201400000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Triassic",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-jurassic",
+    "label": "Jurassic",
+    "kind": "period",
+    "fromYearsAgo": 201400000,
+    "toYearsAgo": 143100000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Jurassic",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-cretaceous",
+    "label": "Cretaceous",
+    "kind": "period",
+    "fromYearsAgo": 143100000,
+    "toYearsAgo": 66000000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Cretaceous",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-paleogene",
+    "label": "Palaeogene",
+    "kind": "period",
+    "fromYearsAgo": 66000000,
+    "toYearsAgo": 23040000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Paleogene",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-neogene",
+    "label": "Neogene",
+    "kind": "period",
+    "fromYearsAgo": 23040000,
+    "toYearsAgo": 2580000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Neogene",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-quaternary",
+    "label": "Quaternary",
+    "kind": "period",
+    "fromYearsAgo": 2580000,
+    "toYearsAgo": 0,
+    "wikipedia": "https://en.wikipedia.org/wiki/Quaternary",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth",
+      "life"
+    ]
+  },
+  {
+    "id": "e-paleocene",
+    "label": "Palaeocene",
+    "kind": "epoch",
+    "fromYearsAgo": 66000000,
+    "toYearsAgo": 56000000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Paleocene",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth"
+    ]
+  },
+  {
+    "id": "e-eocene",
+    "label": "Eocene",
+    "kind": "epoch",
+    "fromYearsAgo": 56000000,
+    "toYearsAgo": 33900000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Eocene",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth"
+    ]
+  },
+  {
+    "id": "e-oligocene",
+    "label": "Oligocene",
+    "kind": "epoch",
+    "fromYearsAgo": 33900000,
+    "toYearsAgo": 23040000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Oligocene",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth"
+    ]
+  },
+  {
+    "id": "e-miocene",
+    "label": "Miocene",
+    "kind": "epoch",
+    "fromYearsAgo": 23040000,
+    "toYearsAgo": 5333000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Miocene",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth"
+    ]
+  },
+  {
+    "id": "e-pliocene",
+    "label": "Pliocene",
+    "kind": "epoch",
+    "fromYearsAgo": 5333000,
+    "toYearsAgo": 2580000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Pliocene",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth"
+    ]
+  },
+  {
+    "id": "e-pleistocene",
+    "label": "Pleistocene",
+    "kind": "epoch",
+    "fromYearsAgo": 2580000,
+    "toYearsAgo": 11700,
+    "wikipedia": "https://en.wikipedia.org/wiki/Pleistocene",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth"
+    ]
+  },
+  {
+    "id": "e-holocene",
+    "label": "Holocene",
+    "kind": "epoch",
+    "fromYearsAgo": 11700,
+    "toYearsAgo": 0,
+    "wikipedia": "https://en.wikipedia.org/wiki/Holocene",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "earth"
+    ]
+  }
+]

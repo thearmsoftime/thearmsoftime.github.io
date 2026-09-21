@@ -1,0 +1,17 @@
+{
+  "id": "h-agriculture",
+  "label": "Farming",
+  "description": "Wild cereals become crops in southwest Asia. About 430 generations ago.",
+  "yearsAgo": 11500,
+  "uncertaintyYears": 1000,
+  "generationsAgo": 428,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Neolithic_Revolution",
+  "source": "https://www.pnas.org/doi/10.1073/pnas.1612797113",
+  "sourceTitle": "Arranz-Otaegui et al. 2016, PNAS",
+  "timelines": {
+    "humans": {
+      "simple": true
+    }
+  }
+}

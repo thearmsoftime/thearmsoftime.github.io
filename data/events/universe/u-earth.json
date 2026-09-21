@@ -1,0 +1,18 @@
+{
+  "id": "u-earth",
+  "label": "Earth forms",
+  "description": "Our planet clumps together out of the disc around the young Sun.",
+  "yearsAgo": 4540000000,
+  "uncertaintyYears": 50000000,
+  "generationsAgo": 168773234,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Earth",
+  "source": "https://en.wikipedia.org/wiki/Age_of_Earth",
+  "sourceTitle": "Age of Earth, after Dalrymple 2001",
+  "timelines": {
+    "universe": {
+      "simple": true,
+      "landmark": true
+    }
+  }
+}

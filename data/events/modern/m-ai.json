@@ -1,0 +1,17 @@
+{
+  "id": "m-ai",
+  "label": "Machines that talk",
+  "description": "Large language models reach everyone at once.",
+  "yearsAgo": 4,
+  "uncertaintyYears": 1,
+  "generationsAgo": 0.15,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Large_language_model",
+  "source": "https://en.wikipedia.org/wiki/Large_language_model",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "modern": {
+      "simple": false
+    }
+  }
+}

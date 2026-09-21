@@ -1,0 +1,17 @@
+{
+  "id": "m-relativity",
+  "label": "Space and time bend",
+  "description": "Einstein's general relativity. Gravity turns out to be the shape of space.",
+  "yearsAgo": 111,
+  "uncertaintyYears": 1,
+  "generationsAgo": 4.13,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/General_relativity",
+  "source": "https://en.wikipedia.org/wiki/General_relativity",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "modern": {
+      "simple": false
+    }
+  }
+}

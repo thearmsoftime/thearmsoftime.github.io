@@ -1,0 +1,20 @@
+{
+  "id": "e-land-animals",
+  "label": "First animals on land",
+  "description": "Pneumodesmus, a millipede from Scotland, with holes in its shell for breathing air.",
+  "yearsAgo": 425000000,
+  "uncertaintyYears": 5000000,
+  "generationsAgo": 15799257,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Pneumodesmus",
+  "source": "https://en.wikipedia.org/wiki/Pneumodesmus",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "e-noe",
+  "label": "Oxygen rises again",
+  "description": "A second rise, much bigger than the first. Now there is enough of it in the sea for animals to grow large.",
+  "yearsAgo": 800000000,
+  "uncertaintyYears": 100000000,
+  "generationsAgo": 29739777,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Neoproterozoic_oxygenation_event",
+  "source": "https://www.sciencedirect.com/science/article/abs/pii/S0012825211001498",
+  "sourceTitle": "Och & Shields-Zhou 2012, Earth-Science Reviews",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

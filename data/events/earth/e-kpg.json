@@ -1,0 +1,22 @@
+{
+  "id": "e-kpg",
+  "label": "Asteroid, end of the dinosaurs",
+  "description": "A 10 km rock hits Yucatan. Three quarters of species go, and the Mesozoic ends.",
+  "yearsAgo": 66000000,
+  "uncertaintyYears": 100000,
+  "generationsAgo": 2453532,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Cretaceous%E2%80%93Paleogene_extinction_event",
+  "source": "https://stratigraphy.org/chart",
+  "sourceTitle": "ICS Chronostratigraphic Chart",
+  "watch": "https://www.youtube.com/watch?v=dFCbJmgeHmA",
+  "watchTitle": "Kurzgesagt video",
+  "timelines": {
+    "earth": {
+      "simple": true
+    },
+    "life": {
+      "simple": true
+    }
+  }
+}

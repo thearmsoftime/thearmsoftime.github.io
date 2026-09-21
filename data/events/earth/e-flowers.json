@@ -1,0 +1,20 @@
+{
+  "id": "e-flowers",
+  "label": "Flowers",
+  "description": "Flowering plants appear, then take over the land in about 50 million years.",
+  "yearsAgo": 130000000,
+  "uncertaintyYears": 5000000,
+  "generationsAgo": 4832714,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Flowering_plant",
+  "source": "https://en.wikipedia.org/wiki/Flowering_plant",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": true
+    }
+  }
+}

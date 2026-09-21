@@ -1,0 +1,17 @@
+{
+  "id": "h-wheel",
+  "label": "The wheel",
+  "description": "A wagon scratched on a clay pot at Bronocice, Poland, is among the oldest evidence.",
+  "yearsAgo": 5400,
+  "uncertaintyYears": 200,
+  "generationsAgo": 201,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Wheel",
+  "source": "https://en.wikipedia.org/wiki/Wheel",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

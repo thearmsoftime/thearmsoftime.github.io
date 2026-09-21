@@ -1,0 +1,17 @@
+{
+  "id": "u-land-plants",
+  "label": "Plants on land",
+  "description": "The first spores from land plants. Green creeps out of the water.",
+  "yearsAgo": 470000000,
+  "uncertaintyYears": 10000000,
+  "generationsAgo": 17472119,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Embryophyte",
+  "source": "https://nph.onlinelibrary.wiley.com/doi/10.1111/j.1469-8137.2010.03471.x",
+  "sourceTitle": "Wellman 2010, New Phytologist",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

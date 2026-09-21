@@ -1,0 +1,17 @@
+{
+  "id": "h-venus",
+  "label": "Oldest fired clay figure",
+  "description": "The Venus of Dolni Vestonice. Fired clay used for art long before anyone made pots.",
+  "yearsAgo": 29000,
+  "uncertaintyYears": 1000,
+  "generationsAgo": 1078,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Venus_of_Doln%C3%AD_V%C4%9Bstonice",
+  "source": "https://en.wikipedia.org/wiki/Venus_of_Doln%C3%AD_V%C4%9Bstonice",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

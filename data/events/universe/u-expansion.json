@@ -1,0 +1,17 @@
+{
+  "id": "u-expansion",
+  "label": "We learn the universe expands",
+  "description": "Hubble shows distant galaxies are moving away. The universe gets a beginning, and an age.",
+  "yearsAgo": 97,
+  "uncertaintyYears": 1,
+  "generationsAgo": 3.61,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Hubble%27s_law",
+  "source": "https://en.wikipedia.org/wiki/Hubble%27s_law",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

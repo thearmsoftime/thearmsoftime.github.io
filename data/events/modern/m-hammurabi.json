@@ -1,0 +1,17 @@
+{
+  "id": "m-hammurabi",
+  "label": "Written law",
+  "description": "Hammurabi has 282 laws cut into a stone pillar in Babylon.",
+  "yearsAgo": 3780,
+  "uncertaintyYears": 10,
+  "generationsAgo": 141,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Code_of_Hammurabi",
+  "source": "https://en.wikipedia.org/wiki/Code_of_Hammurabi",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "modern": {
+      "simple": false
+    }
+  }
+}

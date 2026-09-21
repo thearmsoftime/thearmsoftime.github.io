@@ -1,0 +1,13 @@
+{
+  "id": "humans",
+  "label": "Humans",
+  "spanYears": 7000000,
+  "spanUncertaintyYears": 1000000,
+  "spanGenerations": 260223,
+  "startLabel": "Split from chimpanzees",
+  "endLabel": "Now",
+  "note": "Start set at the hominin/chimpanzee split, about 7 Ma, marked by Sahelanthropus tchadensis (7 to 6 Ma).",
+  "wikipedia": "https://en.wikipedia.org/wiki/Human_evolution",
+  "source": "https://humanorigins.si.edu/evidence/human-fossils/species/sahelanthropus-tchadensis",
+  "sourceTitle": "Smithsonian Human Origins"
+}

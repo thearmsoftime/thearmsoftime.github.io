@@ -1,0 +1,17 @@
+{
+  "id": "m-principia",
+  "label": "Newton writes down gravity",
+  "description": "One set of rules for apples, moons and planets alike.",
+  "yearsAgo": 339,
+  "uncertaintyYears": 1,
+  "generationsAgo": 12.6,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Philosophi%C3%A6_Naturalis_Principia_Mathematica",
+  "source": "https://en.wikipedia.org/wiki/Philosophi%C3%A6_Naturalis_Principia_Mathematica",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "modern": {
+      "simple": true
+    }
+  }
+}

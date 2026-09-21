@@ -1,0 +1,20 @@
+{
+  "id": "e-ediacaran",
+  "label": "The big freeze ends",
+  "description": "The ice retreats, and the first large organisms follow.",
+  "yearsAgo": 635000000,
+  "uncertaintyYears": 1000000,
+  "generationsAgo": 23605948,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Ediacaran",
+  "source": "https://stratigraphy.org/chart",
+  "sourceTitle": "ICS Chronostratigraphic Chart",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "e-petm",
+  "label": "A sudden hot spell",
+  "description": "Carbon floods the air and the world warms 5 to 8 degrees. The closest thing to what we are doing now.",
+  "yearsAgo": 56000000,
+  "uncertaintyYears": 100000,
+  "generationsAgo": 2081784,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Paleocene%E2%80%93Eocene_thermal_maximum",
+  "source": "https://stratigraphy.org/chart",
+  "sourceTitle": "ICS Chronostratigraphic Chart",
+  "timelines": {
+    "earth": {
+      "simple": false
+    }
+  }
+}

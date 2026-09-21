@@ -1,0 +1,20 @@
+{
+  "id": "e-ordovician-ext",
+  "label": "Ordovician extinction",
+  "description": "The first of the big five. Ice caps grow, sea level drops, most marine species die.",
+  "yearsAgo": 443100000,
+  "uncertaintyYears": 500000,
+  "generationsAgo": 16472119,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Late_Ordovician_mass_extinction",
+  "source": "https://stratigraphy.org/chart",
+  "sourceTitle": "ICS Chronostratigraphic Chart",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

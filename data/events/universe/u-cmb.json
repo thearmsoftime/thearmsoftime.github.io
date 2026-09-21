@@ -1,0 +1,17 @@
+{
+  "id": "u-cmb",
+  "label": "The fog clears",
+  "description": "After 380,000 years the gas cools enough for atoms to form and light to travel. We still pick up that light.",
+  "yearsAgo": 13786620000,
+  "uncertaintyYears": 20000000,
+  "generationsAgo": 512513755,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Cosmic_microwave_background",
+  "source": "https://arxiv.org/abs/1807.06209",
+  "sourceTitle": "Planck 2018 results VI",
+  "timelines": {
+    "universe": {
+      "simple": true
+    }
+  }
+}

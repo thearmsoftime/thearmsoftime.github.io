@@ -1,0 +1,17 @@
+{
+  "id": "h-oldowan",
+  "label": "Oldowan toolkit",
+  "description": "Hammerstones and sharp flakes for cutting meat off bone. The same design for a million years.",
+  "yearsAgo": 2600000,
+  "uncertaintyYears": 100000,
+  "generationsAgo": 96654,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Oldowan",
+  "source": "https://humanorigins.si.edu/human-characteristics/tools-food",
+  "sourceTitle": "Smithsonian Human Origins: Tools & Food",
+  "timelines": {
+    "humans": {
+      "simple": true
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "m-gunpowder",
+  "label": "Gunpowder",
+  "description": "Chinese alchemists looking for long life find the opposite.",
+  "yearsAgo": 1120,
+  "uncertaintyYears": 50,
+  "generationsAgo": 42,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/History_of_gunpowder",
+  "source": "https://en.wikipedia.org/wiki/History_of_gunpowder",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "modern": {
+      "simple": false
+    }
+  }
+}

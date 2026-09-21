@@ -1,0 +1,17 @@
+{
+  "id": "e-columbia",
+  "label": "First big supercontinent",
+  "description": "Columbia, also called Nuna. Continents have been gathering and splitting ever since.",
+  "yearsAgo": 1800000000,
+  "uncertaintyYears": 100000000,
+  "generationsAgo": 66914498,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Columbia_(supercontinent)",
+  "source": "https://en.wikipedia.org/wiki/Columbia_(supercontinent)",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "earth": {
+      "simple": false
+    }
+  }
+}

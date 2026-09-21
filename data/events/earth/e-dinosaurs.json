@@ -1,0 +1,21 @@
+{
+  "id": "e-dinosaurs",
+  "label": "Age of dinosaurs",
+  "description": "It starts with Nyasasaurus in Tanzania and ends with the asteroid. Only the birds come through.",
+  "yearsAgo": 243000000,
+  "endYearsAgo": 66000000,
+  "uncertaintyYears": 3000000,
+  "generationsAgo": 9033457,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Dinosaur",
+  "source": "https://ucmp.berkeley.edu/2012/12/werning-in-biology-letters-with-oldest-dinosaur/",
+  "sourceTitle": "UCMP Berkeley, on Nesbitt et al. 2013",
+  "timelines": {
+    "earth": {
+      "simple": true
+    },
+    "life": {
+      "simple": true
+    }
+  }
+}

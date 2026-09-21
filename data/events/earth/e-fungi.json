@@ -1,0 +1,20 @@
+{
+  "id": "e-fungi",
+  "label": "First fungi",
+  "description": "Ourasphaira, a speck of a fossil from Arctic Canada. Mushrooms, yeast and mould all come from this branch.",
+  "yearsAgo": 1000000000,
+  "uncertaintyYears": 100000000,
+  "generationsAgo": 37174721,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Ourasphaira_giraldae",
+  "source": "https://www.nature.com/articles/s41586-019-1217-0",
+  "sourceTitle": "Loron et al. 2019, Nature",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

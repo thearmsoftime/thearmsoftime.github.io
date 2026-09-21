@@ -1,0 +1,17 @@
+{
+  "id": "u-dark-ages",
+  "label": "Dark ages",
+  "description": "No stars yet. Just dark, cooling gas pulling itself together.",
+  "yearsAgo": 13700000000,
+  "uncertaintyYears": 100000000,
+  "generationsAgo": 509293680,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Chronology_of_the_universe",
+  "source": "https://arxiv.org/abs/1807.06209",
+  "sourceTitle": "Planck 2018 results VI",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

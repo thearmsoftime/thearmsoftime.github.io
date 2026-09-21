@@ -1,0 +1,17 @@
+{
+  "id": "h-kadabba",
+  "label": "Ardipithecus kadabba",
+  "description": "Teeth and toe bones from Ethiopia. Still very ape-like.",
+  "yearsAgo": 5600000,
+  "uncertaintyYears": 200000,
+  "generationsAgo": 208178,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Ardipithecus_kadabba",
+  "source": "https://humanorigins.si.edu/evidence/human-fossils/species/ardipithecus-kadabba",
+  "sourceTitle": "Smithsonian Human Origins",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "e-primates",
+  "label": "First primates",
+  "description": "Purgatorius, a small climber in Montana, only a hundred thousand years or so after the asteroid.",
+  "yearsAgo": 65900000,
+  "uncertaintyYears": 500000,
+  "generationsAgo": 2449814,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Purgatorius",
+  "source": "https://vcresearch.berkeley.edu/news/our-earliest-primate-ancestors-rapidly-spread-after-dinosaur-extinction",
+  "sourceTitle": "UC Berkeley Research, on Wilson Mantilla et al. 2021",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": true
+    }
+  }
+}

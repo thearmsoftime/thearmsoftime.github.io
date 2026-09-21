@@ -1,0 +1,17 @@
+{
+  "id": "u-tetrapods",
+  "label": "Arms",
+  "description": "Tiktaalik: a fish with a neck, ribs and the beginnings of arms.",
+  "yearsAgo": 375000000,
+  "uncertaintyYears": 5000000,
+  "generationsAgo": 13940520,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Tiktaalik",
+  "source": "https://www.nature.com/news/2006/060403/full/news060403-7.html",
+  "sourceTitle": "Nature News 2006, on Daeschler et al.",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

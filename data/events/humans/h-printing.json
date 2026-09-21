@@ -1,0 +1,20 @@
+{
+  "id": "h-printing",
+  "label": "Printing press",
+  "description": "Gutenberg's movable type. Ideas start travelling faster than the people carrying them.",
+  "yearsAgo": 586,
+  "uncertaintyYears": 5,
+  "generationsAgo": 21.8,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Printing_press",
+  "source": "https://en.wikipedia.org/wiki/Printing_press",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "humans": {
+      "simple": false
+    },
+    "modern": {
+      "simple": true
+    }
+  }
+}

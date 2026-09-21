@@ -1,0 +1,17 @@
+{
+  "id": "e-keeling",
+  "label": "We start measuring the air",
+  "description": "Continuous CO2 records begin at Mauna Loa. The line has gone up every year since.",
+  "yearsAgo": 68,
+  "uncertaintyYears": 1,
+  "generationsAgo": 2.53,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Keeling_Curve",
+  "source": "https://en.wikipedia.org/wiki/Keeling_Curve",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "earth": {
+      "simple": false
+    }
+  }
+}

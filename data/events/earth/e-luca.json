@@ -1,0 +1,17 @@
+{
+  "id": "e-luca",
+  "label": "The ancestor of all life",
+  "description": "One cell, called LUCA. Every living thing today grows out of it. Genes date it this early; the oldest traces in rock are younger.",
+  "yearsAgo": 4200000000,
+  "uncertaintyYears": 120000000,
+  "generationsAgo": 156133829,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Last_universal_common_ancestor",
+  "source": "https://www.nature.com/articles/s41559-024-02461-1",
+  "sourceTitle": "Moody et al. 2024, Nature Ecology & Evolution",
+  "timelines": {
+    "earth": {
+      "simple": false
+    }
+  }
+}

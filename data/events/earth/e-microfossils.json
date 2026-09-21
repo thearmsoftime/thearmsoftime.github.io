@@ -1,0 +1,20 @@
+{
+  "id": "e-microfossils",
+  "label": "First fossils most people accept",
+  "description": "Microbial mats in the Dresser Formation, Western Australia.",
+  "yearsAgo": 3480000000,
+  "uncertaintyYears": 20000000,
+  "generationsAgo": 129368030,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Dresser_Formation",
+  "source": "https://www.nature.com/articles/nature19355",
+  "sourceTitle": "Nutman et al. 2016, Nature",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

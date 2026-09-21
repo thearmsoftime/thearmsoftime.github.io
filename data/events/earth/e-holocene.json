@@ -1,0 +1,17 @@
+{
+  "id": "e-holocene",
+  "label": "The last ice age ends",
+  "description": "The warm spell we still live in. Everything humans built happened inside it.",
+  "yearsAgo": 11700,
+  "uncertaintyYears": 100,
+  "generationsAgo": 435,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Holocene",
+  "source": "https://stratigraphy.org/chart",
+  "sourceTitle": "ICS Chronostratigraphic Chart",
+  "timelines": {
+    "earth": {
+      "simple": false
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "u-cmb-found",
+  "label": "The Big Bang's echo is found",
+  "description": "Penzias and Wilson pick up the microwave glow left over from the fog clearing.",
+  "yearsAgo": 61,
+  "uncertaintyYears": 1,
+  "generationsAgo": 2.27,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Discovery_of_cosmic_microwave_background_radiation",
+  "source": "https://en.wikipedia.org/wiki/Discovery_of_cosmic_microwave_background_radiation",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

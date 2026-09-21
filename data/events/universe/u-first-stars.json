@@ -1,0 +1,17 @@
+{
+  "id": "u-first-stars",
+  "label": "First stars",
+  "description": "The first stars switch on. They are the first things to make elements heavier than helium.",
+  "yearsAgo": 13600000000,
+  "uncertaintyYears": 200000000,
+  "generationsAgo": 505576208,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Stellar_population",
+  "source": "https://arxiv.org/abs/1807.06209",
+  "sourceTitle": "Planck 2018 results VI",
+  "timelines": {
+    "universe": {
+      "simple": true
+    }
+  }
+}

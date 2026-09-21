@@ -1,0 +1,20 @@
+{
+  "id": "h-apollo",
+  "label": "People on the Moon",
+  "description": "Roughly two generations ago.",
+  "yearsAgo": 57,
+  "uncertaintyYears": 1,
+  "generationsAgo": 2.12,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Apollo_11",
+  "source": "https://en.wikipedia.org/wiki/Apollo_11",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "humans": {
+      "simple": true
+    },
+    "modern": {
+      "simple": true
+    }
+  }
+}

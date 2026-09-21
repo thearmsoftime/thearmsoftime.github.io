@@ -1,0 +1,17 @@
+{
+  "id": "u-out-of-africa",
+  "label": "People spread out of Africa",
+  "description": "The move that puts humans on every continent. Invisible at this scale.",
+  "yearsAgo": 60000,
+  "uncertaintyYears": 10000,
+  "generationsAgo": 2230,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Early_human_migrations",
+  "source": "https://www.nature.com/articles/nature19792",
+  "sourceTitle": "Malaspinas et al. 2016, Nature",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

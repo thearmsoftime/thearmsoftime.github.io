@@ -1,0 +1,17 @@
+{
+  "id": "m-black-death",
+  "label": "The Black Death",
+  "description": "About a third of Europe dies in four years.",
+  "yearsAgo": 678,
+  "uncertaintyYears": 2,
+  "generationsAgo": 25.2,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Black_Death",
+  "source": "https://en.wikipedia.org/wiki/Black_Death",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "modern": {
+      "simple": false
+    }
+  }
+}

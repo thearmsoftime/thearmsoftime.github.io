@@ -1,0 +1,17 @@
+{
+  "id": "h-sapiens",
+  "label": "Homo sapiens",
+  "description": "Fossils from Jebel Irhoud, Morocco. Our own species, about 11,700 generations back.",
+  "yearsAgo": 315000,
+  "uncertaintyYears": 34000,
+  "generationsAgo": 11710,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Homo_sapiens",
+  "source": "https://www.nature.com/articles/nature22335",
+  "sourceTitle": "Richter et al. 2017, Nature",
+  "timelines": {
+    "humans": {
+      "simple": true
+    }
+  }
+}

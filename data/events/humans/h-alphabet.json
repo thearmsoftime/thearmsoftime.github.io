@@ -1,0 +1,20 @@
+{
+  "id": "h-alphabet",
+  "label": "The alphabet",
+  "description": "Proto-Sinaitic: one sign per sound. Writing becomes something ordinary people can learn.",
+  "yearsAgo": 3800,
+  "uncertaintyYears": 200,
+  "generationsAgo": 141,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Proto-Sinaitic_script",
+  "source": "https://en.wikipedia.org/wiki/Proto-Sinaitic_script",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "humans": {
+      "simple": false
+    },
+    "modern": {
+      "simple": false
+    }
+  }
+}

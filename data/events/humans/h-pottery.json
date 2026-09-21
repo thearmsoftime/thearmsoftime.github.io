@@ -1,0 +1,17 @@
+{
+  "id": "h-pottery",
+  "label": "Oldest pots",
+  "description": "Fired clay vessels in Xianrendong Cave, China, ten thousand years before farming.",
+  "yearsAgo": 20000,
+  "uncertaintyYears": 1000,
+  "generationsAgo": 743,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Xianren_Cave",
+  "source": "https://www.science.org/doi/10.1126/science.1218643",
+  "sourceTitle": "Wu et al. 2012, Science",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "m-stonehenge",
+  "label": "Stonehenge finished",
+  "description": "The big sarsen stones go up in England while the pyramids are still new.",
+  "yearsAgo": 4500,
+  "uncertaintyYears": 100,
+  "generationsAgo": 167,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Stonehenge",
+  "source": "https://en.wikipedia.org/wiki/Stonehenge",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "modern": {
+      "simple": false
+    }
+  }
+}

@@ -4,4 +4,6 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [tailwindcss(), solid()],
+  server: { port: 3333, strictPort: true },
+  preview: { port: 3333, strictPort: true },
 })

@@ -1,0 +1,20 @@
+{
+  "id": "e-grasslands",
+  "label": "Grasslands spread",
+  "description": "Grasses take over dry country. Grazing animals follow, and later so do our ancestors.",
+  "yearsAgo": 8000000,
+  "uncertaintyYears": 2000000,
+  "generationsAgo": 297398,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Grassland",
+  "source": "https://en.wikipedia.org/wiki/Grassland",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "h-eight-billion",
+  "label": "Eight billion people",
+  "description": "More humans alive at once than in any generation before.",
+  "yearsAgo": 4,
+  "uncertaintyYears": 1,
+  "generationsAgo": 0.15,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/World_population",
+  "source": "https://en.wikipedia.org/wiki/World_population",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "humans": {
+      "simple": false
+    },
+    "modern": {
+      "simple": false
+    }
+  }
+}

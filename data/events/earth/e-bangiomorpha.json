@@ -1,0 +1,20 @@
+{
+  "id": "e-bangiomorpha",
+  "label": "Sex, and complex cells",
+  "description": "Bangiomorpha, a red alga: the oldest datable fossil of a complex cell that reproduced sexually.",
+  "yearsAgo": 1047000000,
+  "uncertaintyYears": 15000000,
+  "generationsAgo": 38921933,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Bangiomorpha",
+  "source": "https://authors.library.caltech.edu/records/7brz9-8mw86",
+  "sourceTitle": "Gibson et al. 2018, Geology",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": true
+    }
+  }
+}

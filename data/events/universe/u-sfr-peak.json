@@ -1,0 +1,17 @@
+{
+  "id": "u-sfr-peak",
+  "label": "Peak of star birth",
+  "description": "Stars are being born faster than at any time before or since. The universe is at its brightest.",
+  "yearsAgo": 10300000000,
+  "uncertaintyYears": 500000000,
+  "generationsAgo": 382899628,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Star_formation",
+  "source": "https://www.annualreviews.org/doi/pdf/10.1146/annurev-astro-081811-125615",
+  "sourceTitle": "Madau & Dickinson 2014, ARA&A",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

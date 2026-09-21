@@ -1,0 +1,17 @@
+{
+  "id": "h-burial",
+  "label": "Burying the dead",
+  "description": "Deliberate graves at Qafzeh and Skhul in Israel, some with objects placed in them.",
+  "yearsAgo": 100000,
+  "uncertaintyYears": 20000,
+  "generationsAgo": 3717,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Qafzeh_Cave",
+  "source": "https://humanorigins.si.edu/evidence/human-evolution-timeline-interactive",
+  "sourceTitle": "Smithsonian Human Origins timeline",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

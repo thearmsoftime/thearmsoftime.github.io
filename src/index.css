@@ -45,44 +45,6 @@
 }
 
 @plugin "daisyui/theme" {
-  name: "black";
-  color-scheme: dark;
-
-  /* True black for OLED: base-100 is 0% lightness, and the panels stay near it. */
-  --color-base-100: oklch(0% 0 0);
-  --color-base-200: oklch(0% 0 0);
-  --color-base-300: oklch(16% 0 0);
-  --color-base-content: oklch(91% 0 0);
-
-  --color-primary: oklch(84% 0.15 195);
-  --color-primary-content: oklch(12% 0.03 195);
-  --color-secondary: oklch(78% 0.12 300);
-  --color-secondary-content: oklch(12% 0.03 300);
-  --color-accent: oklch(84% 0.15 195);
-  --color-accent-content: oklch(10% 0.03 195);
-  --color-neutral: oklch(18% 0 0);
-  --color-neutral-content: oklch(91% 0 0);
-
-  --color-info: oklch(78% 0.12 232);
-  --color-success: oklch(78% 0.15 163);
-  --color-warning: oklch(85% 0.16 88);
-  --color-error: oklch(72% 0.19 22);
-  --color-info-content: oklch(12% 0.04 232);
-  --color-success-content: oklch(12% 0.04 163);
-  --color-warning-content: oklch(14% 0.05 88);
-  --color-error-content: oklch(12% 0.05 22);
-
-  --radius-selector: 999px;
-  --radius-field: 0.5rem;
-  --radius-box: 1rem;
-  --size-selector: 0.25rem;
-  --size-field: 0.25rem;
-  --border: 1px;
-  --depth: 0;
-  --noise: 0;
-}
-
-@plugin "daisyui/theme" {
   name: "light";
   color-scheme: light;
 
@@ -119,6 +81,27 @@
   --noise: 0;
 }
 
+/*
+ * DaisyUI tooltips, set at the size the rest of the app reads in — the stock
+ * 0.875rem shouts next to 0.6rem cells — and lifted over the marker knob so a
+ * timeline name is never drawn behind it.
+ */
+.tooltip[data-tip]:before,
+.tooltip > .tooltip-content {
+  z-index: 40;
+  font-size: 0.7rem;
+  line-height: 1.3;
+  /* The timeline cells are set in small caps; the bubble reads as a sentence. */
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  box-shadow: 0 2px 10px oklch(0% 0 0 / 0.35);
+}
+
+.tooltip:after {
+  z-index: 40;
+}
+
 @theme {
   --font-display:
     "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia,
@@ -126,11 +109,10 @@
 }
 
 /*
- * Band colours are per-theme: the pale set reads on the two dark themes and
- * disappears on paper, so light gets its own deeper set.
+ * Band colours are per-theme: the pale set reads on dark and disappears on
+ * paper, so light gets its own deeper set.
  */
-[data-theme="dark"],
-[data-theme="black"] {
+[data-theme="dark"] {
   --band-1: #f0a24b;
   --band-2: #5fb8e6;
   --band-3: #b498ee;
@@ -140,14 +122,16 @@
   --band-7: #7aa7f0;
   --band-8: #e59ac9;
   --band-shadow: 0 1px 5px oklch(0% 0 0 / 0.95);
+  /*
+   * Dev mode wears purple, and nothing else in the app does. Anything in this
+   * colour is behind `?dev=1` and is not part of what a visitor sees.
+   */
+  --dev: #c08cf2;
+  --dev-content: oklch(17% 0.04 300);
   /* The scan is white ink on a black card: screen drops the card onto the page. */
   --figure-blend: screen;
   --figure-filter: none;
-  --figure-opacity: 0.9;
-}
-
-[data-theme="black"] {
-  --figure-opacity: 1;
+  --figure-opacity: 0.2;
 }
 
 [data-theme="light"] {
@@ -160,10 +144,13 @@
   --band-7: #2a51b4;
   --band-8: #97347f;
   --band-shadow: 0 1px 4px oklch(100% 0 0 / 0.95);
+  /* See the dark theme: purple is the dev-only colour. */
+  --dev: #7b34c0;
+  --dev-content: oklch(98% 0.006 85);
   /* Inverted the scan reads as black ink on white, and multiply drops the card. */
   --figure-blend: multiply;
   --figure-filter: invert(1) contrast(1.08);
-  --figure-opacity: 0.78;
+  --figure-opacity: 0.2;
 }
 
 html,
@@ -188,6 +175,86 @@ body {
   opacity: var(--figure-opacity);
 }
 
+/*
+ * The lines are a mask cut out of a block of `currentColor`, not an image, so
+ * they need no filter and no blend mode: every theme just paints its own ink
+ * through them. The mask box is the whole scan, laid out to match .figure-ink
+ * exactly, so the lines sit on the scan to the pixel.
+ */
+.figure-lines {
+  background-color: currentColor;
+  /* the line layer and the fade, both cut from the same box */
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  /*
+    The trace has no alpha — it is white ink on a black card — so its layer is
+    read by brightness: the card is nothing, the lines are ink, the grain in
+    between comes through as faintly as it is drawn. The fade under it is a
+    gradient, which carries its own alpha. Older WebKit spells this
+    -webkit-mask-source-type.
+  */
+  -webkit-mask-source-type: luminance, alpha;
+  mask-mode: luminance, alpha;
+}
+
+/*
+  Without luminance masking the trace has no alpha to read, so the layer would
+  come out as a solid slab of ink over the arms. Better to show nothing and let
+  the scan underneath carry the figure on its own.
+*/
+.figure-lines {
+  display: none;
+}
+
+@supports (mask-mode: luminance) or (-webkit-mask-source-type: luminance) {
+  .figure-lines {
+    display: block;
+  }
+}
+
+/*
+  The scrubber ring, and the rail its readout rides on. Both want one size on a
+  phone and a bigger one from 40rem up, and both are live numbers in dev — a
+  Tailwind class cannot be a variable, so they come in as custom properties and
+  the rules below spend them. See `src/scrub.ts`.
+
+  The ring owns its whole transform, because the press is a number too, and its
+  halo is a shadow rather than a Tailwind ring for the same reason.
+*/
+.fob {
+  width: var(--fob-size);
+  height: var(--fob-size);
+  transform: translate(-50%, -50%) scale(var(--fob-press, 1));
+  box-shadow: 0 0 0 var(--fob-halo)
+    color-mix(in oklab, var(--color-base-100) 55%, transparent);
+}
+
+.fob:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 calc(var(--fob-halo) * 2)
+    color-mix(in oklab, var(--color-accent) 50%, transparent);
+}
+
+/* Pulled up into the bottom of the band, where the figure has faded out. */
+.rail {
+  margin-top: calc(-1 * var(--rail-gap));
+}
+
+@media (width >= 40rem) {
+  .fob {
+    width: var(--fob-size-wide);
+    height: var(--fob-size-wide);
+  }
+
+  .rail {
+    margin-top: calc(-1 * var(--rail-gap-wide));
+  }
+}
+
 /* Only while a theme is being swapped, so hover states stay snappy the rest of the time. */
 html.theme-shift,
 html.theme-shift * {
@@ -201,7 +268,32 @@ html.theme-shift * {
     filter 0.35s ease !important;
 }
 
-@keyframes zone-fade {
+/*
+ * The event dots: they grow and shrink, and nothing else. `r` carries the size
+ * the live dot gets, `transform` the one hover gives it, so the two never
+ * overwrite each other. `fill-box` makes the scale turn around the dot's own
+ * middle instead of the whole drawing's.
+ */
+.event-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    r 180ms ease-out,
+    transform 140ms ease-out;
+}
+
+/* A wide invisible disc, so a 4px dot is still easy to point at. */
+.event-hit {
+  fill: transparent;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.event:hover .event-dot {
+  transform: scale(1.5);
+}
+
+@keyframes timeline-fade {
   from {
     opacity: 0;
   }
@@ -210,8 +302,8 @@ html.theme-shift * {
   }
 }
 
-.zone-fade {
-  animation: zone-fade 0.5s ease both;
+.timeline-fade {
+  animation: timeline-fade 0.5s ease both;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -221,4 +313,61 @@ html.theme-shift * {
     animation-duration: 1ms !important;
     transition-duration: 1ms !important;
   }
+}
+
+/*
+ * The horizontal card strip. No frame: the cards carry their own, and both ends
+ * fade out instead of being cut, so it reads as a strip running off the page.
+ * The scrollbar is slim, so the cards keep the height.
+ */
+.card-strip {
+  /*
+   * Half the strip in padding at each end, so the first and the last card can
+   * sit in the middle like any other one — the live card is always centred,
+   * even at the two ends of the timeline.
+   */
+  --card-w: 14rem;
+  padding-inline: max(0.75rem, calc(50% - var(--card-w) / 2));
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklch, currentColor 22%, transparent) transparent;
+  overscroll-behavior-x: contain;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 2rem,
+    #000 calc(100% - 2rem),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 2rem,
+    #000 calc(100% - 2rem),
+    transparent 100%
+  );
+}
+
+@media (width >= 40rem) {
+  .card-strip {
+    --card-w: 16rem;
+  }
+}
+
+/* While the strip is being pulled, the card under the mouse is not a button. */
+.card-strip[data-dragging] * {
+  cursor: grabbing;
+}
+
+.card-strip::-webkit-scrollbar {
+  height: 6px;
+}
+
+.card-strip::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, currentColor 22%, transparent);
+  border-radius: 999px;
+}
+
+.card-blurb {
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 1.25rem), transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 1.25rem), transparent 100%);
 }

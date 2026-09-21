@@ -1,0 +1,20 @@
+{
+  "id": "h-pyramid",
+  "label": "Great Pyramid",
+  "description": "Built about 171 generations ago, by a state that could feed and organise thousands.",
+  "yearsAgo": 4600,
+  "uncertaintyYears": 100,
+  "generationsAgo": 171,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+  "source": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "humans": {
+      "simple": false
+    },
+    "modern": {
+      "simple": true
+    }
+  }
+}

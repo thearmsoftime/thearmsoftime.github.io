@@ -1,0 +1,17 @@
+{
+  "id": "u-cambrian",
+  "label": "Animals everywhere",
+  "description": "In a few tens of millions of years most major animal body plans appear.",
+  "yearsAgo": 538800000,
+  "uncertaintyYears": 600000,
+  "generationsAgo": 20029740,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Cambrian_explosion",
+  "source": "https://stratigraphy.org/chart",
+  "sourceTitle": "ICS Chronostratigraphic Chart",
+  "timelines": {
+    "universe": {
+      "simple": true
+    }
+  }
+}

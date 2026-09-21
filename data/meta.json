@@ -1,0 +1,7 @@
+{
+  "generated": "2026-09-10",
+  "defaultArmSpanM": 1.9,
+  "generationYears": 26.9,
+  "generationSource": "Wang, Al-Saffar, Rogers & Hahn (2023), Human generation times across the past 250,000 years, Science Advances 9:eabm7047. Sex-averaged generation time 26.9 years (fathers 30.7, mothers 23.2), averaged over the past 250,000 years. https://www.science.org/doi/10.1126/sciadv.abm7047",
+  "note": "yearsAgo counts back from now; 0 = now, taken as the year 2026. Position along the arms is x = 1 - yearsAgo / spanYears. generationsAgo = yearsAgo / generationYears, rounded. Generations are only literally meaningful inside the humans timeline; on the universe and earth timelines they answer 'how many human generations would fit'. See research.md for the scale maths, the band tables and the full source list."
+}

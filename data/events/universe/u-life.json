@@ -1,0 +1,18 @@
+{
+  "id": "u-life",
+  "label": "Life",
+  "description": "The oldest structures anyone reads as built by living things. Life shows up early and never stops.",
+  "yearsAgo": 3700000000,
+  "uncertaintyYears": 100000000,
+  "generationsAgo": 137546468,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Abiogenesis",
+  "source": "https://www.nature.com/articles/nature19355",
+  "sourceTitle": "Nutman et al. 2016, Nature",
+  "timelines": {
+    "universe": {
+      "simple": true,
+      "landmark": true
+    }
+  }
+}

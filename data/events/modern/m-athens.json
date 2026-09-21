@@ -1,0 +1,17 @@
+{
+  "id": "m-athens",
+  "label": "Democracy in Athens",
+  "description": "Citizens vote on their own laws, the first time we know of.",
+  "yearsAgo": 2530,
+  "uncertaintyYears": 10,
+  "generationsAgo": 94,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Athenian_democracy",
+  "source": "https://en.wikipedia.org/wiki/Athenian_democracy",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "modern": {
+      "simple": true
+    }
+  }
+}

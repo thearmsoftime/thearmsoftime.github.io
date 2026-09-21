@@ -1,0 +1,17 @@
+{
+  "id": "u-planck",
+  "label": "The length of this arm is measured",
+  "description": "The Planck satellite's final results fix the age of the universe at 13.787 billion years.",
+  "yearsAgo": 8,
+  "uncertaintyYears": 1,
+  "generationsAgo": 0.3,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Planck_(spacecraft)",
+  "source": "https://arxiv.org/abs/1807.06209",
+  "sourceTitle": "Planck 2018 results VI",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

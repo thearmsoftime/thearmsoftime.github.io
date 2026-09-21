@@ -1,0 +1,223 @@
+[
+  {
+    "id": "h-sahelanthropus",
+    "label": "Sahelanthropus",
+    "kind": "species",
+    "fromYearsAgo": 7200000,
+    "toYearsAgo": 6800000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Sahelanthropus",
+    "source": "https://humanorigins.si.edu/evidence/human-fossils/species/sahelanthropus-tchadensis",
+    "sourceTitle": "Smithsonian Human Origins",
+    "timelines": [
+      "humans"
+    ]
+  },
+  {
+    "id": "h-ardipithecus",
+    "label": "Ardipithecus",
+    "kind": "species",
+    "fromYearsAgo": 5800000,
+    "toYearsAgo": 4400000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Ardipithecus",
+    "source": "https://humanorigins.si.edu/evidence/human-fossils/species/ardipithecus-ramidus",
+    "sourceTitle": "Smithsonian Human Origins",
+    "timelines": [
+      "humans"
+    ]
+  },
+  {
+    "id": "h-australopithecus",
+    "label": "Australopithecus",
+    "kind": "species",
+    "fromYearsAgo": 4200000,
+    "toYearsAgo": 1900000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Australopithecus",
+    "source": "https://humanorigins.si.edu/evidence/human-fossils/species/australopithecus-afarensis",
+    "sourceTitle": "Smithsonian Human Origins",
+    "timelines": [
+      "humans"
+    ]
+  },
+  {
+    "id": "h-paranthropus",
+    "label": "Paranthropus",
+    "kind": "species",
+    "fromYearsAgo": 2700000,
+    "toYearsAgo": 1200000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Paranthropus",
+    "source": "https://humanorigins.si.edu/evidence/human-fossils/species/paranthropus-boisei",
+    "sourceTitle": "Smithsonian Human Origins",
+    "timelines": [
+      "humans"
+    ]
+  },
+  {
+    "id": "h-habilis",
+    "label": "Homo habilis",
+    "kind": "species",
+    "fromYearsAgo": 2400000,
+    "toYearsAgo": 1400000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Homo_habilis",
+    "source": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-habilis",
+    "sourceTitle": "Smithsonian Human Origins",
+    "timelines": [
+      "humans"
+    ]
+  },
+  {
+    "id": "h-erectus",
+    "label": "Homo erectus",
+    "kind": "species",
+    "fromYearsAgo": 1890000,
+    "toYearsAgo": 110000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Homo_erectus",
+    "source": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-erectus",
+    "sourceTitle": "Smithsonian Human Origins",
+    "timelines": [
+      "humans"
+    ]
+  },
+  {
+    "id": "h-heidelbergensis",
+    "label": "Homo heidelbergensis",
+    "kind": "species",
+    "fromYearsAgo": 700000,
+    "toYearsAgo": 200000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Homo_heidelbergensis",
+    "source": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-heidelbergensis",
+    "sourceTitle": "Smithsonian Human Origins",
+    "timelines": [
+      "humans"
+    ]
+  },
+  {
+    "id": "h-neanderthal",
+    "label": "Neanderthals",
+    "kind": "species",
+    "fromYearsAgo": 400000,
+    "toYearsAgo": 40000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Neanderthal",
+    "source": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-neanderthalensis",
+    "sourceTitle": "Smithsonian Human Origins",
+    "timelines": [
+      "humans"
+    ]
+  },
+  {
+    "id": "h-sapiens",
+    "label": "Homo sapiens",
+    "kind": "species",
+    "fromYearsAgo": 315000,
+    "toYearsAgo": 0,
+    "wikipedia": "https://en.wikipedia.org/wiki/Homo_sapiens",
+    "source": "https://www.nature.com/articles/nature22335",
+    "sourceTitle": "Richter et al. 2017, Nature",
+    "timelines": [
+      "humans"
+    ]
+  },
+  {
+    "id": "h-lower-pal",
+    "label": "Lower Palaeolithic",
+    "kind": "culture",
+    "fromYearsAgo": 3300000,
+    "toYearsAgo": 300000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Lower_Paleolithic",
+    "source": "https://www.nature.com/articles/nature14464",
+    "sourceTitle": "Harmand et al. 2015, Nature",
+    "timelines": [
+      "humans"
+    ]
+  },
+  {
+    "id": "h-middle-pal",
+    "label": "Middle Palaeolithic",
+    "kind": "culture",
+    "fromYearsAgo": 300000,
+    "toYearsAgo": 50000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Middle_Paleolithic",
+    "source": "https://en.wikipedia.org/wiki/Middle_Paleolithic",
+    "sourceTitle": "English Wikipedia (secondary)",
+    "timelines": [
+      "humans"
+    ]
+  },
+  {
+    "id": "h-upper-pal",
+    "label": "Upper Palaeolithic",
+    "kind": "culture",
+    "fromYearsAgo": 50000,
+    "toYearsAgo": 11700,
+    "wikipedia": "https://en.wikipedia.org/wiki/Upper_Paleolithic",
+    "source": "https://en.wikipedia.org/wiki/Upper_Paleolithic",
+    "sourceTitle": "English Wikipedia (secondary)",
+    "timelines": [
+      "humans"
+    ]
+  },
+  {
+    "id": "h-neolithic",
+    "label": "Neolithic",
+    "kind": "culture",
+    "fromYearsAgo": 11700,
+    "toYearsAgo": 5300,
+    "wikipedia": "https://en.wikipedia.org/wiki/Neolithic",
+    "source": "https://www.pnas.org/doi/10.1073/pnas.1612797113",
+    "sourceTitle": "Arranz-Otaegui et al. 2016, PNAS",
+    "timelines": [
+      "humans"
+    ]
+  },
+  {
+    "id": "h-bronze",
+    "label": "Bronze Age",
+    "kind": "culture",
+    "fromYearsAgo": 5300,
+    "toYearsAgo": 3200,
+    "wikipedia": "https://en.wikipedia.org/wiki/Bronze_Age",
+    "source": "https://en.wikipedia.org/wiki/Bronze_Age",
+    "sourceTitle": "English Wikipedia (secondary)",
+    "timelines": [
+      "humans"
+    ]
+  },
+  {
+    "id": "h-iron",
+    "label": "Iron Age",
+    "kind": "culture",
+    "fromYearsAgo": 3200,
+    "toYearsAgo": 1500,
+    "wikipedia": "https://en.wikipedia.org/wiki/Iron_Age",
+    "source": "https://en.wikipedia.org/wiki/Iron_Age",
+    "sourceTitle": "English Wikipedia (secondary)",
+    "timelines": [
+      "humans"
+    ]
+  },
+  {
+    "id": "h-recorded",
+    "label": "Recorded history",
+    "kind": "culture",
+    "fromYearsAgo": 5300,
+    "toYearsAgo": 0,
+    "wikipedia": "https://en.wikipedia.org/wiki/Recorded_history",
+    "source": "https://www.metmuseum.org/essays/the-origins-of-writing",
+    "sourceTitle": "The Met: The Origins of Writing",
+    "timelines": [
+      "humans"
+    ]
+  },
+  {
+    "id": "h-industrial",
+    "label": "Industrial era",
+    "kind": "culture",
+    "fromYearsAgo": 250,
+    "toYearsAgo": 0,
+    "wikipedia": "https://en.wikipedia.org/wiki/Industrial_Revolution",
+    "source": "https://en.wikipedia.org/wiki/Industrial_Revolution",
+    "sourceTitle": "English Wikipedia (secondary)",
+    "timelines": [
+      "humans"
+    ]
+  }
+]

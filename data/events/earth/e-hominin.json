@@ -1,0 +1,20 @@
+{
+  "id": "e-hominin",
+  "label": "Our line splits from chimpanzees",
+  "description": "Where the humans timeline starts, and 2.9 mm from the right fingertip on this one.",
+  "yearsAgo": 7000000,
+  "uncertaintyYears": 500000,
+  "generationsAgo": 260223,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Sahelanthropus",
+  "source": "https://humanorigins.si.edu/evidence/human-fossils/species/sahelanthropus-tchadensis",
+  "sourceTitle": "Smithsonian Human Origins",
+  "timelines": {
+    "earth": {
+      "simple": true
+    },
+    "life": {
+      "simple": true
+    }
+  }
+}

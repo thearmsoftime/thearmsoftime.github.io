@@ -1,0 +1,20 @@
+{
+  "id": "h-industrial",
+  "label": "Industrial Revolution",
+  "description": "Coal and steam, about nine generations ago. It changed the whole planet.",
+  "yearsAgo": 250,
+  "uncertaintyYears": 30,
+  "generationsAgo": 9.29,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Industrial_Revolution",
+  "source": "https://en.wikipedia.org/wiki/Industrial_Revolution",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "humans": {
+      "simple": true
+    },
+    "modern": {
+      "simple": true
+    }
+  }
+}

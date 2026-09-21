@@ -1,0 +1,20 @@
+{
+  "id": "e-cambrian",
+  "label": "Cambrian explosion",
+  "description": "Shells, eyes, guts, legs. Most animal body plans appear in a geological blink.",
+  "yearsAgo": 538800000,
+  "uncertaintyYears": 600000,
+  "generationsAgo": 20029740,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Cambrian_explosion",
+  "source": "https://stratigraphy.org/chart",
+  "sourceTitle": "ICS Chronostratigraphic Chart",
+  "timelines": {
+    "earth": {
+      "simple": true
+    },
+    "life": {
+      "simple": true
+    }
+  }
+}

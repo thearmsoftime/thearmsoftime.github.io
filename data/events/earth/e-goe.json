@@ -1,0 +1,20 @@
+{
+  "id": "e-goe",
+  "label": "Oxygen fills the air",
+  "description": "Oxygen rises in the air. It only becomes permanent about 2.22 billion years ago.",
+  "yearsAgo": 2430000000,
+  "uncertaintyYears": 100000000,
+  "generationsAgo": 90334572,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Great_Oxidation_Event",
+  "source": "https://www.nature.com/articles/s41586-021-03393-7",
+  "sourceTitle": "Poulton et al. 2021, Nature",
+  "timelines": {
+    "earth": {
+      "simple": true
+    },
+    "life": {
+      "simple": true
+    }
+  }
+}

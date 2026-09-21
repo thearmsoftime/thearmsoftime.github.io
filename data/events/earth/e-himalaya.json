@@ -1,0 +1,17 @@
+{
+  "id": "e-himalaya",
+  "label": "India hits Asia",
+  "description": "The collision that is still pushing the Himalaya up a few millimetres a year.",
+  "yearsAgo": 50000000,
+  "uncertaintyYears": 5000000,
+  "generationsAgo": 1858736,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Himalayas",
+  "source": "https://en.wikipedia.org/wiki/Himalayas",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "earth": {
+      "simple": false
+    }
+  }
+}

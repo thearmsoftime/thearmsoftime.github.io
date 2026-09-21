@@ -1,0 +1,17 @@
+{
+  "id": "h-dmanisi",
+  "label": "Out of Africa, first time",
+  "description": "Skulls at Dmanisi in Georgia. Humans are in Europe long before Homo sapiens exists.",
+  "yearsAgo": 1800000,
+  "uncertaintyYears": 50000,
+  "generationsAgo": 66914,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Dmanisi",
+  "source": "https://humanorigins.si.edu/evidence/human-evolution-timeline-interactive",
+  "sourceTitle": "Smithsonian Human Origins timeline",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

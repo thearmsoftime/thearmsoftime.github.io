@@ -1,7 +1,7 @@
 # The Arms of Time — research
 
 Three timelines laid across one arm span. Written 2026-09-10. Companion file:
-[`timelines.json`](timelines.json) — 3 zones, 53 bands, 153 events, every one with
+[`data/`](../data/) — 3 timelines, 53 bands, 153 events, every one with
 a Wikipedia link and a date source.
 
 Default arm span **1.90 m = 1900 mm**. `yearsAgo` counts back from now; now is
@@ -49,7 +49,7 @@ Earth "forming" is a process, not a moment: accretion took tens of millions of
 years. 4.54 Gyr is the conventional end of it.
 
 Note for the band drawing: the ICS base of the Hadean (4567.3 Ma) is *older than
-this zone*. In `timelines.json` the Hadean band is clipped to the zone start
+this timeline*. In `data/bands/earth.json` the Hadean band is clipped to the timeline start
 (4540 Ma) so `x` stays inside 0–1.
 
 ### Humans — 7 Myr, and why
@@ -325,9 +325,13 @@ Each list stands on its own.
 | Every eon / era / period / epoch boundary; the five big extinctions; PETM; Messinian; onset of Quaternary glaciation; base of the Holocene | ICS International Chronostratigraphic Chart — <https://stratigraphy.org/chart> |
 | Age of Earth, 4.54 ± 0.05 Ga | Age of Earth, after Dalrymple 2001 — <https://en.wikipedia.org/wiki/Age_of_Earth> |
 | Oldest terrestrial material, Jack Hills zircon 4404 ± 8 Ma, with liquid water | Wilde et al. 2001, Nature — <https://www.nature.com/articles/35051550> |
+| LUCA, last universal common ancestor, ~4.2 Ga (4.09–4.33) | Moody et al. 2024, Nature Ecology & Evolution — <https://www.nature.com/articles/s41559-024-02461-1> |
 | Oldest claimed life, Isua 3.7 Ga; Dresser Formation 3.48 Ga | Nutman et al. 2016, Nature — <https://www.nature.com/articles/nature19355> |
 | Great Oxidation Event, first rise 2.43 Ga, permanent 2.22 Ga | Poulton et al. 2021, Nature — <https://www.nature.com/articles/s41586-021-03393-7> |
+| Decimetre-scale multicellular eukaryotes, Gaoyuzhuang Formation 1.56 Ga | Zhu et al. 2016, Nature Communications — <https://www.nature.com/articles/ncomms11500> |
 | Oldest datable crown-group eukaryote and sexual reproduction, *Bangiomorpha* 1047 Ma | Gibson et al. 2018, Geology — <https://authors.library.caltech.edu/records/7brz9-8mw86> |
+| Oldest fungi, *Ourasphaira giraldae* ~1.0–0.9 Ga | Loron et al. 2019, Nature — <https://www.nature.com/articles/s41586-019-1217-0> |
+| Neoproterozoic Oxygenation Event, second oxygen rise from ~800 Ma | Och & Shields-Zhou 2012, Earth-Science Reviews — <https://www.sciencedirect.com/science/article/abs/pii/S0012825211001498> |
 | First large animals, Avalon assemblage 575 Ma | Shen et al. 2008, Science — <https://www.science.org/doi/10.1126/science.1150279> |
 | Oldest vertebrate, *Myllokunmingia* 518 Ma | Shu et al. 2003, Nature — <https://pubmed.ncbi.nlm.nih.gov/12350247/> |
 | First land plants, cryptospores ~470 Ma | Wellman 2010, New Phytologist — <https://nph.onlinelibrary.wiley.com/doi/10.1111/j.1469-8137.2010.03471.x> |

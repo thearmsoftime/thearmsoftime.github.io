@@ -1,0 +1,17 @@
+{
+  "id": "h-laetoli",
+  "label": "Footprints at Laetoli",
+  "description": "Two or three individuals walk across wet ash in Tanzania. The stride is human.",
+  "yearsAgo": 3660000,
+  "uncertaintyYears": 100000,
+  "generationsAgo": 136059,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Laetoli",
+  "source": "https://humanorigins.si.edu/evidence/human-evolution-timeline-interactive",
+  "sourceTitle": "Smithsonian Human Origins timeline",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

@@ -4,6 +4,7 @@
   "description": "Deep time laid out across your outstretched arms.",
   "scripts": {
     "dev": "vite",
+    "start": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"

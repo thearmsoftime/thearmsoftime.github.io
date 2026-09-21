@@ -1,0 +1,20 @@
+{
+  "id": "e-amniotes",
+  "label": "Eggs that need no pond",
+  "description": "Amniote eggs carry their own water, so animals can finally live away from water.",
+  "yearsAgo": 312000000,
+  "uncertaintyYears": 5000000,
+  "generationsAgo": 11598513,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Amniote",
+  "source": "https://en.wikipedia.org/wiki/Amniote",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

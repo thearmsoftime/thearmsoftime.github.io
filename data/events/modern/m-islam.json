@@ -1,0 +1,17 @@
+{
+  "id": "m-islam",
+  "label": "Islam begins",
+  "description": "Muhammad moves to Medina. The Islamic calendar counts from this year.",
+  "yearsAgo": 1404,
+  "uncertaintyYears": 2,
+  "generationsAgo": 52,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Hijrah",
+  "source": "https://en.wikipedia.org/wiki/Hijrah",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "modern": {
+      "simple": true
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "h-beads",
+  "label": "Oldest jewellery",
+  "description": "Pierced Tritia gibbosula sea-snail shells from Bizmoune Cave, Morocco, worn as beads. Someone wanted to be seen.",
+  "yearsAgo": 142000,
+  "uncertaintyYears": 10000,
+  "generationsAgo": 5279,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Tritia_gibbosula",
+  "source": "https://www.science.org/doi/10.1126/sciadv.abi8620",
+  "sourceTitle": "Sehasseh et al. 2021, Science Advances",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

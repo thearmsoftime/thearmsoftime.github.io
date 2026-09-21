@@ -1,0 +1,17 @@
+{
+  "id": "e-antarctic-ice",
+  "label": "Antarctica freezes",
+  "description": "A permanent ice sheet forms in the south. The long cooling towards our ice ages begins.",
+  "yearsAgo": 33900000,
+  "uncertaintyYears": 100000,
+  "generationsAgo": 1260223,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Antarctic_ice_sheet",
+  "source": "https://stratigraphy.org/chart",
+  "sourceTitle": "ICS Chronostratigraphic Chart",
+  "timelines": {
+    "earth": {
+      "simple": false
+    }
+  }
+}

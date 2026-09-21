@@ -1,0 +1,17 @@
+{
+  "id": "u-agriculture",
+  "label": "Farming",
+  "description": "People start growing their food. Everything we call civilisation follows.",
+  "yearsAgo": 11500,
+  "uncertaintyYears": 1000,
+  "generationsAgo": 428,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Neolithic_Revolution",
+  "source": "https://www.pnas.org/doi/10.1073/pnas.1612797113",
+  "sourceTitle": "Arranz-Otaegui et al. 2016, PNAS",
+  "timelines": {
+    "universe": {
+      "simple": true
+    }
+  }
+}

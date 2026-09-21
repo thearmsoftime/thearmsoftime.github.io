@@ -1,0 +1,17 @@
+{
+  "id": "h-naledi",
+  "label": "Homo naledi",
+  "description": "A small-brained human deep in a South African cave, far more recent than its skull suggests.",
+  "yearsAgo": 335000,
+  "uncertaintyYears": 50000,
+  "generationsAgo": 12454,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Homo_naledi",
+  "source": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-naledi",
+  "sourceTitle": "Smithsonian Human Origins",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

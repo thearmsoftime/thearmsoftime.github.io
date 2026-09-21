@@ -1,0 +1,17 @@
+{
+  "id": "h-lgm",
+  "label": "Height of the last ice age",
+  "description": "Small, scattered groups of people, and ice over much of the north.",
+  "yearsAgo": 20000,
+  "uncertaintyYears": 3000,
+  "generationsAgo": 743,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Last_Glacial_Maximum",
+  "source": "https://www.science.org/doi/10.1126/science.1172873",
+  "sourceTitle": "Clark et al. 2009, Science",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

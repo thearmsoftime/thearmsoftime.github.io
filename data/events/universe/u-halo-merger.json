@@ -1,0 +1,17 @@
+{
+  "id": "u-halo-merger",
+  "label": "A galaxy crashes into ours",
+  "description": "A smaller galaxy falls into the young Milky Way. Its stars are still moving through our sky.",
+  "yearsAgo": 11000000000,
+  "uncertaintyYears": 1000000000,
+  "generationsAgo": 408921933,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Gaia_Sausage",
+  "source": "https://www.nature.com/articles/s41586-022-04496-5",
+  "sourceTitle": "Xiang & Rix 2022, Nature",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "h-chauvet",
+  "label": "Chauvet Cave",
+  "description": "Horses, lions and rhinos drawn in charcoal by people who clearly knew how to draw.",
+  "yearsAgo": 36000,
+  "uncertaintyYears": 1000,
+  "generationsAgo": 1338,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Chauvet_Cave",
+  "source": "https://en.wikipedia.org/wiki/Chauvet_Cave",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "humans": {
+      "simple": true
+    }
+  }
+}

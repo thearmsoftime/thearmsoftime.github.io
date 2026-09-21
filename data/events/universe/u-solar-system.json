@@ -1,0 +1,17 @@
+{
+  "id": "u-solar-system",
+  "label": "Solar System forms",
+  "description": "A cloud of gas and dust collapses. The oldest solid grains in any meteorite date from this moment.",
+  "yearsAgo": 4567300000,
+  "uncertaintyYears": 500000,
+  "generationsAgo": 169788104,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Formation_and_evolution_of_the_Solar_System",
+  "source": "https://stratigraphy.org/chart",
+  "sourceTitle": "ICS Chronostratigraphic Chart",
+  "timelines": {
+    "universe": {
+      "simple": true
+    }
+  }
+}

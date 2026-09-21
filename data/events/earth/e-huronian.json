@@ -1,0 +1,20 @@
+{
+  "id": "e-huronian",
+  "label": "Earth freezes over",
+  "description": "The Huronian glaciations. Oxygen eats the methane that kept the planet warm.",
+  "yearsAgo": 2400000000,
+  "uncertaintyYears": 100000000,
+  "generationsAgo": 89219331,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Huronian_glaciation",
+  "source": "https://www.nature.com/articles/s41586-021-03393-7",
+  "sourceTitle": "Poulton et al. 2021, Nature",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

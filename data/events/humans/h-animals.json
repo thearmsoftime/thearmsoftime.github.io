@@ -1,0 +1,17 @@
+{
+  "id": "h-animals",
+  "label": "Herds",
+  "description": "Goats and sheep first, then cattle and pigs. Food that walks with you.",
+  "yearsAgo": 10500,
+  "uncertaintyYears": 500,
+  "generationsAgo": 390,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Domestication_of_vertebrates",
+  "source": "https://en.wikipedia.org/wiki/Domestication_of_vertebrates",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

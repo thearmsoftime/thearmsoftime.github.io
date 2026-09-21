@@ -1,0 +1,17 @@
+{
+  "id": "e-rodinia",
+  "label": "Rodinia",
+  "description": "A supercontinent that sat across the equator, then broke apart.",
+  "yearsAgo": 900000000,
+  "uncertaintyYears": 100000000,
+  "generationsAgo": 33457249,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Rodinia",
+  "source": "https://en.wikipedia.org/wiki/Rodinia",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "earth": {
+      "simple": false
+    }
+  }
+}

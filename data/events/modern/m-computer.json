@@ -1,0 +1,17 @@
+{
+  "id": "m-computer",
+  "label": "The first computers",
+  "description": "ENIAC is switched on. Electronics start doing the sums.",
+  "yearsAgo": 81,
+  "uncertaintyYears": 1,
+  "generationsAgo": 3.01,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/ENIAC",
+  "source": "https://en.wikipedia.org/wiki/ENIAC",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "modern": {
+      "simple": true
+    }
+  }
+}

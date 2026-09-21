@@ -1,0 +1,17 @@
+{
+  "id": "u-jwst",
+  "label": "Webb telescope opens its eye",
+  "description": "The telescope that found the most distant galaxy on this arm starts work.",
+  "yearsAgo": 5,
+  "uncertaintyYears": 1,
+  "generationsAgo": 0.19,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/James_Webb_Space_Telescope",
+  "source": "https://www.nature.com/articles/s41586-024-07860-9",
+  "sourceTitle": "Carniani et al. 2024, Nature",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

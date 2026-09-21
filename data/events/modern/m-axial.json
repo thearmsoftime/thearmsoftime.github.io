@@ -1,0 +1,17 @@
+{
+  "id": "m-axial",
+  "label": "Buddha and Confucius",
+  "description": "Two ways of thinking start within a lifetime of each other. Both are still followed.",
+  "yearsAgo": 2500,
+  "uncertaintyYears": 50,
+  "generationsAgo": 93,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Axial_Age",
+  "source": "https://en.wikipedia.org/wiki/Axial_Age",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "modern": {
+      "simple": false
+    }
+  }
+}

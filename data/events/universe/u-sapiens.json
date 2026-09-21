@@ -1,0 +1,17 @@
+{
+  "id": "u-sapiens",
+  "label": "Homo sapiens",
+  "description": "Us. On a 1.90 m span that is four hundredths of a millimetre, thinner than a hair.",
+  "yearsAgo": 315000,
+  "uncertaintyYears": 34000,
+  "generationsAgo": 11710,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Homo_sapiens",
+  "source": "https://www.nature.com/articles/nature22335",
+  "sourceTitle": "Richter et al. 2017, Nature",
+  "timelines": {
+    "universe": {
+      "simple": true
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "u-telescope",
+  "label": "First telescope views",
+  "description": "Galileo publishes what he saw: moons around Jupiter, mountains on the Moon.",
+  "yearsAgo": 416,
+  "uncertaintyYears": 2,
+  "generationsAgo": 15.5,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Sidereus_Nuncius",
+  "source": "https://en.wikipedia.org/wiki/Sidereus_Nuncius",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

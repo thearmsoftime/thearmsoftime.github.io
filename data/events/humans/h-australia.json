@@ -1,0 +1,17 @@
+{
+  "id": "h-australia",
+  "label": "People reach Australia",
+  "description": "Madjedbebe, northern Australia. Getting there needed boats and open-water crossings.",
+  "yearsAgo": 65000,
+  "uncertaintyYears": 5000,
+  "generationsAgo": 2416,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Madjedbebe",
+  "source": "https://www.nature.com/articles/nature22968",
+  "sourceTitle": "Clarkson et al. 2017, Nature",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

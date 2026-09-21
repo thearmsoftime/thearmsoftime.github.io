@@ -1,0 +1,20 @@
+{
+  "id": "e-snowball",
+  "label": "Snowball Earth",
+  "description": "Ice reaches the tropics, twice. The Cryogenian period is named for it.",
+  "yearsAgo": 720000000,
+  "uncertaintyYears": 5000000,
+  "generationsAgo": 26765799,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Cryogenian",
+  "source": "https://stratigraphy.org/chart",
+  "sourceTitle": "ICS Chronostratigraphic Chart",
+  "timelines": {
+    "earth": {
+      "simple": true
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

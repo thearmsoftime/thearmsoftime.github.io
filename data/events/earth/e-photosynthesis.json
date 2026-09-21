@@ -1,0 +1,20 @@
+{
+  "id": "e-photosynthesis",
+  "label": "Life learns to use sunlight",
+  "description": "Photosynthesis without oxygen comes first, and runs the biosphere for a billion years.",
+  "yearsAgo": 3400000000,
+  "uncertaintyYears": 200000000,
+  "generationsAgo": 126394052,
+  "certainty": "disputed",
+  "wikipedia": "https://en.wikipedia.org/wiki/Evolution_of_photosynthesis",
+  "source": "https://en.wikipedia.org/wiki/Evolution_of_photosynthesis",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": true
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "e-devonian-ext",
+  "label": "Late Devonian extinction",
+  "description": "A long series of die-offs in the sea, ending the Devonian.",
+  "yearsAgo": 358860000,
+  "uncertaintyYears": 400000,
+  "generationsAgo": 13340520,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Late_Devonian_mass_extinction",
+  "source": "https://stratigraphy.org/chart",
+  "sourceTitle": "ICS Chronostratigraphic Chart",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

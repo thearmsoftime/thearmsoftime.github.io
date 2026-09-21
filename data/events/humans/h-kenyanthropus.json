@@ -1,0 +1,17 @@
+{
+  "id": "h-kenyanthropus",
+  "label": "Kenyanthropus",
+  "description": "A flat-faced skull from Kenya. The family tree is a bush, not a ladder.",
+  "yearsAgo": 3500000,
+  "uncertaintyYears": 200000,
+  "generationsAgo": 130112,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Kenyanthropus",
+  "source": "https://humanorigins.si.edu/evidence/human-fossils/species/kenyanthropus-platyops",
+  "sourceTitle": "Smithsonian Human Origins",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

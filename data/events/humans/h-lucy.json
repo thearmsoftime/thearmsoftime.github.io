@@ -1,0 +1,17 @@
+{
+  "id": "h-lucy",
+  "label": "Lucy",
+  "description": "Australopithecus afarensis. One metre tall, brain the size of a chimpanzee's, fully upright.",
+  "yearsAgo": 3200000,
+  "uncertaintyYears": 100000,
+  "generationsAgo": 118959,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Lucy_(hominid)",
+  "source": "https://humanorigins.si.edu/evidence/human-fossils/species/australopithecus-afarensis",
+  "sourceTitle": "Smithsonian Human Origins",
+  "timelines": {
+    "humans": {
+      "simple": true
+    }
+  }
+}

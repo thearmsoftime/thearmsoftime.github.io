@@ -1,0 +1,13 @@
+{
+  "id": "earth",
+  "label": "Earth",
+  "spanYears": 4540000000,
+  "spanUncertaintyYears": 50000000,
+  "spanGenerations": 168773234,
+  "startLabel": "Earth forms",
+  "endLabel": "Now",
+  "note": "4.54 +/- 0.05 Gyr, about 1 per cent. Band boundaries follow the ICS chart.",
+  "wikipedia": "https://en.wikipedia.org/wiki/History_of_Earth",
+  "source": "https://en.wikipedia.org/wiki/Age_of_Earth",
+  "sourceTitle": "Age of Earth, after Dalrymple 2001"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "h-anamensis",
+  "label": "First Australopithecus",
+  "description": "Australopithecus anamensis. Walking upright is now the normal way to get around.",
+  "yearsAgo": 4200000,
+  "uncertaintyYears": 100000,
+  "generationsAgo": 156134,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Australopithecus_anamensis",
+  "source": "https://humanorigins.si.edu/evidence/human-fossils/species/australopithecus-anamensis",
+  "sourceTitle": "Smithsonian Human Origins",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

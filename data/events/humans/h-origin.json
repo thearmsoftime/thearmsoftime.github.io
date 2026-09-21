@@ -1,0 +1,20 @@
+{
+  "id": "h-origin",
+  "label": "On the Origin of Species",
+  "description": "The book that explains everything on the left half of this arm.",
+  "yearsAgo": 167,
+  "uncertaintyYears": 1,
+  "generationsAgo": 6.21,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/On_the_Origin_of_Species",
+  "source": "https://en.wikipedia.org/wiki/On_the_Origin_of_Species",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "humans": {
+      "simple": false
+    },
+    "modern": {
+      "simple": true
+    }
+  }
+}

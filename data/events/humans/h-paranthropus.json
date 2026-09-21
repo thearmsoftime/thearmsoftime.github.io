@@ -1,0 +1,17 @@
+{
+  "id": "h-paranthropus",
+  "label": "Paranthropus",
+  "description": "Huge jaws and chewing muscles for tough plants. A cousin, not an ancestor.",
+  "yearsAgo": 2300000,
+  "uncertaintyYears": 200000,
+  "generationsAgo": 85502,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Paranthropus_boisei",
+  "source": "https://humanorigins.si.edu/evidence/human-fossils/species/paranthropus-boisei",
+  "sourceTitle": "Smithsonian Human Origins",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

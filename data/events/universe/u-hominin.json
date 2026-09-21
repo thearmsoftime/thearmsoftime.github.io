@@ -1,0 +1,17 @@
+{
+  "id": "u-hominin",
+  "label": "Our line splits off",
+  "description": "The whole human story starts here, and it is under a millimetre long on this arm.",
+  "yearsAgo": 7000000,
+  "uncertaintyYears": 500000,
+  "generationsAgo": 260223,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Sahelanthropus",
+  "source": "https://humanorigins.si.edu/evidence/human-fossils/species/sahelanthropus-tchadensis",
+  "sourceTitle": "Smithsonian Human Origins",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

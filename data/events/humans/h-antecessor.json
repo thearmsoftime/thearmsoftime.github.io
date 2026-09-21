@@ -1,0 +1,17 @@
+{
+  "id": "h-antecessor",
+  "label": "Homo antecessor",
+  "description": "Fossils from Atapuerca in Spain, near the base of the European branch.",
+  "yearsAgo": 850000,
+  "uncertaintyYears": 50000,
+  "generationsAgo": 31599,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Homo_antecessor",
+  "source": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-antecessor",
+  "sourceTitle": "Smithsonian Human Origins",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

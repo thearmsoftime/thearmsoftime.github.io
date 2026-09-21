@@ -1,0 +1,20 @@
+{
+  "id": "e-avalon",
+  "label": "First large animals",
+  "description": "Fronds and discs on the sea floor. Nothing much like them survives today.",
+  "yearsAgo": 575000000,
+  "uncertaintyYears": 1000000,
+  "generationsAgo": 21375465,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Ediacaran_biota",
+  "source": "https://www.science.org/doi/10.1126/science.1150279",
+  "sourceTitle": "Shen et al. 2008, Science",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

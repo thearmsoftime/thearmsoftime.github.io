@@ -1,0 +1,67 @@
+[
+  {
+    "id": "u-radiation",
+    "label": "Radiation era",
+    "kind": "epoch",
+    "fromYearsAgo": 13787000000,
+    "toYearsAgo": 13786620000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Chronology_of_the_universe",
+    "source": "https://arxiv.org/abs/1807.06209",
+    "sourceTitle": "Planck 2018 results VI",
+    "timelines": [
+      "universe"
+    ]
+  },
+  {
+    "id": "u-dark-ages",
+    "label": "Cosmic dark ages",
+    "kind": "epoch",
+    "fromYearsAgo": 13786620000,
+    "toYearsAgo": 13600000000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Chronology_of_the_universe",
+    "source": "https://arxiv.org/abs/1807.06209",
+    "sourceTitle": "Planck 2018 results VI",
+    "timelines": [
+      "universe"
+    ]
+  },
+  {
+    "id": "u-reionization",
+    "label": "Reionization",
+    "kind": "epoch",
+    "fromYearsAgo": 13600000000,
+    "toYearsAgo": 12800000000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Reionization",
+    "source": "https://arxiv.org/abs/1807.06209",
+    "sourceTitle": "Planck 2018 results VI",
+    "timelines": [
+      "universe"
+    ]
+  },
+  {
+    "id": "u-galaxies",
+    "label": "Galaxies grow",
+    "kind": "epoch",
+    "fromYearsAgo": 12800000000,
+    "toYearsAgo": 4567300000,
+    "wikipedia": "https://en.wikipedia.org/wiki/Galaxy_formation_and_evolution",
+    "source": "https://www.annualreviews.org/doi/pdf/10.1146/annurev-astro-081811-125615",
+    "sourceTitle": "Madau & Dickinson 2014, ARA&A",
+    "timelines": [
+      "universe"
+    ]
+  },
+  {
+    "id": "u-solar",
+    "label": "Solar System",
+    "kind": "epoch",
+    "fromYearsAgo": 4567300000,
+    "toYearsAgo": 0,
+    "wikipedia": "https://en.wikipedia.org/wiki/Solar_System",
+    "source": "https://stratigraphy.org/chart",
+    "sourceTitle": "ICS Chronostratigraphic Chart",
+    "timelines": [
+      "universe"
+    ]
+  }
+]

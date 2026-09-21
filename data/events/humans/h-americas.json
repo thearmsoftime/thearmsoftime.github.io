@@ -1,0 +1,17 @@
+{
+  "id": "h-americas",
+  "label": "People in the Americas",
+  "description": "Footprints at White Sands, New Mexico, from the middle of the ice age. Still argued over.",
+  "yearsAgo": 23000,
+  "uncertaintyYears": 1000,
+  "generationsAgo": 855,
+  "certainty": "disputed",
+  "wikipedia": "https://en.wikipedia.org/wiki/Peopling_of_the_Americas",
+  "source": "https://www.science.org/doi/10.1126/science.abg7586",
+  "sourceTitle": "Bennett et al. 2021, Science",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

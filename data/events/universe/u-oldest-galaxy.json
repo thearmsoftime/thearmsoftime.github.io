@@ -1,0 +1,17 @@
+{
+  "id": "u-oldest-galaxy",
+  "label": "Oldest galaxy we can see",
+  "description": "JADES-GS-z14-0 is the most distant galaxy measured so far. It was already bright 290 million years in.",
+  "yearsAgo": 13497000000,
+  "uncertaintyYears": 30000000,
+  "generationsAgo": 501747212,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/JADES-GS-z14-0",
+  "source": "https://www.nature.com/articles/s41586-024-07860-9",
+  "sourceTitle": "Carniani et al. 2024, Nature",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

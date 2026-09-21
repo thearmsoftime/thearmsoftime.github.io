@@ -1,0 +1,17 @@
+{
+  "id": "h-out-of-africa",
+  "label": "The move that peopled the world",
+  "description": "Everyone alive outside Africa descends mostly from this one dispersal. About 2,200 generations ago.",
+  "yearsAgo": 60000,
+  "uncertaintyYears": 10000,
+  "generationsAgo": 2230,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Early_human_migrations",
+  "source": "https://www.nature.com/articles/nature19792",
+  "sourceTitle": "Malaspinas et al. 2016, Nature",
+  "timelines": {
+    "humans": {
+      "simple": true
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "e-teilhardina",
+  "label": "Primates spread worldwide",
+  "description": "Teilhardina turns up in Asia, Europe and North America within a few thousand years.",
+  "yearsAgo": 56000000,
+  "uncertaintyYears": 100000,
+  "generationsAgo": 2081784,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Teilhardina",
+  "source": "https://www.pnas.org/doi/10.1073/pnas.0511296103",
+  "sourceTitle": "Smith et al. 2006, PNAS",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

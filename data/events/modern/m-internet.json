@@ -1,0 +1,17 @@
+{
+  "id": "m-internet",
+  "label": "The internet",
+  "description": "The first two computers talk to each other over ARPANET.",
+  "yearsAgo": 57,
+  "uncertaintyYears": 1,
+  "generationsAgo": 2.12,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/ARPANET",
+  "source": "https://en.wikipedia.org/wiki/ARPANET",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "modern": {
+      "simple": false
+    }
+  }
+}

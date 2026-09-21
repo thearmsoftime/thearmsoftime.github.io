@@ -1,0 +1,20 @@
+{
+  "id": "e-coal-collapse",
+  "label": "Coal forests collapse",
+  "description": "The great swamps dry out. Their buried wood is the coal we later burned.",
+  "yearsAgo": 305000000,
+  "uncertaintyYears": 5000000,
+  "generationsAgo": 11338290,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Carboniferous_rainforest_collapse",
+  "source": "https://en.wikipedia.org/wiki/Carboniferous_rainforest_collapse",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

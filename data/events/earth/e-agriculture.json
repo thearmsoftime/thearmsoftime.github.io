@@ -1,0 +1,20 @@
+{
+  "id": "e-agriculture",
+  "label": "Farming",
+  "description": "One species starts reshaping the surface of the planet on purpose.",
+  "yearsAgo": 11500,
+  "uncertaintyYears": 1000,
+  "generationsAgo": 428,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Neolithic_Revolution",
+  "source": "https://www.pnas.org/doi/10.1073/pnas.1612797113",
+  "sourceTitle": "Arranz-Otaegui et al. 2016, PNAS",
+  "timelines": {
+    "earth": {
+      "simple": true
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "u-reionization",
+  "label": "Universe turns clear",
+  "description": "Starlight strips the electrons off the hydrogen between galaxies, and the last of the fog lifts.",
+  "yearsAgo": 12900000000,
+  "uncertaintyYears": 200000000,
+  "generationsAgo": 479553903,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Reionization",
+  "source": "https://arxiv.org/abs/1807.06209",
+  "sourceTitle": "Planck 2018 results VI",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

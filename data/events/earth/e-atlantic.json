@@ -1,0 +1,17 @@
+{
+  "id": "e-atlantic",
+  "label": "The Atlantic opens",
+  "description": "Pangaea splits and a new ocean starts widening. It is still widening today.",
+  "yearsAgo": 180000000,
+  "uncertaintyYears": 10000000,
+  "generationsAgo": 6691450,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Atlantic_Ocean",
+  "source": "https://en.wikipedia.org/wiki/Atlantic_Ocean",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "earth": {
+      "simple": false
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "m-smartphone",
+  "label": "A computer in every pocket",
+  "description": "The iPhone. Within fifteen years most adults on Earth carry one.",
+  "yearsAgo": 19,
+  "uncertaintyYears": 1,
+  "generationsAgo": 0.71,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Smartphone",
+  "source": "https://en.wikipedia.org/wiki/Smartphone",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "modern": {
+      "simple": true
+    }
+  }
+}

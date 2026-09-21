@@ -1,0 +1,13 @@
+{
+  "id": "universe",
+  "label": "Universe",
+  "spanYears": 13787000000,
+  "spanUncertaintyYears": 20000000,
+  "spanGenerations": 512527881,
+  "startLabel": "Big Bang",
+  "endLabel": "Now",
+  "note": "13.787 +/- 0.020 Gyr, Planck 2018 TT,TE,EE+lowE+lensing+BAO.",
+  "wikipedia": "https://en.wikipedia.org/wiki/Chronology_of_the_universe",
+  "source": "https://arxiv.org/abs/1807.06209",
+  "sourceTitle": "Planck 2018 results VI"
+}

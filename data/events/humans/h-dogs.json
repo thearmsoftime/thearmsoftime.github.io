@@ -1,0 +1,17 @@
+{
+  "id": "h-dogs",
+  "label": "Dogs",
+  "description": "Wolves that stayed near our camps become another species. The first animal we lived with.",
+  "yearsAgo": 15000,
+  "uncertaintyYears": 3000,
+  "generationsAgo": 558,
+  "certainty": "disputed",
+  "wikipedia": "https://en.wikipedia.org/wiki/Domestication_of_the_dog",
+  "source": "https://www.science.org/doi/10.1126/science.aaf3161",
+  "sourceTitle": "Frantz et al. 2016, Science",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "e-cyanobacteria",
+  "label": "Oxygen-making microbes",
+  "description": "Cyanobacteria start splitting water and letting the oxygen go. The waste product remakes the planet.",
+  "yearsAgo": 2700000000,
+  "uncertaintyYears": 200000000,
+  "generationsAgo": 100371747,
+  "certainty": "disputed",
+  "wikipedia": "https://en.wikipedia.org/wiki/Cyanobacteria",
+  "source": "https://en.wikipedia.org/wiki/Cyanobacteria",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "earth": {
+      "simple": false
+    },
+    "life": {
+      "simple": false
+    }
+  }
+}

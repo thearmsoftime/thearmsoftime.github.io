@@ -1,0 +1,93 @@
+[
+  {
+    "id": "m-bronze",
+    "label": "Bronze Age",
+    "kind": "period",
+    "fromYearsAgo": 4600,
+    "toYearsAgo": 3200,
+    "wikipedia": "https://en.wikipedia.org/wiki/Bronze_Age",
+    "source": "https://en.wikipedia.org/wiki/Bronze_Age",
+    "sourceTitle": "English Wikipedia (secondary)",
+    "timelines": [
+      "modern"
+    ]
+  },
+  {
+    "id": "m-iron",
+    "label": "Iron Age",
+    "kind": "period",
+    "fromYearsAgo": 3200,
+    "toYearsAgo": 2550,
+    "wikipedia": "https://en.wikipedia.org/wiki/Iron_Age",
+    "source": "https://en.wikipedia.org/wiki/Iron_Age",
+    "sourceTitle": "English Wikipedia (secondary)",
+    "timelines": [
+      "modern"
+    ]
+  },
+  {
+    "id": "m-antiquity",
+    "label": "Classical world",
+    "kind": "period",
+    "fromYearsAgo": 2550,
+    "toYearsAgo": 1550,
+    "wikipedia": "https://en.wikipedia.org/wiki/Classical_antiquity",
+    "source": "https://en.wikipedia.org/wiki/Classical_antiquity",
+    "sourceTitle": "English Wikipedia (secondary)",
+    "timelines": [
+      "modern"
+    ]
+  },
+  {
+    "id": "m-middle-ages",
+    "label": "Middle Ages",
+    "kind": "period",
+    "fromYearsAgo": 1550,
+    "toYearsAgo": 526,
+    "wikipedia": "https://en.wikipedia.org/wiki/Middle_Ages",
+    "source": "https://en.wikipedia.org/wiki/Middle_Ages",
+    "sourceTitle": "English Wikipedia (secondary)",
+    "timelines": [
+      "modern"
+    ]
+  },
+  {
+    "id": "m-early-modern",
+    "label": "Early modern",
+    "kind": "period",
+    "fromYearsAgo": 526,
+    "toYearsAgo": 226,
+    "wikipedia": "https://en.wikipedia.org/wiki/Early_modern_period",
+    "source": "https://en.wikipedia.org/wiki/Early_modern_period",
+    "sourceTitle": "English Wikipedia (secondary)",
+    "timelines": [
+      "modern"
+    ]
+  },
+  {
+    "id": "m-industrial-age",
+    "label": "Industrial age",
+    "kind": "period",
+    "fromYearsAgo": 226,
+    "toYearsAgo": 80,
+    "wikipedia": "https://en.wikipedia.org/wiki/Industrial_Revolution",
+    "source": "https://en.wikipedia.org/wiki/Industrial_Revolution",
+    "sourceTitle": "English Wikipedia (secondary)",
+    "timelines": [
+      "modern"
+    ]
+  },
+  {
+    "id": "m-information",
+    "label": "Information age",
+    "kind": "period",
+    "fromYearsAgo": 80,
+    "toYearsAgo": 0,
+    "wikipedia": "https://en.wikipedia.org/wiki/Information_Age",
+    "source": "https://en.wikipedia.org/wiki/Information_Age",
+    "sourceTitle": "English Wikipedia (secondary)",
+    "timelines": [
+      "modern"
+    ]
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "id": "u-moon",
+  "label": "The Moon",
+  "description": "Something about the size of Mars hits Earth. The debris becomes the Moon.",
+  "yearsAgo": 4510000000,
+  "uncertaintyYears": 10000000,
+  "generationsAgo": 167657993,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Moon",
+  "source": "https://www.science.org/doi/10.1126/sciadv.1602365",
+  "sourceTitle": "Barboni et al. 2017, Science Advances",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

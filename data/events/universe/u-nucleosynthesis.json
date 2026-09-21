@@ -1,0 +1,17 @@
+{
+  "id": "u-nucleosynthesis",
+  "label": "First atomic nuclei",
+  "description": "Within minutes protons and neutrons stick together. Nearly all the hydrogen and helium there will ever be is made now.",
+  "yearsAgo": 13787000000,
+  "uncertaintyYears": 20000000,
+  "generationsAgo": 512527881,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Big_Bang_nucleosynthesis",
+  "source": "https://arxiv.org/abs/1807.06209",
+  "sourceTitle": "Planck 2018 results VI",
+  "timelines": {
+    "universe": {
+      "simple": false
+    }
+  }
+}

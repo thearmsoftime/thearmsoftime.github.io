@@ -1,0 +1,17 @@
+{
+  "id": "e-ice-ages",
+  "label": "The ice ages begin",
+  "description": "The Quaternary. Ice sheets grow and shrink on a cycle, and never quite go away.",
+  "yearsAgo": 2580000,
+  "uncertaintyYears": 10000,
+  "generationsAgo": 95911,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Quaternary_glaciation",
+  "source": "https://stratigraphy.org/chart",
+  "sourceTitle": "ICS Chronostratigraphic Chart",
+  "timelines": {
+    "earth": {
+      "simple": false
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "e-pangaea",
+  "label": "Pangaea",
+  "description": "Nearly all the land in one piece, from pole to pole.",
+  "yearsAgo": 335000000,
+  "uncertaintyYears": 15000000,
+  "generationsAgo": 12453532,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Pangaea",
+  "source": "https://en.wikipedia.org/wiki/Pangaea",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "earth": {
+      "simple": false
+    }
+  }
+}

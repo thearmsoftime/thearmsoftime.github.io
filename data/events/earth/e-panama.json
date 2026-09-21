@@ -1,0 +1,17 @@
+{
+  "id": "e-panama",
+  "label": "Panama closes",
+  "description": "North and South America join. Ocean currents change, and animals swap continents.",
+  "yearsAgo": 2800000,
+  "uncertaintyYears": 200000,
+  "generationsAgo": 104089,
+  "certainty": "disputed",
+  "wikipedia": "https://en.wikipedia.org/wiki/Isthmus_of_Panama",
+  "source": "https://en.wikipedia.org/wiki/Isthmus_of_Panama",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "earth": {
+      "simple": false
+    }
+  }
+}

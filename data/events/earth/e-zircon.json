@@ -1,0 +1,17 @@
+{
+  "id": "e-zircon",
+  "label": "Oldest piece of Earth",
+  "description": "A zircon crystal from the Jack Hills, Australia. Its chemistry says there was already liquid water.",
+  "yearsAgo": 4404000000,
+  "uncertaintyYears": 8000000,
+  "generationsAgo": 163717472,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Jack_Hills",
+  "source": "https://www.nature.com/articles/35051550",
+  "sourceTitle": "Wilde et al. 2001, Nature",
+  "timelines": {
+    "earth": {
+      "simple": false
+    }
+  }
+}

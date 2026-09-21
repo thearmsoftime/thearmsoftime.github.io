@@ -1,0 +1,17 @@
+{
+  "id": "h-fire",
+  "label": "Cooking on fire",
+  "description": "Hearths with burnt seeds and fish. Cooked food is easier to digest and feeds a bigger brain.",
+  "yearsAgo": 790000,
+  "uncertaintyYears": 50000,
+  "generationsAgo": 29368,
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Control_of_fire_by_early_humans",
+  "source": "https://humanorigins.si.edu/human-characteristics/tools-food",
+  "sourceTitle": "Smithsonian Human Origins: Tools & Food",
+  "timelines": {
+    "humans": {
+      "simple": true
+    }
+  }
+}

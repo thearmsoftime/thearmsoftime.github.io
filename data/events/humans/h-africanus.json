@@ -1,0 +1,17 @@
+{
+  "id": "h-africanus",
+  "label": "Australopithecus africanus",
+  "description": "The southern African branch, and the first early human fossil ever found in Africa.",
+  "yearsAgo": 3300000,
+  "uncertaintyYears": 200000,
+  "generationsAgo": 122677,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Australopithecus_africanus",
+  "source": "https://humanorigins.si.edu/evidence/human-fossils/species/australopithecus-africanus",
+  "sourceTitle": "Smithsonian Human Origins",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

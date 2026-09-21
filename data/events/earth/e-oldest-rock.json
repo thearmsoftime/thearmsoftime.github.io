@@ -1,0 +1,17 @@
+{
+  "id": "e-oldest-rock",
+  "label": "Oldest whole rock",
+  "description": "The Acasta Gneiss in Canada. The Archean eon is defined to begin with it.",
+  "yearsAgo": 4031000000,
+  "uncertaintyYears": 3000000,
+  "generationsAgo": 149851301,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Acasta_Gneiss",
+  "source": "https://stratigraphy.org/chart",
+  "sourceTitle": "ICS Chronostratigraphic Chart",
+  "timelines": {
+    "earth": {
+      "simple": false
+    }
+  }
+}

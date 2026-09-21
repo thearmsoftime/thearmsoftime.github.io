@@ -1,0 +1,17 @@
+{
+  "id": "h-erectus",
+  "label": "Homo erectus",
+  "description": "Long legs, our body shape, and the first of us to leave Africa. It lasted almost two million years.",
+  "yearsAgo": 2000000,
+  "uncertaintyYears": 100000,
+  "generationsAgo": 74349,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Homo_erectus",
+  "source": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-erectus",
+  "sourceTitle": "Smithsonian Human Origins",
+  "timelines": {
+    "humans": {
+      "simple": true
+    }
+  }
+}

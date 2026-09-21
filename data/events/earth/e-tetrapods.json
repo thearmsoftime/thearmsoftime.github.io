@@ -1,0 +1,20 @@
+{
+  "id": "e-tetrapods",
+  "label": "Fish grow arms",
+  "description": "Tiktaalik had a neck, ribs and shoulders. Our arms come from fish like this one — one bone, two bones, wrist, fingers. Same bones in your arm today.",
+  "yearsAgo": 375000000,
+  "uncertaintyYears": 5000000,
+  "generationsAgo": 13940520,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Tiktaalik",
+  "source": "https://www.nature.com/news/2006/060403/full/news060403-7.html",
+  "sourceTitle": "Nature News 2006, on Daeschler et al.",
+  "timelines": {
+    "earth": {
+      "simple": true
+    },
+    "life": {
+      "simple": true
+    }
+  }
+}

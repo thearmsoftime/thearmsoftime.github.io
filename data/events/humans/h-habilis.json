@@ -1,0 +1,17 @@
+{
+  "id": "h-habilis",
+  "label": "Homo habilis",
+  "description": "A bigger brain and a smaller face. Found with stone tools, which is how it got its name.",
+  "yearsAgo": 2300000,
+  "uncertaintyYears": 100000,
+  "generationsAgo": 85502,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Homo_habilis",
+  "source": "https://humanorigins.si.edu/evidence/human-fossils/species/homo-habilis",
+  "sourceTitle": "Smithsonian Human Origins",
+  "timelines": {
+    "humans": {
+      "simple": false
+    }
+  }
+}

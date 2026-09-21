@@ -1,0 +1,17 @@
+{
+  "id": "u-oxygen",
+  "label": "Oxygen in the air",
+  "description": "Microbes fill the atmosphere with oxygen. For most life at the time it was poison.",
+  "yearsAgo": 2430000000,
+  "uncertaintyYears": 100000000,
+  "generationsAgo": 90334572,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Great_Oxidation_Event",
+  "source": "https://www.nature.com/articles/s41586-021-03393-7",
+  "sourceTitle": "Poulton et al. 2021, Nature",
+  "timelines": {
+    "universe": {
+      "simple": true
+    }
+  }
+}

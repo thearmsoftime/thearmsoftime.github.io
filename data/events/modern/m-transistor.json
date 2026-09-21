@@ -1,0 +1,17 @@
+{
+  "id": "m-transistor",
+  "label": "The transistor",
+  "description": "The switch every digital thing is built from.",
+  "yearsAgo": 79,
+  "uncertaintyYears": 1,
+  "generationsAgo": 2.94,
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Transistor",
+  "source": "https://en.wikipedia.org/wiki/Transistor",
+  "sourceTitle": "English Wikipedia (secondary)",
+  "timelines": {
+    "modern": {
+      "simple": false
+    }
+  }
+}
