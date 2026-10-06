@@ -203,7 +203,7 @@ export default function AboutDialog() {
                   <OutLink href="https://www.youtube.com/watch?v=uMXt0eGXuZc">
                     Natural History Museum of Los Angeles County
                   </OutLink>
-                  .
+                  . They wrote and filmed it. We built it.
                 </Row>
                 <Row term="Generation">
                   One generation is {meta.generationYears} years

@@ -109,6 +109,8 @@ Credit it as **The Arms of Time**, with a link to
   (1981). The Natural History Museum of Los Angeles County made a short video
   of the same idea,
   [At Arm's Length](https://www.youtube.com/watch?v=uMXt0eGXuZc).
+  They wrote and filmed it. We built it, so you can measure it on your own
+  arms.
 - **Generations:** 26.9 years, after
   [Wang and others (2023)](https://www.science.org/doi/10.1126/sciadv.abm7047),
   *Science Advances*.
