@@ -88,8 +88,9 @@ Informative and plain. Not funny, not chatty, not breathless.
   value is that timeline's settings for it: `simple`, `landmark`, and optional
   `label` / `description` overrides. One event, two timelines, different
   treatment. There is no `keyEvents` list on a timeline any more.
-- **A timeline is Universe, Earth, Life, Humans, Modern humans.** Never call one
+- **A timeline is Universe, Earth, Life, Humans, History.** Never call one
   a "zone" — that was the old name and it is gone from the code and the data.
+  History is `modern` in the files — the id predates the name.
   The word itself is not banned: *zone* is a real unit in the band vocabulary
   (a chronozone sits under a stage), so it stays free for a `kind` value. It is
   not a word for an eon, an era, a period or an epoch either — those are bands,
@@ -99,19 +100,22 @@ Informative and plain. Not funny, not chatty, not breathless.
   **event** is a moment on the arm. A **stretch** is an event that lasted — it
   carries `endYearsAgo`: the age of dinosaurs, Egypt of the pharaohs, the Roman Empire. Never
   call a stretch a "range": the ± on a date is a range too, and the card shows
-  both. An **oddity** is three moments whose *two gaps* are the point —
-  Cleopatra is nearer to the Moon landing than to the pyramid. Never call one a
-  "comparison": `src/scale.ts` already uses that word for the nail-file
+  both. An **oddity** is moments whose *gaps* are the point: three for two
+  gaps it compares — Cleopatra is nearer to the Moon landing than to the
+  pyramid — or two for one gap — mammoths were still alive when the pyramid
+  was finished. Never pad a one-gap fact with *now* to make three: the gap to
+  now says nothing, and the arm draws it as loudly as the one that does. Never
+  call one a "comparison": `src/scale.ts` already uses that word for the nail-file
   match the ruler workbench reads. The dev data browser uses these words and the field names,
   nothing friendlier.
-- **A fact is only offered where both its gaps can be read.** `MIN_GAP` in
+- **A fact is only offered where every gap can be read.** `MIN_GAP` in
   `src/oddities.ts` is the single gate: 4 % of the span each, about a palm on a
   1.90 m arm. `odditiesFor()` is what the files pin to a timeline; `factsFor()`
   is what that arm may draw, and the Fun fact button only ever sees the second.
   Never widen the gate to get a favourite fact on screen — two hairlines and
   three names in a heap is a drawing that lies. Write a shorter timeline
   instead.
-- **A fact marks its own three moments,** events or not, simple list or not.
+- **A fact marks its own moments,** events or not, simple list or not.
   That is the point of it: Cleopatra has no card on any arm. While a fact is up
   the landmark names stand down and the scan is turned down to `FACT_DIM`, so
   there is one set of names on the arm and the rules are readable over it.
@@ -135,7 +139,8 @@ Informative and plain. Not funny, not chatty, not breathless.
 - **The figure landmarks are measured, not guessed.** The fingertip and chest
   fractions in `src/figure.ts` belong to the image file. Replacing the image
   means re-measuring them.
-- **`earth` and `humans` are dev-only** until their research is done: `?dev=1`.
+- **`earth` and `life` are dev-only** until their research is done: `?dev=1`.
+  The picker shows them in the dev purple.
 - **Check data changes in the data browser**: `?dev=1` → Settings → Data
   browser. Every row in `data/` as a table, with a **Missing something** filter
   for rows with no source, link or description.

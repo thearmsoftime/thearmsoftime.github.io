@@ -63,9 +63,9 @@ const decimalsAt = (step: number): number =>
   step >= 1 ? 0 : Math.min(3, Math.ceil(-Math.log10(step)))
 
 /** "1 year", "1.1 years", "11 months" — a count that never says "1 months". */
-function count(value: number, unit: string, digits = 2): string {
+function count(value: number, unit: string, digits = 2): [string, string] {
   const text = sig(value, digits)
-  return `${text} ${text === '1' ? unit : `${unit}s`}`
+  return [text, text === '1' ? unit : `${unit}s`]
 }
 
 /**
@@ -76,16 +76,21 @@ function count(value: number, unit: string, digits = 2): string {
  * those apart anyway.
  */
 export function formatYears(years: number): string {
+  if (years === 0) return 'no time at all'
+  return yearsParts(years).join(' ')
+}
+
+/** The same, as the number and the words after it: ["440", "years"]. */
+function yearsParts(years: number): [string, string] {
   const y = Math.abs(years)
-  if (y === 0) return 'no time at all'
-  if (y >= 1e9) return `${sig(y / 1e9)} billion years`
-  if (y >= 1e6) return `${sig(y / 1e6)} million years`
+  if (y >= 1e9) return [sig(y / 1e9), 'billion years']
+  if (y >= 1e6) return [sig(y / 1e6), 'million years']
   if (y >= 2) return count(y, 'year', y >= 1000 ? 3 : 2)
   // Below two years it steps down a rung at a time. Without the months rung a
   // year and a bit had to be said in 300-odd days, or rounded flat to "1 year".
   if (y >= 1) return count(y, 'year')
   // Nobody says "12 months".
-  if (y >= 11.5 * MONTH) return '1 year'
+  if (y >= 11.5 * MONTH) return ['1', 'year']
   if (y >= MONTH) return count(y / MONTH, 'month')
   if (y >= DAY) return count(y / DAY, 'day')
   if (y >= HOUR) return count(y / HOUR, 'hour')
@@ -100,53 +105,75 @@ export function formatYearsAgo(years: number): string {
 }
 
 /**
- * A date and its error bar, split so the bar can be set grey and small:
- * "130" + "±5" + "million years ago". The unit is said once, at the end,
- * because "130 million ± 5 million years" is the unit read twice for no gain.
+ * A card's date, in pieces, so the number can be set large and the words
+ * after it small: "130" + "million years ago". The eye lands on the number,
+ * and the whole date fits on one line of a narrow card.
  *
- * A few dates are pinned far finer than their own unit (the Solar System, to
- * half a million years in 4.57 billion). "±0.0005 billion" is a row of zeros,
- * so those keep their own words in the bar and leave `trail` empty.
+ * Read in order: figure, unit, bar, words. Each piece is optional but the
+ * figure, and the card puts a space between the pieces it has.
  */
-export interface UncertainDate {
-  /** The number, or the whole date when the bar carries its own unit. */
-  lead: string
-  /** "±5", glued tight. Absent when the date has no error bar. */
+export interface DateParts {
+  /** "130", "243–66", "now". */
+  figure: string
+  /**
+   * Only when the bar carries a unit of its own and this date's unit has to
+   * be said before it: "4.57" + "billion" + "±500,000 years" + "ago".
+   */
+  unit?: string
+  /** "±5", set grey. Absent when the date has no error bar. */
   bar?: string
-  /** The shared unit and "ago", after the bar. */
-  trail?: string
-}
-
-export function formatYearsAgoUncertain(years: number, uncertainty = 0): UncertainDate {
-  if (years <= 0 || !(uncertainty > 0)) return { lead: formatYearsAgo(years) }
-  const own = (): UncertainDate => ({
-    lead: formatYearsAgo(years),
-    bar: `±${formatYears(uncertainty)}`,
-  })
-  const unit = years >= 1e9 ? 1e9 : years >= 1e6 ? 1e6 : 1
-  // Under two years the date itself is months or days; no unit to share.
-  if (unit === 1 && (years < 2 || uncertainty < 1)) return own()
-  const bar = sig(uncertainty / unit, 2)
-  // Past two decimals the shared unit stops paying: "±0.024 million" is a
-  // worse way to say 24,000 years.
-  if ((bar.split('.')[1]?.length ?? 0) > 2) return own()
-  const word = unit === 1e9 ? 'billion years' : unit === 1e6 ? 'million years' : 'years'
-  return { lead: sig(years / unit), bar: `±${bar}`, trail: `${word} ago` }
+  /** "million years ago". Empty for "now". */
+  words: string
 }
 
 /**
- * A span, said as one line: "243 to 66 million years ago". Both edges share
- * the bigger one's unit whenever that stays readable, because "243 million
- * years to 66 million years ago" is the same fact said twice.
+ * A moment and its error bar: "130 ±5 million years ago". The unit is said
+ * once, at the end, because "130 million ± 5 million years" is the unit read
+ * twice for no gain.
+ *
+ * A few dates are pinned far finer than their own unit (the Solar System, to
+ * half a million years in 4.57 billion). "±0.0005 billion" is a row of zeros,
+ * so those give the bar its own words: "4.57 billion ±500,000 years ago".
  */
-export function formatYearsAgoStretch(from: number, to: number): string {
-  if (to <= 0) return `${formatYears(from)} ago to now`
+export function formatDateParts(years: number, uncertainty = 0): DateParts {
+  if (years <= 0) return { figure: 'now', words: '' }
+  const [figure, words] = yearsParts(years)
+  if (!(uncertainty > 0)) return { figure, words: `${words} ago` }
+  const unit = years >= 1e9 ? 1e9 : years >= 1e6 ? 1e6 : 1
+  // Under two years the date itself is months or days; no unit to share.
+  const shared = !(unit === 1 && (years < 2 || uncertainty < 1))
+  const bar = sig(uncertainty / unit, 2)
+  // Past two decimals the shared unit stops paying: "±0.024 million" is a
+  // worse way to say 24,000 years.
+  if (shared && (bar.split('.')[1]?.length ?? 0) <= 2) {
+    const word = unit === 1e9 ? 'billion years' : unit === 1e6 ? 'million years' : 'years'
+    return { figure: sig(years / unit), bar: `±${bar}`, words: `${word} ago` }
+  }
+  const own = formatYears(uncertainty)
+  // Both in years: say "years" once, after the bar.
+  if (words.endsWith('years') && own.endsWith('years')) {
+    const scale = words.slice(0, -'years'.length).trim()
+    return { figure, unit: scale || undefined, bar: `±${own}`, words: 'ago' }
+  }
+  return { figure, unit: words, bar: `±${own}`, words: 'ago' }
+}
+
+/**
+ * A stretch, as one line: "243–66 million years ago". Both edges share the
+ * bigger one's unit whenever that stays readable, because "243 million years
+ * to 66 million years ago" is the same fact said twice.
+ */
+export function formatStretchParts(from: number, to: number): DateParts {
+  const [figure, words] = yearsParts(from)
+  if (to <= 0) return { figure, words: `${words} ago to now` }
   const unit = from >= 1e9 ? 1e9 : from >= 1e6 ? 1e6 : 0
   if (unit > 0 && to >= unit / 10) {
     const word = unit === 1e9 ? 'billion' : 'million'
-    return `${sig(from / unit)} to ${sig(to / unit)} ${word} years ago`
+    return { figure: `${sig(from / unit)}–${sig(to / unit)}`, words: `${word} years ago` }
   }
-  return `${formatYears(from)} to ${formatYearsAgo(to)}`
+  const [toFigure, toWords] = yearsParts(to)
+  if (toWords === words) return { figure: `${figure}–${toFigure}`, words: `${words} ago` }
+  return { figure, words: `${words} to ${formatYearsAgo(to)}` }
 }
 
 /**

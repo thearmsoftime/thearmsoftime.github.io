@@ -12,6 +12,9 @@
   "timelines": {
     "humans": {
       "simple": true
+    },
+    "modern": {
+      "simple": true
     }
   }
 }

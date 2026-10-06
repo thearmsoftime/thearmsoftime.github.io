@@ -168,8 +168,8 @@ function readEvents(
     for (const [timelineId, settings] of Object.entries(on)) {
       const timeline = known.get(timelineId)
       // A timeline only carries the events that fit inside its own span. A
-      // stretch only has to end inside it: Egypt of the pharaohs was already
-      // old when the Great Pyramid went up, and the arm shows the part it has.
+      // stretch only has to end inside it: one that began before the left
+      // fingertip fades in from there, and the arm shows the part it has.
       if (!timeline || (endYearsAgo ?? yearsAgo) > timeline.spanYears) continue
       placements[timelineId] = readPlacement(settings)
     }
@@ -235,12 +235,15 @@ export const allEvents = readEvents(records(rawEvents), byId, meta.generationYea
 
 
 /** Timelines still being worked on: only reachable with `?dev=1`. */
-const DEV_ONLY_TIMELINES = new Set(['earth', 'humans'])
+const DEV_ONLY_TIMELINES = new Set(['earth', 'life'])
+
+/** True for a timeline a visitor cannot pick. The picker wears it in the dev purple. */
+export const isDevOnly = (timelineId: string): boolean => DEV_ONLY_TIMELINES.has(timelineId)
 
 /**
- * The timelines a visitor may pick: Universe, Life and Modern humans. Everything else
- * in here still works on the whole set, so a dev-only one is a line away from
- * being public again.
+ * The timelines a visitor may pick: Universe, Humans and History.
+ * Everything else in here still works on the whole set, so a dev-only one is a
+ * line away from being public again.
  */
 export const visibleTimelines: Timeline[] = DEV
   ? timelines

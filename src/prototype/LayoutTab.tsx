@@ -19,6 +19,7 @@ const RANGES: Record<keyof Layout, { min: number; max: number; step: number }> =
   trayBottomRem: { min: 0, max: 3, step: 0.125 },
   cardGapRem: { min: 0, max: 3, step: 0.125 },
   cardHeightRem: { min: 8, max: 18, step: 0.25 },
+  dateWordsEm: { min: 0.5, max: 1, step: 0.02 },
 }
 
 const within = (v: unknown, r: { min: number; max: number }) =>
@@ -85,6 +86,14 @@ function Body() {
         show={rem}
         onInput={(v) => set('cardHeightRem', v)}
       />
+      <Knob
+        label="Date words"
+        hint="share of the number's size"
+        {...RANGES.dateWordsEm}
+        value={layout().dateWordsEm}
+        show={share}
+        onInput={(v) => set('dateWordsEm', v)}
+      />
     </div>
   )
 }
@@ -99,6 +108,7 @@ const copy = () => {
     `  trayBottomRem: ${l.trayBottomRem},`,
     `  cardGapRem: ${l.cardGapRem},`,
     `  cardHeightRem: ${l.cardHeightRem},`,
+    `  dateWordsEm: ${l.dateWordsEm},`,
     '}',
   ].join('\n')
 }

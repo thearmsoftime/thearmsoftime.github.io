@@ -101,7 +101,7 @@ export const LIFE_YEARS = 80;
 /**
  * A life is only offered as a ruler where it is at least half a finger long.
  * A finger is a fixed share of the span, so this is a gate on the timeline,
- * not on the arm span: Modern humans passes, Humans is a thousand times short.
+ * not on the arm span: History passes, Humans is a thousand times short.
  */
 const LIFE_MIN_FINGERS = 0.5;
 
@@ -176,7 +176,7 @@ export const parseYardstick = (raw: string): YardstickId | undefined =>
   YARDSTICKS.some((y) => y.id === raw) ? (raw as YardstickId) : undefined;
 
 /**
- * The ruler is picked per timeline — a life on Modern humans, a millimetre on
+ * The ruler is picked per timeline — a life on History, a millimetre on
  * the Universe — and stored as "modern:life,universe:hair". A pair that no
  * longer parses is dropped, not the whole list.
  */

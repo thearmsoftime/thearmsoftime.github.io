@@ -15,7 +15,8 @@
       "simple": true
     },
     "modern": {
-      "simple": true
+      "simple": true,
+      "landmark": true
     }
   }
 }

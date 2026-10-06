@@ -1,7 +1,8 @@
 {
   "id": "o-oxygen",
   "timelines": [
-    "life"
+    "life",
+    "universe"
   ],
   "label": "Before oxygen",
   "line": "Life was here for more than a billion years before there was oxygen to breathe.",
@@ -21,10 +22,6 @@
       "wikipedia": "https://en.wikipedia.org/wiki/Great_Oxidation_Event",
       "source": "https://www.science.org/doi/10.1126/sciadv.1600134",
       "sourceTitle": "Luo et al. 2016, Science Advances"
-    },
-    {
-      "label": "Now",
-      "yearsAgo": 0
     }
   ],
   "certainty": "high",

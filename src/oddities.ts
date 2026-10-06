@@ -2,7 +2,7 @@ import { certaintyOf, num, readSourced, records, str, strings, timelines } from 
 import type { Oddity, OddityPoint, OddityPoints, Timeline } from './types'
 
 /**
- * The odd facts: three moments whose *two gaps* are the point. Kept out of
+ * The odd facts: two or three moments whose *gaps* are the point. Kept out of
  * `data.ts` because they are their own entity and nothing else reads them —
  * the header's Fun fact button, the marks it puts on the arm, and the dev
  * panel.
@@ -39,8 +39,8 @@ function readOddities(input: Record<string, unknown>[], known: Map<string, Timel
     const points = (Array.isArray(o.points) ? o.points : [])
       .map(readOddityPoint)
       .filter((p): p is OddityPoint => p !== null)
-    // Two gaps need exactly three moments. Anything else is not an oddity yet.
-    if (!id || !line || points.length !== 3) continue
+    // One gap or two: two moments or three. Anything else is not an oddity yet.
+    if (!id || !line || points.length < 2 || points.length > 3) continue
     points.sort((a, b) => b.yearsAgo - a.yearsAgo)
     const on = strings(o.timelines).filter((t) => {
       const timeline = known.get(t)
@@ -80,7 +80,7 @@ export interface FactStop {
 }
 
 /**
- * Where an oddity's three moments fall on a timeline. A moment still ahead is
+ * Where an oddity's moments fall on a timeline. A moment still ahead is
  * kept with its true `t` past 1 rather than dropped: the drawing needs to know
  * how far off the end it would be, even though it can only draw to the
  * fingertip.
@@ -101,8 +101,8 @@ export const odditiesFor = (timelineId: string): Oddity[] =>
   odditiesByTimeline.get(timelineId) ?? EMPTY_ODDITIES
 
 /**
- * How much of the arm the smaller of the two gaps has to cover before the fact
- * is worth drawing — about a palm on a 1.90 m span.
+ * How much of the arm every gap has to cover before the fact is worth
+ * drawing — about a palm on a 1.90 m span.
  *
  * This is the gate everything else hangs on. Tyrannosaurus lived nearer to us
  * than to Stegosaurus, but on the 3.7-billion-year Life arm both gaps are two
@@ -125,15 +125,15 @@ const drawnGaps = (oddity: Oddity, spanYears: number): number[] => {
   // A moment still ahead is drawn in the margin past the fingertip, so its gap
   // is measured to where the drawing stops rather than to the true date.
   const at = (i: number) => Math.min(Math.max(stops[i]!.t, 0), 1 + BEYOND_MARGIN)
-  return [at(1) - at(0), at(2) - at(1)]
+  return stops.slice(1).map((_, i) => at(i + 1) - at(i))
 }
 
 export const isReadable = (oddity: Oddity, spanYears: number): boolean =>
   drawnGaps(oddity, spanYears).every((gap) => gap >= MIN_GAP)
 
 /**
- * The facts this timeline can actually show: the ones whose two gaps are both
- * big enough on the arm to be seen and measured.
+ * The facts this timeline can actually show: the ones whose gaps are all big
+ * enough on the arm to be seen and measured.
  */
 const readableByTimeline = new Map<string, Oddity[]>(
   timelines.map((t) => [
@@ -146,11 +146,9 @@ export const factsFor = (timelineId: string): Oddity[] =>
   readableByTimeline.get(timelineId) ?? EMPTY_ODDITIES
 
 /**
- * The two gaps an oddity compares, in years. Older is the first pair, younger
- * the second; on a fact about the future the younger gap runs past now and so
- * past the right fingertip.
+ * An oddity's gaps in years, oldest first: one, or the two it compares. On a
+ * fact about the future the younger gap runs past now and so past the right
+ * fingertip.
  */
-export const gapsOf = (oddity: Oddity): { older: number; younger: number } => ({
-  older: oddity.points[0].yearsAgo - oddity.points[1].yearsAgo,
-  younger: oddity.points[1].yearsAgo - oddity.points[2].yearsAgo,
-})
+export const gapsOf = (oddity: Oddity): number[] =>
+  oddity.points.slice(1).map((point, i) => oddity.points[i]!.yearsAgo - point.yearsAgo)

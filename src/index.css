@@ -157,6 +157,19 @@
   --figure-opacity: 0.2;
 }
 
+/*
+ * Tailwind 4 gives buttons the arrow cursor, as the browser does. Here the
+ * hand is the only sign on a desktop that a quiet grey pill can be pressed.
+ * In the base layer, so a `cursor-*` utility — the scrubber's resize arrows,
+ * the strip's grab — still wins.
+ */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+}
+
 html,
 body {
   /* The page itself never scrolls sideways. Nothing inside it does either. */

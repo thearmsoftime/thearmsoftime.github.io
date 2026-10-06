@@ -1,5 +1,6 @@
 import { Show, type JSX } from "solid-js";
 import KofiLink, { QUIET_LINK } from "./KofiLink";
+import Logo from "./Logo";
 import { OutLink } from "./Sources";
 import { generationCredit, meta } from "../data";
 
@@ -85,7 +86,7 @@ export function AboutButton(props: { always?: boolean; quiet?: boolean }) {
   return (
     <button
       type="button"
-      class="border-base-300 bg-base-200/70 text-base-content/55 hover:text-base-content focus-visible:ring-accent/50 flex h-6 shrink-0 items-center gap-1.5 rounded-full border px-2 text-[0.65rem] leading-none font-medium whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:outline-none"
+      class="border-base-300 bg-base-200/70 text-base-content/55 hover:text-base-content hover:border-base-content/30 focus-visible:ring-accent/50 flex h-6 shrink-0 items-center gap-1.5 rounded-full border px-2 text-[0.65rem] leading-none font-medium whitespace-nowrap transition focus-visible:ring-2 focus-visible:outline-none active:scale-95"
       aria-label="About this page"
       onClick={openAbout}
     >
@@ -106,7 +107,8 @@ export default function AboutDialog() {
     <dialog class="modal" ref={(el) => (dialog = el)}>
       <div class="modal-box border-base-300 flex max-h-[90dvh] w-[calc(100%-2rem)] max-w-3xl flex-col gap-0 border p-0">
         <header class="border-base-300 flex flex-col gap-3 border-b px-6 pt-8 pb-6 sm:px-14 sm:pt-10 sm:pb-8">
-          <h2 class="font-display text-base tracking-[0.18em] uppercase">
+          <h2 class="font-display flex items-center gap-3 text-base tracking-[0.18em] uppercase">
+            <Logo class="text-primary size-9 shrink-0" />
             The Arms of Time
           </h2>
           <p class="text-base-content/80 max-w-prose text-sm leading-relaxed sm:text-base">

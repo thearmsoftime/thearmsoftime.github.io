@@ -25,6 +25,7 @@ import { FACT_DIM, inkOpacity, lineOpacity, maskStyle } from "../fade";
 import { cardRadius, fob, fobY } from "../fob";
 import { columnFrom, columnTo, lineY, scrub } from "../scrub";
 import { clamp01 } from "../scale";
+import { placeLandmarks } from "../landmarks";
 import { formatYears } from "../format";
 import { factRows } from "../factRows";
 import { light, scanTint, sideColour } from "../light";
@@ -63,7 +64,7 @@ interface Props {
    */
   previewFrom?: number;
   /**
-   * The fun fact on show, if any: three moments and the two gaps between them,
+   * The fun fact on show, if any: its moments and the gaps between them,
    * drawn on the arm whether or not those moments are events here.
    */
   fact?: Oddity;
@@ -102,8 +103,15 @@ const captionGap = () => `${scrub().captionGap}px`;
 const landmarkLift = () => scrub().lineDrop + scrub().landmarkLift;
 /** The hover name sits a little lower than a landmark's, right over its dot. */
 const hoverLift = () => scrub().lineDrop + scrub().hoverLift;
-/** Roughly how wide a name draws, for keeping two of them off each other. */
-const LANDMARK_CHAR_PX = 5.2;
+/**
+ * Roughly how wide a name draws, for keeping two of them off each other. The
+ * names grow at `sm:` in LABEL_CLASS, so the guess grows with them: 0.56 em
+ * a letter, at 0.58rem and 0.7rem. A guess that stays phone-sized lets desktop
+ * names overlap, and the cull in `landmarks.ts` would never see it. Read when
+ * the stage resizes, which crossing 40rem always does.
+ */
+const landmarkCharPx = () =>
+  window.matchMedia("(min-width: 40rem)").matches ? 6.3 : 5.2;
 const LANDMARK_PAD_PX = 16;
 const leftMargin = () => `calc(${FIGURE.leftX * 100}% - ${captionGap()})`;
 const rightMargin = () =>
@@ -373,41 +381,28 @@ export default function ArmStage(props: Props) {
   });
 
   /**
-   * Landmark names, placed left to right and pushed apart where two of them
-   * would collide: Earth and Life sit close together on the universe span. The
-   * placement depends only on the dates and the width, so a name never moves
-   * when the marker arrives on its dot.
+   * Landmark names, pushed apart where two of them would collide — Earth and
+   * Life sit close together on the universe span — and left off where the
+   * push would carry a name off its own dot, which on a phone it does. See
+   * `src/landmarks.ts`.
    */
   const landmarks = createMemo(() => {
     const width = stageWidth();
-    const placed = eventsWithPos()
-      .filter((e) => e.event.landmark)
-      .map((e) => ({
-        id: e.event.id,
-        label: e.event.label,
-        at: xFrac(e.t),
-        half:
-          width > 0
-            ? (e.event.label.length * LANDMARK_CHAR_PX + LANDMARK_PAD_PX) /
-              2 /
-              width
-            : 0,
-      }))
-      .sort((a, b) => a.at - b.at);
-
-    for (let i = 1; i < placed.length; i++) {
-      const prev = placed[i - 1]!;
-      const cur = placed[i]!;
-      cur.at = Math.max(cur.at, prev.at + prev.half + cur.half);
-    }
-    // The push only ever goes right, so walk back to keep the last one on stage.
-    for (let i = placed.length - 1; i >= 0; i--) {
-      const cur = placed[i]!;
-      const next = placed[i + 1];
-      const ceiling = next ? next.at - next.half - cur.half : 1 - cur.half;
-      cur.at = Math.min(cur.at, ceiling);
-    }
-    return placed;
+    const charPx = landmarkCharPx();
+    return placeLandmarks(
+      eventsWithPos()
+        .filter((e) => e.event.landmark)
+        .map((e) => ({
+          id: e.event.id,
+          label: e.event.label,
+          dot: xFrac(e.t),
+          half:
+            width > 0
+              ? (e.event.label.length * charPx + LANDMARK_PAD_PX) / 2 / width
+              : 0,
+        })),
+      scrub().landmarkSlide,
+    );
   });
 
   /** The scan steps back while a fact is drawn over it. */
@@ -510,7 +505,7 @@ export default function ArmStage(props: Props) {
           )}
         </Show>
 
-        {/* A fun fact's two gaps, each a bar over the arms it covers. */}
+        {/* A fun fact's gaps, each a bar over the arms it covers. */}
         <Show when={props.fact}>
           {(fact) => (
             <FactBars
@@ -780,6 +775,10 @@ export default function ArmStage(props: Props) {
               {(mark) => (
                 <span
                   class={LANDMARK_CLASS}
+                  // The live event's name stands out from the rest. Placement
+                  // still uses the regular width, so nothing shifts when the
+                  // marker arrives.
+                  classList={{ "font-bold": mark.id === props.nearestId }}
                   style={{
                     left: `${mark.at * 100}%`,
                     top: bandAt(lineY() - landmarkLift()),
@@ -791,7 +790,7 @@ export default function ArmStage(props: Props) {
             </For>
           }
         >
-          {/* A fact names its own three moments, so the landmark names stand
+          {/* A fact names its own moments, so the landmark names stand
               down rather than fight them for the same strip of arm. */}
           {(fact) => (
             <FactNames

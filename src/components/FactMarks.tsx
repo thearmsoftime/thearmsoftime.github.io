@@ -7,15 +7,16 @@ import { gapsOf, stopsOf, type FactStop } from '../oddities'
 import type { Oddity } from '../types'
 
 /**
- * A fun fact drawn on the arm: three moments dotted on the line, and the two
- * gaps between them laid over the arms as two bars, each in its own colour.
+ * A fun fact drawn on the arm: its moments dotted on the line, and the gaps
+ * between them laid over the arms as bars, each in its own colour. Two gaps
+ * when the fact compares them, one when it is about one stretch of time.
  *
  * The bars are the same shape as the band under the pointer in the strip: a
  * block of colour from the names down through the line, fading out below it.
  * One idea on the arm, whether the strip is on or not — a gap is a stretch of
  * arm, and a bar says that without a dimension line to read.
  *
- * The three moments are marked whether or not they are events in `data/`, and
+ * The moments are marked whether or not they are events in `data/`, and
  * whether or not the short list keeps them. That is the point of a fact:
  * Cleopatra has no card on any arm, and the reader still has to see where she
  * falls between the pyramid and the Moon.
@@ -41,7 +42,7 @@ const tOf = (stop: FactStop) => Math.min(Math.max(stop.t, 0), 1 + BEYOND_CAP)
 /** True when the moment is so far ahead that the bar had to be cut. */
 const isCut = (stop: FactStop) => stop.t > 1 + BEYOND_CAP
 
-/** The two gaps' colours, older first. `--fact-near` is set per theme in index.css. */
+/** The gaps' colours, older first. `--fact-near` is set per theme in index.css. */
 const GAP_COLOUR = ['var(--color-secondary)', 'var(--fact-near)'] as const
 
 /** A name's rough width, for telling whether two of them would touch. */
@@ -53,7 +54,7 @@ interface Props {
   spanYears: number
 }
 
-/** The three dots on the line. A bare `<g>`, for inside the stage's svg. */
+/** The dots on the line. A bare `<g>`, for inside the stage's svg. */
 export function FactDots(props: Props) {
   const stops = createMemo(() => stopsOf(props.fact, props.spanYears))
   return (
@@ -116,15 +117,16 @@ const extent = (stop: FactStop, stageWidth: number) => {
 
 /**
  * The hinge's name goes up a row only when it would touch a neighbour's.
- * Most facts keep all three on one row, and the bars stay short.
+ * Most facts keep every name on one row, and the bars stay short.
  */
 const hingeUpOf = (stops: FactStop[], stageWidth: number) => {
+  // A fact with one gap has no third moment; its hinge is the last.
   const [first, hinge, last] = stops
   if (!named(hinge!)) return false
   const [l, r] = extent(hinge!, stageWidth)
   return (
     (named(first!) && extent(first!, stageWidth)[1] > l) ||
-    (named(last!) && extent(last!, stageWidth)[0] < r)
+    (last !== undefined && named(last) && extent(last, stageWidth)[0] < r)
   )
 }
 
@@ -148,6 +150,8 @@ export const factLift = (fact: Oddity, spanYears: number, stageWidth: number): n
 function layoutOf(props: Props & { stageWidth: number }) {
   const stops = createMemo(() => stopsOf(props.fact, props.spanYears))
   const gaps = createMemo(() => gapsOf(props.fact))
+  /** 0, or 0 and 1: which gaps there are, for walking them in order. */
+  const gapIndexes = createMemo(() => gaps().map((_, i) => i))
   const line = () => `${yFrac(lineY()) * 100}%`
   const up = (rem: number) => `calc(${line()} - ${rem}rem)`
   const down = (rem: number) => `calc(${line()} + ${rem}rem)`
@@ -156,18 +160,18 @@ function layoutOf(props: Props & { stageWidth: number }) {
     factRows().nameRem + (index === 1 && hingeUp() ? factRows().rowRem : 0)
   const barLift = () => liftOf(hingeUp())
 
-  return { stops, gaps, up, down, nameRow, barLift }
+  return { stops, gaps, gapIndexes, up, down, nameRow, barLift }
 }
 
 /**
- * The two bars. HTML, and put in before the stage's svg so the line and its
+ * The bars. HTML, and put in before the stage's svg so the line and its
  * dots are drawn over them.
  */
 export function FactBars(props: Props & { stageWidth: number }) {
-  const { stops, up, barLift } = layoutOf(props)
+  const { stops, gapIndexes, up, barLift } = layoutOf(props)
   return (
     <>
-      <For each={[0, 1]}>
+      <For each={gapIndexes()}>
         {(gap) => {
           const from = () => tOf(stops()[gap]!)
           const to = () => tOf(stops()[gap + 1]!)
@@ -205,10 +209,10 @@ export function FactBars(props: Props & { stageWidth: number }) {
 
 /** The words: each moment named over the line, each gap measured under it. */
 export function FactNames(props: Props & { stageWidth: number }) {
-  const { stops, gaps, up, down, nameRow } = layoutOf(props)
+  const { stops, gaps, gapIndexes, up, down, nameRow } = layoutOf(props)
   return (
     <>
-      <For each={[0, 1]}>
+      <For each={gapIndexes()}>
         {(gap) => {
           const from = () => tOf(stops()[gap]!)
           const to = () => tOf(stops()[gap + 1]!)
@@ -226,7 +230,7 @@ export function FactNames(props: Props & { stageWidth: number }) {
                 transform: `translateX(-${anchor() * 100}%)`,
               }}
             >
-              {formatYears(gap === 0 ? gaps().older : gaps().younger)}
+              {formatYears(gaps()[gap]!)}
             </span>
           )
         }}

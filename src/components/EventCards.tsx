@@ -1,15 +1,16 @@
 import { For, Show, createEffect, createMemo, createSignal, onCleanup, onMount } from 'solid-js'
 import type { Oddity, TimelineEvent } from '../types'
 import FactCard from './FactCard'
-import Sources from './Sources'
+import Sources, { linksOf } from './Sources'
 import { clamp01, fractionOf, startsInside } from '../scale'
 import { bodyAt } from '../body'
+import { layout } from '../layout'
 import {
   formatCalendarYear,
+  formatDateParts,
   formatGenerationsAgo,
+  formatStretchParts,
   formatYears,
-  formatYearsAgoStretch,
-  formatYearsAgoUncertain,
 } from '../format'
 
 interface Props {
@@ -30,8 +31,8 @@ interface Props {
   showUncertainty: boolean
   /**
    * The fun fact on show, if any. It is squeezed into the strip as a card of
-   * its own, at the moment its two gaps share, so the marker has something
-   * real to land on — see `FactCard`.
+   * its own, at its hinge — the moment its two gaps share, or the end of its
+   * one gap — so the marker has something real to land on. See `FactCard`.
    */
   fact?: Oddity
   onFactNext: () => void
@@ -61,6 +62,11 @@ const DRAG_SLOP = 4
  */
 const HAND_MS = 160
 
+/**
+ * Smallest a card's date may shrink to, as a share of its size. See `fitDates`.
+ */
+const FIT_MIN = 0.75
+
 /** Where one card sits on the arm: a moment has a == b, a stretch spans them. */
 interface Anchor {
   id: string
@@ -82,7 +88,7 @@ type Item = TimelineEvent | Oddity
 
 const isFact = (item: Item): item is Oddity => 'points' in item
 
-/** Where a card sits in time. A fact sits on the moment its two gaps share. */
+/** Where a card sits in time. A fact sits on its hinge, the second moment. */
 const startOf = (item: Item): number =>
   isFact(item) ? Math.max(item.points[1].yearsAgo, 0) : item.yearsAgo
 
@@ -109,8 +115,8 @@ export default function EventCards(props: Props) {
 
   /**
    * The events, with the fact dropped in at its own moment in time. Oldest
-   * first, the way the arms run. A fact sits on the moment its two gaps share,
-   * which is the one the marker is sent to when it opens.
+   * first, the way the arms run. A fact sits on its hinge, which is the moment
+   * the marker is sent to when it opens.
    */
   const items = createMemo<Item[]>(() => {
     const fact = props.fact
@@ -151,6 +157,28 @@ export default function EventCards(props: Props) {
       const b = Math.max(startsInside(start, end, starts) ? start : end, a)
       floor = b
       return { id: item?.id ?? '', a, b, center: el.offsetLeft + el.offsetWidth / 2 }
+    })
+  }
+
+  /**
+   * A card's date is one line, always: on two lines it pushes the name down,
+   * and the names stop lining up from card to card. The words are already set
+   * small; where the date is still wider than the card — a long ± in the
+   * science view, a phone — the whole date steps down until it fits.
+   *
+   * All the resets, then all the reads, then all the writes: one layout pass
+   * for the strip, not one per card.
+   */
+  const fitDates = () => {
+    const dates = strip ? Array.from(strip.querySelectorAll<HTMLElement>('[data-date]')) : []
+    for (const el of dates) el.style.fontSize = ''
+    const scales = dates.map((el) => {
+      const room = el.parentElement?.clientWidth ?? 0
+      const need = el.getBoundingClientRect().width
+      return need > room && need > 0 ? Math.max(FIT_MIN, Math.floor((room / need) * 100) / 100) : 1
+    })
+    dates.forEach((el, i) => {
+      if (scales[i]! < 1) el.style.fontSize = `${scales[i]}em`
     })
   }
 
@@ -295,6 +323,15 @@ export default function EventCards(props: Props) {
     })
   })
 
+  // Fit the dates again whenever one can have changed width: new cards, the
+  // ± switched on or off, the date words resized in the prototype panel.
+  createEffect(() => {
+    items()
+    props.showUncertainty
+    layout().dateWordsEm
+    requestAnimationFrame(fitDates)
+  })
+
   // Dragging the marker only moves this.
   createEffect(() => {
     props.pos
@@ -303,6 +340,7 @@ export default function EventCards(props: Props) {
 
   onMount(() => {
     const observer = new ResizeObserver(() => {
+      fitDates()
       measure()
       schedule()
     })
@@ -383,7 +421,7 @@ export default function EventCards(props: Props) {
             <For each={items()}>
               {(item) => {
                 // The fun fact is a guest in the strip: its own card, in the
-                // second colour, at the moment its two gaps share.
+                // second colour, at its hinge.
                 if (isFact(item)) {
                   return (
                     /*
@@ -427,6 +465,29 @@ export default function EventCards(props: Props) {
                   end() !== undefined &&
                   props.markerYearsAgo <= event.yearsAgo &&
                   props.markerYearsAgo >= end()!
+                // A moment carries its error bar in the date; a stretch says
+                // how long it lasted instead, at the foot of the card.
+                const date = () =>
+                  end() !== undefined
+                    ? formatStretchParts(event.yearsAgo, end()!)
+                    : formatDateParts(
+                        event.yearsAgo,
+                        props.showUncertainty ? (event.uncertaintyYears ?? 0) : 0,
+                      )
+                /*
+                 * Where it lands on the reader's own arm, when that is a body
+                 * part. A stretch goes by where it starts, and one that began
+                 * before the arm did has no start on the body to name. The
+                 * date's ± counts, always — the knob that hides the ± on the
+                 * arm does not move the body.
+                 */
+                const body = () =>
+                  event.yearsAgo <= props.spanYears
+                    ? bodyAt(
+                        1 - event.yearsAgo / props.spanYears,
+                        (event.uncertaintyYears ?? 0) / props.spanYears,
+                      )
+                    : undefined
                 /*
                  * Every card is `--card-h` tall, set on the tray from
                  * `src/layout.ts`. The scrollbar rides under the cards, 1 rem
@@ -485,78 +546,45 @@ export default function EventCards(props: Props) {
                       }}
                       aria-current={nearest() ? 'true' : undefined}
                     >
-                      <span class="font-display block text-lg leading-tight tabular-nums sm:text-xl">
-                        <Show
-                          when={end() !== undefined}
-                          fallback={(() => {
-                            const date = formatYearsAgoUncertain(
-                              event.yearsAgo,
-                              props.showUncertainty ? (event.uncertaintyYears ?? 0) : 0,
-                            )
-                            return (
-                              <>
-                                {date.lead}
-                                {/* The error bar rides along grey and small, so the
-                                    date stays the thing the eye lands on. */}
-                                <Show when={date.bar}>
-                                  <span class="text-base-content/70 mx-0.5 text-[0.8em]">
-                                    {date.bar}
-                                  </span>
-                                </Show>
-                                {date.trail ? ` ${date.trail}` : ''}
-                              </>
-                            )
-                          })()}
-                        >
-                          {formatYearsAgoStretch(event.yearsAgo, end()!)}
-                        </Show>
-                      </span>
-                      {/* One quiet line under the date, its parts joined by a middle dot. */}
-                      <span class="text-base-content/80 mt-0.5 text-[0.65rem] tabular-nums [&>*+*]:before:mx-1 [&>*+*]:before:content-['·']">
-                        <Show when={props.showCalendar}>
-                          <span>
-                            {formatCalendarYear(event.yearsAgo)}
-                            <Show when={end() !== undefined}>
-                              {' – '}
-                              {formatCalendarYear(end()!)}
+                      {/* The number large, the words after it small, all on one line. */}
+                      <span class="font-display block text-lg leading-tight whitespace-nowrap tabular-nums sm:text-xl">
+                        <span data-date>
+                          {date().figure}
+                          <span class="text-base-content/80 text-[length:var(--date-words)]">
+                            <Show when={date().unit}>{(unit) => ` ${unit()}`}</Show>
+                            {/* The error bar rides along grey, so the date stays
+                                the thing the eye lands on. */}
+                            <Show when={date().bar}>
+                              {(bar) => <span class="text-base-content/70">{` ${bar()}`}</span>}
                             </Show>
+                            {date().words ? ` ${date().words}` : ''}
                           </span>
-                        </Show>
-                        <Show when={props.showGenerations}>
-                          <span>
-                            {formatGenerationsAgo(event.generationsAgo)}
-                          </span>
-                        </Show>
-                        {/* A moment carries its error bar in the date line above; a
-                            stretch says how long it lasted instead. */}
-                        <Show when={end() !== undefined}>
-                          <span>
-                            lasted {formatYears(event.yearsAgo - end()!)}
-                          </span>
-                        </Show>
+                        </span>
                       </span>
-                      {/* Where it lands on the reader's own arm, when that is a
-                          body part: a row of its own. A stretch goes by where
-                          it starts. The date's ± counts, always — the knob
-                          that hides the ± on the arm does not move the body. */}
-                      <Show
-                        when={
-                          // A stretch that began before the arm did has no
-                          // start on the body to name.
-                          event.yearsAgo <= props.spanYears &&
-                          bodyAt(
-                          1 - event.yearsAgo / props.spanYears,
-                          (event.uncertaintyYears ?? 0) / props.spanYears,
-                          )
-                        }
-                      >
-                        {(body) => (
-                          <span class="text-base-content/70 mt-0.5 text-[0.65rem]">{body()}</span>
-                        )}
+                      {/* One quiet line under the date, its parts joined by a
+                          middle dot. Only on the timelines that show either part,
+                          and there on every card, so the names still line up. */}
+                      <Show when={props.showCalendar || props.showGenerations}>
+                        <span class="text-base-content/80 mt-0.5 text-[0.65rem] tabular-nums [&>*+*]:before:mx-1 [&>*+*]:before:content-['·']">
+                          <Show when={props.showCalendar}>
+                            <span>
+                              {formatCalendarYear(event.yearsAgo)}
+                              <Show when={end() !== undefined}>
+                                {' – '}
+                                {formatCalendarYear(end()!)}
+                              </Show>
+                            </span>
+                          </Show>
+                          <Show when={props.showGenerations}>
+                            <span>
+                              {formatGenerationsAgo(event.generationsAgo)}
+                            </span>
+                          </Show>
+                        </span>
                       </Show>
 
                       <span class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-0.5">
-                        <span class="font-display text-base leading-snug">{event.label}</span>
+                        <span class="font-display text-base leading-snug font-bold">{event.label}</span>
                         <Show when={event.certainty === 'disputed'}>
                           <span class="badge badge-warning badge-xs">disputed</span>
                         </Show>
@@ -567,7 +595,21 @@ export default function EventCards(props: Props) {
                           {event.description}
                         </span>
                       </Show>
-                      <Sources event={event} />
+
+                      {/* The foot: how long a stretch lasted, where the moment
+                          lands on the reader's arm, and the sources behind one
+                          button. Down here and not under the date, because only
+                          some cards have them, and up there they pushed the name
+                          down on those cards only. */}
+                      <span class="mt-auto flex items-end gap-2 pt-1.5">
+                        <span class="text-base-content/70 min-w-0 flex-1 text-[0.65rem] leading-snug [&>*+*]:before:mx-1 [&>*+*]:before:content-['·']">
+                          <Show when={end() !== undefined}>
+                            <span>lasted {formatYears(event.yearsAgo - end()!)}</span>
+                          </Show>
+                          <Show when={body()}>{(at) => <span>{at()}</span>}</Show>
+                        </span>
+                        <Sources links={linksOf(event)} />
+                      </span>
                     </div>
                   </li>
                 )

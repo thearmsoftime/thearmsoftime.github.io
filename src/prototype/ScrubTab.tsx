@@ -97,6 +97,15 @@ const GROUPS: { title: string; knobs: KnobSpec[] }[] = [
       },
       { key: 'hoverLift', label: 'Hover', min: 0, max: 90, step: 1, show: px },
       {
+        key: 'landmarkSlide',
+        label: 'Slide',
+        hint: 'off its dot before it goes; 100% = dot at its edge',
+        min: 0,
+        max: 3,
+        step: 0.05,
+        show: (v) => `${Math.round(v * 100)}%`,
+      },
+      {
         key: 'captionGap',
         label: 'Ends',
         hint: 'clear of the fingertips',

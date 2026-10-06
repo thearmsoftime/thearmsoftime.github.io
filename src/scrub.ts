@@ -42,6 +42,12 @@ export interface Scrub {
   /** Names above the line, measured from the fingertips. */
   landmarkLift: number
   hoverLift: number
+  /**
+   * How far a landmark name may be pushed off its dot by a neighbour before it
+   * is left off, as a share of half its width: at 1 the dot sits at the name's
+   * edge. Past that the name reads as some other dot's. See `landmarks.ts`.
+   */
+  landmarkSlide: number
   /** How far the start and end captions keep off the fingertips, in px. */
   captionGap: number
 }
@@ -62,6 +68,7 @@ export const SCRUB_DEFAULT: Scrub = {
 
   landmarkLift: 20,
   hoverLift: 20,
+  landmarkSlide: 1,
   captionGap: 11,
 }
 

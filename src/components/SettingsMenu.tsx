@@ -129,10 +129,11 @@ export default function SettingsMenu(props: Props) {
         // No tooltip: on `sm` and up the word is right there next to the gear,
         // and below that there is no hover to speak of.
         aria-label="Settings"
-        class="focus-visible:ring-accent/50 flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.7rem] font-medium tracking-wide whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:outline-none sm:text-xs"
+        class="focus-visible:ring-accent/50 flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.7rem] font-medium tracking-wide whitespace-nowrap transition focus-visible:ring-2 focus-visible:outline-none active:scale-95 sm:text-xs"
         classList={{
-          'bg-accent text-accent-content border-accent': open(),
-          'border-base-300 bg-base-200/70 text-base-content/55 hover:text-base-content': !open(),
+          'bg-accent text-accent-content border-accent hover:brightness-110': open(),
+          'border-base-300 bg-base-200/70 text-base-content/55 hover:text-base-content hover:border-base-content/30':
+            !open(),
         }}
         onClick={() => setOpen(!open())}
       >

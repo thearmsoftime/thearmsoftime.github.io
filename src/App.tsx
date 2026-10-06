@@ -106,9 +106,11 @@ export default function App() {
     // A timeline kept from a dev visit is not a timeline this visit may pick.
     (raw) => (visibleTimelines.some((z) => z.id === raw) ? raw : undefined),
   );
+  // Off by default: the bare arms read first. On, the named periods sit on
+  // their own strip above them.
   const [showBands, setShowBands] = createStoredSignal(
     "bands",
-    true,
+    false,
     (raw) => (raw === "1" ? true : raw === "0" ? false : undefined),
     (on) => (on ? "1" : "0"),
   );
@@ -234,12 +236,11 @@ export default function App() {
   /**
    * The button never repeats itself: the first press lands somewhere random,
    * and every press after that steps on through the list. The marker follows
-   * to the moment the two gaps share, so the readout says the date the fact
-   * turns on.
+   * to the fact's hinge, so the readout says the date the fact turns on.
    */
   /**
-   * Where the fact's card sits: the moment its two gaps share, or now when the
-   * fact is about what is still ahead — the arm ends at the fingertip.
+   * Where the fact's card sits: its hinge (see `OddityPoints`), or now when
+   * the fact is about what is still ahead — the arm ends at the fingertip.
    */
   const factPos = createMemo(() => {
     const shown = liveFact();
@@ -595,6 +596,7 @@ export default function App() {
               style={{
                 "--card-h": `min(${layout().cardHeightRem}rem, ${CARD_MAX_VH}vh)`,
                 "--card-gap": `${layout().cardGapRem}rem`,
+                "--date-words": `${layout().dateWordsEm}em`,
               }}
             >
             <div

@@ -1,7 +1,8 @@
 {
   "id": "o-single-cells",
   "timelines": [
-    "life"
+    "life",
+    "universe"
   ],
   "label": "Single cells",
   "line": "For most of life's story there was nothing bigger than a single cell.",

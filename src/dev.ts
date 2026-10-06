@@ -5,7 +5,7 @@ import { createStoredSignal } from './prefs'
  * app can treat it as a constant. Nothing is stored — drop the flag and the
  * build is public again.
  *
- * A visitor without it gets Universe, Life and Humans. Earth and Modern humans
+ * A visitor without it gets Universe, Humans and History. Earth and Life
  * are still loaded and still sanitised the same way; dev mode is the only way
  * to reach them.
  */

@@ -11,7 +11,8 @@
   "sourceTitle": "English Wikipedia (secondary)",
   "timelines": {
     "modern": {
-      "simple": true
+      "simple": true,
+      "landmark": true
     }
   }
 }

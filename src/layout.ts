@@ -1,8 +1,9 @@
 import { createSignal } from 'solid-js'
 
 /**
- * Where the arms sit on the page, and the room around the cards under them.
- * The Layout tab in the prototype panel is the only thing that moves these.
+ * Where the arms sit on the page, the room around the cards under them, and
+ * how small a card's date words are set. The Layout tab in the prototype
+ * panel is the only thing that moves these.
  */
 export interface Layout {
   /**
@@ -23,6 +24,12 @@ export interface Layout {
    * the same height on every timeline and the arms above it never move.
    */
   cardHeightRem: number
+  /**
+   * The words after the number in a card's date — "million years ago" — as a
+   * share of the number's size. Small enough that the whole date fits on one
+   * line, big enough to read from the back of a room.
+   */
+  dateWordsEm: number
 }
 
 export const LAYOUT_DEFAULT: Layout = {
@@ -30,7 +37,8 @@ export const LAYOUT_DEFAULT: Layout = {
   trayTopRem: 1.25,
   trayBottomRem: 1.25,
   cardGapRem: 1,
-  cardHeightRem: 13,
+  cardHeightRem: 15.5,
+  dateWordsEm: 0.7,
 }
 
 /** On a short screen the cards give way before the arms do. */

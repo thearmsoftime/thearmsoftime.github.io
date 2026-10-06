@@ -465,8 +465,14 @@ Why the shape is worth having its own entity:
 - The reader can measure both gaps on their own arm. That is the whole trick:
   the surprise is not a number, it is that the bar they expected to be shorter
   is longer.
-- The third point is usually *now*, which is why the fact lands: the far thing
+- When the third point is *now*, that is why the fact lands: the far thing
   turns out to be nearer to us than to the thing next to it.
+
+Changed 2026-10-06: a fact may also be **two moments, one gap**. Eight facts
+had *now* as a third moment only to fill the shape — "mammoths were still
+alive when the pyramid was finished" is about the 600 years, and the 4,000
+years from the mammoths to now were drawn as loudly while saying nothing. Those
+eight are one-gap facts now; their younger gap below is a dash.
 
 They live in `data/oddities/<id>.json`, one file each, and each names the
 timelines whose span makes the two gaps big enough to see. Cleopatra is a
@@ -477,17 +483,17 @@ timelines whose span makes the two gaps big enough to see. Cleopatra is a
 | id | Timelines | Older gap | Younger gap |
 | --- | --- | --- | --- |
 | `o-cleopatra` | modern | pyramid → Cleopatra, 2,544 yr | Cleopatra → Moon, 1,999 yr |
-| `o-mammoth` | modern | pyramid → last mammoths, 600 yr | mammoths → now, 4,000 yr |
-| `o-oxford` | modern | Oxford → Aztec empire, 332 yr | Aztec → now, 598 yr |
-| `o-harvard` | modern | Harvard → *Principia*, 51 yr | *Principia* → now, 339 yr |
-| `o-fax` | modern | fax → telephone, 33 yr | telephone → now, 150 yr |
-| `o-tools-fire` | humans | tools → fire, 2.51 Myr | fire → now, 790 kyr |
+| `o-mammoth` | modern | pyramid → last mammoths, 600 yr | — |
+| `o-oxford` | modern | Oxford → Aztec empire, 332 yr | — |
+| `o-harvard` | modern | Harvard → *Principia*, 51 yr | — |
+| `o-fax` | modern | fax → telephone, 33 yr | — |
+| `o-tools-fire` | humans | tools → fire, 2.51 Myr | — |
 | `o-neanderthal` | humans | split → end, 560 kyr | end → now, 40 kyr |
-| `o-writing` | humans | *sapiens* → writing, 310 kyr | writing → now, 5.3 kyr |
+| `o-writing` | humans | *sapiens* → writing, 310 kyr | — |
 | `o-trex` | life, earth | *Stegosaurus* → *T. rex*, 83 Myr | *T. rex* → now, 67 Myr |
-| `o-sharks` | life, earth | sharks → forests, 65 Myr | forests → now, 385 Myr |
-| `o-single-cells` | life | first life → large animals, 3.13 Gyr | animals → now, 575 Myr |
-| `o-oxygen` | life | first life → oxygen, 1.27 Gyr | oxygen → now, 2.43 Gyr |
+| `o-sharks` | life, earth | sharks → forests, 65 Myr | — |
+| `o-single-cells` | life, universe | first life → large animals, 3.13 Gyr | animals → now, 575 Myr |
+| `o-oxygen` | life, universe | first life → oxygen, 1.27 Gyr | — |
 | `o-earth-late` | universe | Big Bang → Earth, 9.25 Gyr | Earth → now, 4.54 Gyr |
 | `o-earth-too-hot` | universe | Big Bang → now, 13.787 Gyr | now → too hot, 1 Gyr |
 | `o-eclipses` | universe | Big Bang → now, 13.787 Gyr | now → last eclipse, 600 Myr |
@@ -513,28 +519,28 @@ no second case.
 
 ### Which ones the arm can actually show
 
-Added with the Fun fact button: a fact is only offered on a timeline where both
-gaps cover at least 4 % of the span — about a palm on a 1.90 m arm. Below that
+Added with the Fun fact button: a fact is only offered on a timeline where every
+gap covers at least 4 % of the span — about a palm on a 1.90 m arm. Below that
 the two rules are hairlines and the three names land in a heap, so the drawing
 would say the opposite of the truth.
 
-That leaves **11 of the 17**, and the six it drops are worth reading as a
-finding, not as a bug:
+That leaves **12 of the 17**, and the five it drops are worth reading as a
+finding, not as a bug. (It was 11 until the one-gap change: `o-writing` failed
+only on its gap to now, 0.08 % of the Humans arm.)
 
 | Dropped | Smaller gap, as a share of the arm | Wanted |
 | --- | --- | --- |
 | `o-trex`, `o-sharks` | 1.8 % of the Life arm | a timeline of the last ~250 Myr |
 | `o-neanderthal` | 0.6 % of the Humans arm | a timeline of the last ~500 kyr |
-| `o-writing` | 0.08 % of the Humans arm | same |
-| `o-harvard` | 1.1 % of the Modern arm | a timeline of the last ~500 yr |
-| `o-fax` | 0.7 % of the Modern arm | same |
+| `o-harvard` | 1.0 % of the History arm | a timeline of the last ~500 yr |
+| `o-fax` | 0.6 % of the History arm | same |
 
 Four of the five gaps between our timelines show up here at once. Between
-Modern humans (4,600 yr) and Humans (7 Myr) there is a factor of 1,500, and
+History (5,300 yr) and Humans (7 Myr) there is a factor of 1,300, and
 between Humans and Life a factor of 530. Any fact whose moments fall inside one
 of those gaps has nowhere to be drawn. A sixth timeline of roughly a hundred
-million years, and a seventh of a few hundred years, would give five of these
-six a home.
+million years, and a seventh of a few hundred years, would give four of these
+five a home.
 
 ### Sources, and what is still thin
 

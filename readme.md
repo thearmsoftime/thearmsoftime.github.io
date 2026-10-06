@@ -1,3 +1,5 @@
+<img src="public/favicon.svg" width="88" alt="The logo: a small figure whose outstretched arms make an infinity loop">
+
 # The Arms of Time
 
 The history of the universe, laid along your outstretched arms.
@@ -43,10 +45,10 @@ Each timeline is one whole arm span. The right fingertip is always now.
 | Timeline | The left fingertip | How long ago |
 | --- | --- | --- |
 | Universe | The Big Bang | 13.8 billion years |
-| Life | The first traces of life | 3.7 billion years |
-| Modern humans | The Great Pyramid | 4,600 years |
+| Humans | The split from chimpanzees | 7 million years |
+| History | The first writing | 5,300 years |
 
-Two more, **Earth** and **Humans**, are still being researched. They come later.
+Two more, **Earth** and **Life**, are not finished yet. They come later.
 
 On the human timelines, time is also counted in generations of about 27 years.
 

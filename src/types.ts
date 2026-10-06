@@ -121,7 +121,7 @@ export interface Meta {
 }
 
 /**
- * One of the three moments an oddity hangs on. It carries its own source,
+ * One of the moments an oddity hangs on. It carries its own source,
  * because most of them are not in `data/events/`: Cleopatra earns a mention in
  * one comparison, not a card of her own on the arm.
  */
@@ -137,21 +137,30 @@ export interface OddityPoint extends Sourced {
   uncertaintyYears?: number
 }
 
-/** Oldest first. The middle one is the hinge the two gaps share. */
-export type OddityPoints = [OddityPoint, OddityPoint, OddityPoint]
+/**
+ * Oldest first. The second one is the hinge: the moment the two gaps share,
+ * or the end of the only gap. The fact's card and the marker go there.
+ */
+export type OddityPoints =
+  | [OddityPoint, OddityPoint]
+  | [OddityPoint, OddityPoint, OddityPoint]
 
 /**
- * Two gaps sharing a middle moment — the shape of every fact that makes people
- * stop. Cleopatra is nearer to the Moon landing than to the pyramid she lived
- * beside; the Sun has more time left than the Earth has had.
+ * A fact drawn as gaps on the arm. Three moments make two gaps sharing a
+ * middle moment, for a fact that compares them: Cleopatra is nearer to the
+ * Moon landing than to the pyramid she lived beside. Two moments make one
+ * gap, for a fact about one stretch of time: mammoths were still alive when
+ * the pyramid was finished. Never pad a one-gap fact with *now* to make three
+ * — the gap to now says nothing, and it is drawn as loudly as the one that
+ * does.
  *
- * Both gaps are fractions of the same span, so an oddity holds at any arm span
- * and the reader can measure both with their own fingers. That is why it is
- * worth having its own entity rather than being written into copy.
+ * Every gap is a fraction of the same span, so an oddity holds at any arm
+ * span and the reader can measure it with their own fingers. That is why it
+ * is worth having its own entity rather than being written into copy.
  */
 export interface Oddity extends Sourced {
   id: string
-  /** Only the timelines the two gaps are big enough to see on. */
+  /** Only the timelines its gaps are big enough to see on. */
   timelines: TimelineId[]
   /** A short name for the dev browser. Not the sentence. */
   label: string

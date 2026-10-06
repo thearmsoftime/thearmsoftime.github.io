@@ -1,13 +1,13 @@
 {
   "id": "modern",
-  "label": "Modern humans",
-  "spanYears": 4600,
-  "spanUncertaintyYears": 100,
-  "spanGenerations": 171,
-  "startLabel": "Great Pyramid",
+  "label": "History",
+  "spanYears": 5300,
+  "spanUncertaintyYears": 200,
+  "spanGenerations": 197,
+  "startLabel": "Writing",
   "endLabel": "Now",
-  "note": "Start set at the Great Pyramid of Giza, finished about 2560 BC. Bands are the usual ages of written history; dates counted back from 2026.",
+  "note": "Start set at the oldest writing, clay tablets at Uruk, about 3300 BC: the usual line between prehistory and history. Bands are the usual ages of written history; dates counted back from 2026.",
   "wikipedia": "https://en.wikipedia.org/wiki/Human_history",
-  "source": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
-  "sourceTitle": "English Wikipedia (secondary)"
+  "source": "https://www.metmuseum.org/essays/the-origins-of-writing",
+  "sourceTitle": "The Met: The Origins of Writing"
 }

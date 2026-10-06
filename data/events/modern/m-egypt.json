@@ -1,7 +1,7 @@
 {
   "id": "m-egypt",
   "label": "Egypt of the pharaohs",
-  "description": "Kings rule the Nile for about 3,000 years. It ends in 30 BC, when Cleopatra dies and Rome takes Egypt.",
+  "description": "Pharaohs rule the Nile until Cleopatra dies in 30 BC.",
   "yearsAgo": 5125,
   "endYearsAgo": 2055,
   "uncertaintyYears": 100,

@@ -8,9 +8,8 @@ import type { Oddity, OddityPoint } from '../types'
 
 /**
  * Dev only, while the wording and the sources are still being checked. What it
- * is for: an oddity is two gaps that share a moment, and the only way to judge
- * one is to see the two bars next to each other at the scale the arm would
- * draw them. The panel is deliberately dumb — no arm, no figure, just the
+ * is for: an oddity is one gap, or two that share a moment, and the only way
+ * to judge one is to see its bars at the scale the arm would draw them. The panel is deliberately dumb — no arm, no figure, just the
  * track — so that deciding where this belongs on the page stays an open
  * question.
  */
@@ -43,7 +42,7 @@ interface Frame {
 }
 
 function frameOf(oddity: Oddity, spanYears: number): Frame {
-  const youngest = oddity.points[2].yearsAgo
+  const youngest = oddity.points[oddity.points.length - 1]!.yearsAgo
   const floor = -FUTURE_CAP * spanYears
   const clipped = youngest < floor
   // The track is always the whole timeline, so the arm stays recognisable, plus
@@ -113,6 +112,8 @@ function Card(props: {
 }) {
   const frame = createMemo(() => frameOf(props.oddity, props.spanYears))
   const gaps = createMemo(() => gapsOf(props.oddity))
+  /** The longer gap is the surprise; the first one wins a tie. */
+  const longest = createMemo(() => gaps().indexOf(Math.max(...gaps())))
   const metres = (years: number) => (years / props.spanYears) * props.armSpanM
   const wiki = () => (isUrl(props.oddity.wikipedia) ? props.oddity.wikipedia : undefined)
   const src = () => (isUrl(props.oddity.source) ? props.oddity.source : undefined)
@@ -133,33 +134,32 @@ function Card(props: {
           style={{ left: pct(frame().x(0)) }}
         />
 
-        <div class="absolute top-4 right-0 left-0">
-          <Gap
-            from={frame().x(props.oddity.points[0].yearsAgo)}
-            to={frame().x(props.oddity.points[1].yearsAgo)}
-            years={gaps().older}
-            metres={metres(gaps().older)}
-            accent={gaps().older >= gaps().younger}
-          />
-        </div>
-        <div class="absolute top-9 right-0 left-0">
-          <Gap
-            from={frame().x(props.oddity.points[1].yearsAgo)}
-            to={frame().x(props.oddity.points[2].yearsAgo)}
-            years={gaps().younger}
-            metres={metres(gaps().younger)}
-            accent={gaps().younger > gaps().older}
-          />
-        </div>
+        {/* Each gap on a row of its own. */}
+        <For each={gaps()}>
+          {(years, i) => (
+            <div
+              class="absolute right-0 left-0"
+              classList={{ 'top-4': i() === 0, 'top-9': i() === 1 }}
+            >
+              <Gap
+                from={frame().x(props.oddity.points[i()]!.yearsAgo)}
+                to={frame().x(props.oddity.points[i() + 1]!.yearsAgo)}
+                years={years}
+                metres={metres(years)}
+                accent={i() === longest()}
+              />
+            </div>
+          )}
+        </For>
 
         {/*
-          Two rows of names, not one. The three moments are often close
+          Two rows of names, not one. The moments are often close
           together — Harvard and the Principia are fifty years apart on a span
           of four thousand — and on one row the names sit on top of each other.
-          The hinge, the name both gaps share, gets the second row to itself.
+          The hinge, the second moment, gets the second row to itself.
         */}
         <div class="absolute -bottom-5 right-0 left-0 h-4">
-          <For each={[props.oddity.points[0], props.oddity.points[2]]}>
+          <For each={props.oddity.points.filter((_, i) => i !== 1)}>
             {(point) => (
               <PointLabel
                 point={point}
@@ -255,7 +255,7 @@ export default function OddityPanel(props: Props) {
               fallback={
                 <p class="text-base-content/50 py-6 text-center text-sm">
                   No oddities for this timeline yet. They live in{' '}
-                  <code>data/oddities/</code>, and each one names the timelines its two
+                  <code>data/oddities/</code>, and each one names the timelines its
                   gaps are big enough to see on.
                 </p>
               }
@@ -275,9 +275,9 @@ export default function OddityPanel(props: Props) {
             </Show>
             <p class="text-base-content/40 mt-3 text-[0.68rem] leading-relaxed">
               The thin line is the arm, fingertip to fingertip; the tick is now. A bar
-              that runs past the tick is a gap in the future. The two bars are the two
-              gaps the fact compares — the longer one is the surprise. Click a name to
-              put the marker on it.
+              that runs past the tick is a gap in the future. Two bars are the two
+              gaps the fact compares — the longer one is the surprise. One bar is a
+              fact about one stretch of time. Click a name to put the marker on it.
             </p>
           </div>
         </div>

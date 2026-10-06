@@ -3,7 +3,7 @@ import Segmented from './Segmented'
 import { formatYears } from '../format'
 import SettingsMenu from './SettingsMenu'
 import type { ThemeChoice } from '../theme'
-import type { Detail } from '../data'
+import { isDevOnly, type Detail } from '../data'
 import type { Timeline } from '../types'
 
 interface Props {
@@ -62,6 +62,7 @@ export default function Header(props: Props) {
       // What the timeline is and how long it runs. The research note is far too
       // long to hover — it stays under the events, where there is room to read.
       tip: `${timeline.startLabel} to ${timeline.endLabel} · ${formatYears(timeline.spanYears)}`,
+      dev: isDevOnly(timeline.id),
     })),
   )
 
@@ -95,10 +96,14 @@ export default function Header(props: Props) {
             {(fire) => (
               <button
                 type="button"
-                class="focus-visible:ring-secondary/50 flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.7rem] font-medium tracking-wide whitespace-nowrap transition-colors focus-visible:ring-2 focus-visible:outline-none sm:text-xs"
+                // Pressed again it swaps the fact, and the card in the strip can
+                // be off to one side — so the button itself gives under the
+                // finger, or a second press looks like it did nothing.
+                class="focus-visible:ring-secondary/50 flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[0.7rem] font-medium tracking-wide whitespace-nowrap transition focus-visible:ring-2 focus-visible:outline-none active:scale-95 sm:text-xs"
                 classList={{
-                  'bg-secondary text-secondary-content border-secondary': props.factOn,
-                  'border-base-300 bg-base-200/70 text-base-content/55 hover:text-base-content':
+                  'bg-secondary text-secondary-content border-secondary hover:brightness-110':
+                    props.factOn,
+                  'border-base-300 bg-base-200/70 text-base-content/55 hover:text-base-content hover:border-base-content/30':
                     !props.factOn,
                 }}
                 onClick={() => fire()()}
