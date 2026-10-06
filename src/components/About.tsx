@@ -189,8 +189,17 @@ export default function AboutDialog() {
                   </OutLink>
                   .
                 </Row>
+                {/* McPhee first: his king's arm and nail file (1981) are where
+                    the picture comes from. The museum's video came after. */}
                 <Row term="Idea">
-                  After the{" "}
+                  We thought of it, then found that others had it first: John
+                  McPhee, in{" "}
+                  <em>
+                    <OutLink href="https://en.wikipedia.org/wiki/Annals_of_the_Former_World">
+                      Basin and Range
+                    </OutLink>
+                  </em>{" "}
+                  (1981), and the{" "}
                   <OutLink href="https://www.youtube.com/watch?v=uMXt0eGXuZc">
                     Natural History Museum of Los Angeles County
                   </OutLink>

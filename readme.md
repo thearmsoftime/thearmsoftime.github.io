@@ -102,9 +102,13 @@ Credit it as **The Arms of Time**, with a link to
 - **Drawing:** Leonardo da Vinci, *Vitruvian Man* (about 1490). Public domain.
   Scan by Luc Viatour, via
   [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Da_Vinci_Vitruve_Luc_Viatour.jpg).
-- **Idea:** after
-  [At Arm's Length: A Short History of Earth](https://www.youtube.com/watch?v=uMXt0eGXuZc)
-  by the Natural History Museum of Los Angeles County.
+- **Idea:** we thought of it ourselves, then found that others had it first.
+  John McPhee laid the history of the Earth along a king's outstretched arm,
+  in his book
+  [*Basin and Range*](https://en.wikipedia.org/wiki/Annals_of_the_Former_World)
+  (1981). The Natural History Museum of Los Angeles County made a short video
+  of the same idea,
+  [At Arm's Length](https://www.youtube.com/watch?v=uMXt0eGXuZc).
 - **Generations:** 26.9 years, after
   [Wang and others (2023)](https://www.science.org/doi/10.1126/sciadv.abm7047),
   *Science Advances*.
