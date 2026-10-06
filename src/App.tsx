@@ -498,8 +498,12 @@ export default function App() {
             >
               <div ref={heightOf(setBodyH)} style={{ "margin-top": `${armsLift()}px` }}>
               <div class="mx-auto flex w-full max-w-[130rem] items-start justify-between gap-4 xl:gap-8">
+                {/* From xl only. The rails sit 4.5rem in from their own box
+                    (see ScaleRail), so below about 1200 px they ran over the
+                    "Big Bang" and "Now" captions — a 1024 x 768 projector is
+                    exactly that. Narrower screens get the one-line ScaleRow. */}
                 <div
-                  class="hidden -translate-y-1/2 lg:flex"
+                  class="hidden -translate-y-1/2 xl:flex"
                   style={{ "margin-top": `${lineTop()}px` }}
                 >
                   <ScaleRail
@@ -549,7 +553,7 @@ export default function App() {
                 </div>
 
                 <div
-                  class="hidden -translate-y-1/2 lg:flex"
+                  class="hidden -translate-y-1/2 xl:flex"
                   style={{ "margin-top": `${lineTop()}px` }}
                 >
                   <ScaleRail

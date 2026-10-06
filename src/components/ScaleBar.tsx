@@ -200,7 +200,7 @@ export function ScaleRow(props: ScaleProps) {
   const all = () => [...cells(props).left, ...cells(props).right];
 
   return (
-    <div class="flex flex-wrap items-baseline justify-center gap-x-5 gap-y-0.5 px-3 lg:hidden">
+    <div class="flex flex-wrap items-baseline justify-center gap-x-5 gap-y-0.5 px-3 xl:hidden">
       <For each={all()}>
         {(cell) => (
           <div class="flex items-baseline gap-1.5 whitespace-nowrap">

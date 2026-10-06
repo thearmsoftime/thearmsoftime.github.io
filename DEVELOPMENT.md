@@ -155,8 +155,9 @@ timeline, say) falls back to the default. The marker itself is not kept.
   stops once they hold still.
 
 The scale numbers sit beside the arms, left and right, rather than in a band
-under them: that height belongs to the event list. Below `lg` they fold into
-one compact line.
+under them: that height belongs to the event list. Below `xl` (1280 px) they
+fold into one compact line: the rails sit in from the screen's edge, and on a
+1024 x 768 projector they ran over the "Big Bang" and "Now" captions.
 
 The marker readout says the year the marker is on, all the way to the
 fingertip — near now that reads "8,420 years ago", not "under 20 million years
