@@ -4,7 +4,12 @@ The history of the universe, laid along your outstretched arms.
 
 **[Open it: thearmsoftime.github.io](https://thearmsoftime.github.io)**
 
-[![The Arms of Time: the Vitruvian Man with a timeline along his arms, from the Big Bang at the left fingertip to now at the right](.github/screenshot.png)](https://thearmsoftime.github.io)
+<a href="https://thearmsoftime.github.io">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/screenshot.png">
+    <img src=".github/screenshot-light.png" alt="The Arms of Time: the Vitruvian Man with a timeline along his arms, from the Big Bang at the left fingertip to now at the right">
+  </picture>
+</a>
 
 [![Support on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/G2G8JT2U9)
 
