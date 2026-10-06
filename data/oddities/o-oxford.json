@@ -1,0 +1,32 @@
+{
+  "id": "o-oxford",
+  "timelines": [
+    "modern"
+  ],
+  "label": "Oxford and the Aztecs",
+  "line": "Oxford had been teaching for over three hundred years before the Aztec empire began.",
+  "points": [
+    {
+      "label": "Teaching starts at Oxford",
+      "yearsAgo": 930,
+      "wikipedia": "https://en.wikipedia.org/wiki/University_of_Oxford",
+      "source": "https://www.ox.ac.uk/about/organisation/history",
+      "sourceTitle": "University of Oxford, history"
+    },
+    {
+      "label": "The Aztec empire begins",
+      "yearsAgo": 598,
+      "wikipedia": "https://en.wikipedia.org/wiki/Aztec_Empire",
+      "source": "https://en.wikipedia.org/wiki/Aztec_Empire",
+      "sourceTitle": "English Wikipedia (secondary)"
+    },
+    {
+      "label": "Now",
+      "yearsAgo": 0
+    }
+  ],
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/University_of_Oxford",
+  "source": "https://www.ox.ac.uk/about/organisation/history",
+  "sourceTitle": "University of Oxford, history"
+}

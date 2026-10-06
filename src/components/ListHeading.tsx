@@ -1,35 +1,23 @@
-import { Show } from 'solid-js'
-
 interface Props {
-  count: number
   /** What clicking does, in the words of the layout that is showing. */
   action: string
-  /** The one punchy line for this timeline, or the timeline's data note. */
-  line?: string
 }
 
-/** The line in the footer: what the events are, how many, how to use them. */
+/**
+ * The line in the footer: what the cards are and how to use them. No count —
+ * the cards are right above it — and no punchy line, since the scale bar
+ * already says what one nail-file swipe is worth.
+ */
 export default function ListHeading(props: Props) {
   return (
-    <div class="pb-0.5">
-      <div class="flex flex-wrap items-baseline justify-center gap-x-3 gap-y-0.5">
-        <h2 class="text-[0.65rem] font-semibold tracking-[0.22em] whitespace-nowrap uppercase">
-          Along the arms
-        </h2>
-        <p class="text-base-content/40 text-[0.65rem] whitespace-nowrap">
-          {props.count} events · {props.action}
-        </p>
-        <p class="text-base-content/35 hidden text-[0.65rem] whitespace-nowrap lg:block">
-          <span class="text-base-content/55">← →</span> step ·{' '}
-          <span class="text-base-content/55">Shift</span> jumps ·{' '}
-          <span class="text-base-content/55">Alt</span> hops between events
-        </p>
-      </div>
-      <Show when={props.line}>
-        {(line) => (
-          <p class="text-base-content/35 hidden truncate text-[0.65rem] md:block">{line()}</p>
-        )}
-      </Show>
+    <div class="flex min-w-0 flex-wrap items-center justify-center gap-x-3 gap-y-0.5">
+      {/* Set like the title: the same serif, in small spaced capitals. */}
+      <h2 class="font-display text-base-content/70 text-[0.65rem] tracking-[0.22em] whitespace-nowrap uppercase">
+        Along the arms
+      </h2>
+      {/* No key hints: the arrow keys only answer once the arms have focus,
+          which a visitor never sees, so the hint read as a broken promise. */}
+      <p class="text-base-content/70 text-[0.65rem]">{props.action}</p>
     </div>
   )
 }

@@ -1,0 +1,32 @@
+{
+  "id": "o-harvard",
+  "timelines": [
+    "modern"
+  ],
+  "label": "Harvard and gravity",
+  "line": "Harvard was already teaching when Newton wrote down how gravity works.",
+  "points": [
+    {
+      "label": "Harvard founded",
+      "yearsAgo": 390,
+      "wikipedia": "https://en.wikipedia.org/wiki/Harvard_University",
+      "source": "https://www.harvard.edu/about/history/",
+      "sourceTitle": "Harvard, history"
+    },
+    {
+      "label": "Newton writes down gravity",
+      "yearsAgo": 339,
+      "wikipedia": "https://en.wikipedia.org/wiki/Philosophi%C3%A6_Naturalis_Principia_Mathematica",
+      "source": "https://www.royalsociety.org/collections/",
+      "sourceTitle": "Royal Society collections"
+    },
+    {
+      "label": "Now",
+      "yearsAgo": 0
+    }
+  ],
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Harvard_University",
+  "source": "https://www.harvard.edu/about/history/",
+  "sourceTitle": "Harvard, history"
+}

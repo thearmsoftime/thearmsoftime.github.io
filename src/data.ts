@@ -41,10 +41,10 @@ export const MODERN_ID = 'modern'
 /** Simple keeps a timeline's short list; All shows everything the data holds. */
 export type Detail = 'simple' | 'all'
 
-const num = (v: unknown): number | null =>
+export const num = (v: unknown): number | null =>
   typeof v === 'number' && Number.isFinite(v) ? v : null
 
-const str = (v: unknown): string | undefined =>
+export const str = (v: unknown): string | undefined =>
   typeof v === 'string' && v.trim() !== '' && v.trim() !== '—' ? v.trim() : undefined
 
 /** True for something we can safely put in an href. */
@@ -61,7 +61,7 @@ export function hostOf(url: string): string {
 }
 
 /** Every object a glob brought in, flattening the files that hold a list. */
-function records(loaded: Record<string, unknown>): Record<string, unknown>[] {
+export function records(loaded: Record<string, unknown>): Record<string, unknown>[] {
   const out: Record<string, unknown>[] = []
   for (const value of Object.values(loaded)) {
     for (const item of Array.isArray(value) ? value : [value]) {
@@ -71,15 +71,15 @@ function records(loaded: Record<string, unknown>): Record<string, unknown>[] {
   return out
 }
 
-const strings = (v: unknown): string[] =>
+export const strings = (v: unknown): string[] =>
   Array.isArray(v) ? v.map(str).filter((s): s is string => !!s) : []
 
 const CERTAINTY = new Set<Certainty>(['high', 'medium', 'disputed'])
-const certaintyOf = (v: unknown): Certainty | undefined =>
+export const certaintyOf = (v: unknown): Certainty | undefined =>
   typeof v === 'string' && CERTAINTY.has(v as Certainty) ? (v as Certainty) : undefined
 
 /** The three citation fields, carried by timelines, bands and events alike. */
-const readSourced = (o: Record<string, unknown>): Sourced => ({
+export const readSourced = (o: Record<string, unknown>): Sourced => ({
   wikipedia: str(o.wikipedia),
   source: str(o.source),
   sourceTitle: str(o.sourceTitle),
@@ -167,8 +167,10 @@ function readEvents(
     >
     for (const [timelineId, settings] of Object.entries(on)) {
       const timeline = known.get(timelineId)
-      // A timeline only carries the events that fit inside its own span.
-      if (!timeline || yearsAgo > timeline.spanYears) continue
+      // A timeline only carries the events that fit inside its own span. A
+      // stretch only has to end inside it: Egypt of the pharaohs was already
+      // old when the Great Pyramid went up, and the arm shows the part it has.
+      if (!timeline || (endYearsAgo ?? yearsAgo) > timeline.spanYears) continue
       placements[timelineId] = readPlacement(settings)
     }
     if (Object.keys(placements).length === 0) continue
@@ -231,11 +233,12 @@ const byId = new Map(timelines.map((t) => [t.id, t]))
 export const allBands = readBands(records(rawBands), byId)
 export const allEvents = readEvents(records(rawEvents), byId, meta.generationYears)
 
+
 /** Timelines still being worked on: only reachable with `?dev=1`. */
-const DEV_ONLY_TIMELINES = new Set(['earth', 'modern'])
+const DEV_ONLY_TIMELINES = new Set(['earth', 'humans'])
 
 /**
- * The timelines a visitor may pick: Universe, Life and Humans. Everything else
+ * The timelines a visitor may pick: Universe, Life and Modern humans. Everything else
  * in here still works on the whole set, so a dev-only one is a line away from
  * being public again.
  */
@@ -293,6 +296,7 @@ const EMPTY_EVENTS: TimelineEvent[] = []
 
 export const bandsFor = (timelineId: string): Band[] =>
   byTimeline.get(timelineId)?.bands ?? EMPTY_BANDS
+
 
 /**
  * True for a stretch: an event that lasted rather than happened, carrying a

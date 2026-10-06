@@ -15,6 +15,11 @@ export const FIGURE = {
    * colour the theme is wearing. No derived file — the browser does the merge.
    */
   lines: '/vitruvian-man-outline.webp',
+  /**
+   * The top edge of the arms only, where light from above falls: a part of
+   * the trace above, in the same box, drawn again over it. See `src/light.ts`.
+   */
+  highlight: '/vitruvian-man-highlight.webp',
   width: 1400,
   height: 797,
   /** Left fingertip of the outstretched arms = start of the timeline. */
@@ -51,17 +56,10 @@ export const CROP = { top: 0.158, bottom: 0.632 } as const
 export const FIT = { maxVh: 61, maxRem: 26 } as const
 
 /**
- * Where the bottom of the band strip sits, in source y. The strip lies over
- * the head — the clear space the arms leave — and stops well above the
- * fingertip line, so the landmark names underneath it keep their own air.
- */
-export const STRIP_BOTTOM = 162
-
-/**
- * Dev only. The three numbers above, live, so the prototype panel can drag
- * them while the app runs and the figure re-lays out under the pointer.
- * Nothing else writes them: without `?dev=1` there is no setter on screen, so
- * a visitor gets exactly the constants above.
+ * The three numbers above, live, so a prototype tab can drag them while the
+ * app runs and the figure re-lays out under the pointer. The Figure tab that
+ * did that is gone, so for now nothing writes them and everyone gets the
+ * constants above.
  */
 export interface Tune {
   /** Fraction of the source height cut off the top. */

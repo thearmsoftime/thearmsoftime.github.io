@@ -3,11 +3,12 @@ import type { TimelineEvent } from '../types'
 import { hostOf, isUrl } from '../data'
 
 /** A small, quiet link that opens away from the page. */
-export function OutLink(props: { href: string; children: string }) {
+export function OutLink(props: { href: string; title?: string; children: string }) {
   return (
     <a
-      class="text-base-content/45 hover:text-accent decoration-base-content/25 hover:decoration-accent underline underline-offset-2 transition-colors"
+      class="text-base-content/70 hover:text-accent decoration-base-content/40 hover:decoration-accent underline underline-offset-2 transition-colors"
       href={props.href}
+      title={props.title}
       target="_blank"
       rel="noreferrer"
       onClick={(e) => e.stopPropagation()}
@@ -20,8 +21,12 @@ export function OutLink(props: { href: string; children: string }) {
 /** The date source: a link when the data gives a URL, plain text when it gives a citation. */
 export default function Sources(props: { event: TimelineEvent }) {
   const wiki = () => (isUrl(props.event.wikipedia) ? props.event.wikipedia : undefined)
-  const src = () => (isUrl(props.event.source) ? props.event.source : undefined)
-  const note = () => (src() ? undefined : (props.event.sourceTitle ?? props.event.source))
+  // The date source is often the Wikipedia article itself. Then the card would
+  // show the same page twice under two names, so the second link stands down.
+  const src = () =>
+    isUrl(props.event.source) && props.event.source !== wiki() ? props.event.source : undefined
+  const note = () =>
+    isUrl(props.event.source) ? undefined : (props.event.sourceTitle ?? props.event.source)
   const watch = () => props.event.watch
 
   return (
@@ -36,7 +41,7 @@ export default function Sources(props: { event: TimelineEvent }) {
         <Show when={src()}>
           {(href) => <OutLink href={href()}>{props.event.sourceTitle ?? hostOf(href())}</OutLink>}
         </Show>
-        <Show when={note()}>{(text) => <span class="text-base-content/35">{text()}</span>}</Show>
+        <Show when={note()}>{(text) => <span class="text-base-content/70">{text()}</span>}</Show>
       </span>
     </Show>
   )

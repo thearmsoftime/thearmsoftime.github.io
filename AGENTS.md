@@ -90,19 +90,48 @@ Informative and plain. Not funny, not chatty, not breathless.
   (a chronozone sits under a stage), so it stays free for a `kind` value. It is
   not a word for an eon, an era, a period or an epoch either — those are bands,
   and each says which it is in `kind`.
-- **The four words, and only these.** A **timeline** is a whole arm span. A
+- **The five words, and only these.** A **timeline** is a whole arm span. A
   **band** is a named part of one, drawn on the strip above the arms. An
   **event** is a moment on the arm. A **stretch** is an event that lasted — it
-  carries `endYearsAgo`, and the age of dinosaurs is the one we have. Never
+  carries `endYearsAgo`: the age of dinosaurs, Egypt of the pharaohs, the Roman Empire. Never
   call a stretch a "range": the ± on a date is a range too, and the card shows
-  both. The dev data browser uses these words and the field names, nothing
-  friendlier.
+  both. An **oddity** is three moments whose *two gaps* are the point —
+  Cleopatra is nearer to the Moon landing than to the pyramid. Never call one a
+  "comparison": `src/scale.ts` already uses that word for the nail-file
+  match the ruler workbench reads. The dev data browser uses these words and the field names,
+  nothing friendlier.
+- **A fact is only offered where both its gaps can be read.** `MIN_GAP` in
+  `src/oddities.ts` is the single gate: 4 % of the span each, about a palm on a
+  1.90 m arm. `odditiesFor()` is what the files pin to a timeline; `factsFor()`
+  is what that arm may draw, and the Fun fact button only ever sees the second.
+  Never widen the gate to get a favourite fact on screen — two hairlines and
+  three names in a heap is a drawing that lies. Write a shorter timeline
+  instead.
+- **A fact marks its own three moments,** events or not, simple list or not.
+  That is the point of it: Cleopatra has no card on any arm. While a fact is up
+  the landmark names stand down and the scan is turned down to `FACT_DIM`, so
+  there is one set of names on the arm and the rules are readable over it.
+- **The fact's card lives in the event strip, not in a banner.** `items()` in
+  `EventCards.tsx` is the events with the fact spliced in at its own moment,
+  and `measure()` walks that list beside the cards in the DOM — same length,
+  same order, or every anchor is off by one. Put the events and the fact in
+  that list **as they arrive**: `For` keys on identity, so a fresh wrapper
+  object per pass throws away and rebuilds every card in the strip each time
+  the fact changes. The card squeezes in over 0.32 s, so `measure()` runs again
+  on `animationend` — measure while it is still growing and every anchor to the
+  right of it is out by half a card. The animation fills `backwards`, never
+  `both`: the card has to end up back on its own width from the class, or a
+  browser that skips the animation shows nothing at all.
+- **A fact's hinge is usually an event,** on the same date, so both cards sit on
+  the same point. `nearest()` in `App.tsx` gives the fact the top rank for that
+  tie — the reader is standing there because of the fact, not the card behind
+  it.
 - **Generations are human-only.** `showsGenerations()` in `src/data.ts` is the
   single gate — `humans` and `modern` timelines only.
 - **The figure landmarks are measured, not guessed.** The fingertip and chest
   fractions in `src/figure.ts` belong to the image file. Replacing the image
   means re-measuring them.
-- **`earth` and `modern` are dev-only** until their research is done: `?dev=1`.
+- **`earth` and `humans` are dev-only** until their research is done: `?dev=1`.
 - **Check data changes in the data browser**: `?dev=1` → Settings → Data
   browser. Every row in `data/` as a table, with a **Missing something** filter
   for rows with no source, link or description.

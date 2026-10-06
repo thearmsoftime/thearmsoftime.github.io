@@ -1,0 +1,35 @@
+{
+  "id": "o-cleopatra",
+  "timelines": [
+    "modern"
+  ],
+  "label": "Cleopatra",
+  "line": "Cleopatra lived nearer in time to the first Moon landing than to the building of the Great Pyramid.",
+  "points": [
+    {
+      "label": "Great Pyramid finished",
+      "yearsAgo": 4600,
+      "wikipedia": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+      "source": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+      "sourceTitle": "English Wikipedia (secondary)"
+    },
+    {
+      "label": "Cleopatra dies",
+      "yearsAgo": 2056,
+      "wikipedia": "https://en.wikipedia.org/wiki/Cleopatra",
+      "source": "https://www.britannica.com/biography/Cleopatra-queen-of-Egypt",
+      "sourceTitle": "Britannica, Cleopatra"
+    },
+    {
+      "label": "People on the Moon",
+      "yearsAgo": 57,
+      "wikipedia": "https://en.wikipedia.org/wiki/Apollo_11",
+      "source": "https://www.nasa.gov/mission/apollo-11/",
+      "sourceTitle": "NASA, Apollo 11"
+    }
+  ],
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Cleopatra",
+  "source": "https://www.britannica.com/biography/Cleopatra-queen-of-Egypt",
+  "sourceTitle": "Britannica, Cleopatra"
+}

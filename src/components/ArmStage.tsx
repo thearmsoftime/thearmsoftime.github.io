@@ -4,14 +4,15 @@ import {
   createEffect,
   createMemo,
   createSignal,
+  lazy,
   onCleanup,
   onMount,
 } from "solid-js";
 import TimelineStrip from "./TimelineStrip";
-import type { Band, TimelineEvent, Timeline } from "../types";
+import type { Band, Oddity, TimelineEvent, Timeline } from "../types";
+import { FactBars, FactDots, FactNames, factLift } from "./FactMarks";
 import {
   FIGURE,
-  STRIP_BOTTOM,
   bandRows,
   cropHeight,
   cropTop,
@@ -20,9 +21,17 @@ import {
   yFrac,
 } from "../figure";
 import type { PlacedBand } from "../figure";
-import { inkOpacity, lineOpacity, maskStyle } from "../fade";
-import { columnFrom, columnTo, fobY, lineY, scrub } from "../scrub";
+import { FACT_DIM, inkOpacity, lineOpacity, maskStyle } from "../fade";
+import { cardRadius, fob, fobY } from "../fob";
+import { columnFrom, columnTo, lineY, scrub } from "../scrub";
 import { clamp01 } from "../scale";
+import { formatYears } from "../format";
+import { factRows } from "../factRows";
+import { light, scanTint, sideColour } from "../light";
+import { DEV, bodyMarks } from "../dev";
+
+/** Purple body landmarks, dev only: the chunk is fetched when the switch is on. */
+const BodyMarks = lazy(() => import("./BodyMarks"));
 
 export type NudgeKind = "fine" | "coarse" | "page" | "event";
 
@@ -45,12 +54,24 @@ interface Props {
   readoutSub?: string;
   /** Smaller line under that: how far back along the arm that reading sits. */
   readoutLength?: string;
+  /** Over the card, before the length: the body part the marker stands on. */
+  readoutBody?: string;
   /**
    * A shorter timeline the reader is hovering in the picker: where it starts,
    * 0..1 along this one. It runs from there to the right fingertip, because
    * every timeline ends at now.
    */
   previewFrom?: number;
+  /**
+   * The fun fact on show, if any: three moments and the two gaps between them,
+   * drawn on the arm whether or not those moments are events here.
+   */
+  fact?: Oddity;
+  /**
+   * How far down from the top of this component the fingertip line runs, in
+   * pixels, so the scale numbers outside it can sit level with it.
+   */
+  onLineTop?: (px: number) => void;
 }
 
 /**
@@ -85,61 +106,94 @@ const hoverLift = () => scrub().lineDrop + scrub().hoverLift;
 const LANDMARK_CHAR_PX = 5.2;
 const LANDMARK_PAD_PX = 16;
 const leftMargin = () => `calc(${FIGURE.leftX * 100}% - ${captionGap()})`;
-const rightMargin = () => `calc(${(1 - FIGURE.rightX) * 100}% - ${captionGap()})`;
+const rightMargin = () =>
+  `calc(${(1 - FIGURE.rightX) * 100}% - ${captionGap()})`;
 
 /**
  * The image is drawn full width and pulled up, so only the arms band shows.
  * The crop is a live number in dev — the prototype panel drags it — so these
- * are functions, read inside the JSX and recomputed when it moves.
+ * are functions, read inside the JSX and recomputed when it moves. The Light
+ * tab's shift slides the drawing under the line; nothing else reads this box.
  */
 const boxStyle = () => ({
   height: `${(FIGURE.height / cropHeight()) * 100}%`,
-  top: `${-(cropTop() / cropHeight()) * 100}%`,
+  top: `${((light().shift - cropTop()) / cropHeight()) * 100}%`,
 });
 
 /**
  * Solid across the arms and gone by the crop edge, plus whatever else the Fade
  * tab has switched on. Cut from the image's own box — see `src/fade.ts`.
  */
-const imageStyle = () => ({
+const imageStyle = (dim: number) => ({
   ...boxStyle(),
   ...maskStyle(),
-  opacity: inkOpacity(),
+  // A custom scan colour is painted by the layer below instead; the photo
+  // stays in the page for its alt text.
+  opacity:
+    light().scan.colour === "custom" ? "0" : inkOpacity(dim * light().scanInk),
+  "--figure-tint": scanTint(),
 });
 
 /**
- * The line layer rides on exactly the same box as the scan, so it lands on it
- * to the pixel. It is a mask, not an image: the colour under it is
- * `currentColor`, and the fade is laid under it as further mask layers, all
- * intersected. The trace is white on black with no alpha, so its own layer
- * reads luminance while the gradients read alpha — see `.figure-lines` in
- * index.css, which `maskStyle` then overrides layer by layer.
+ * The scan as a mask, in a colour of the Light tab's choosing. The file is
+ * white ink on a black card, so it reads by brightness like the trace does,
+ * and the colour lands the same on paper and on dark — a tint on the photo
+ * cannot, because the light theme inverts it to black first.
  */
-const linesStyle = () => ({
+const scanColourStyle = (dim: number) => ({
   ...boxStyle(),
-  ...maskStyle(`url(${FIGURE.lines})`),
-  opacity: lineOpacity(),
+  ...maskStyle(`url(${FIGURE.src})`),
+  "background-color": sideColour(light().scan),
+  opacity: inkOpacity(dim * light().scanInk),
 });
 
 /**
- * A stretch of arm — how long an event ran, how much of this timeline another
- * one covers — is marked with a column, because a bar lying on the line is a
- * few pixels tall and reads as a thicker line rather than as a length. It is a
- * short band centred on the line the knob rides: run it the whole height and it
- * stops being a mark on the arms and becomes a block over the drawing. The
- * stage is shorter than the cap on a phone, so there it takes what there is.
+ * The line layers ride on exactly the same box as the scan, so they land on it
+ * to the pixel. Each is a mask, not an image: the colour under it is the
+ * layer's own (see `src/light.ts`), and the fade is laid under it as further
+ * mask layers, all intersected. A trace is white on black with no alpha, so its
+ * own layer reads luminance while the gradients read alpha — see
+ * `.figure-lines` in index.css, which `maskStyle` then overrides layer by layer.
  */
-const columnHeight = () => `min(100%, ${scrub().columnPx}px)`;
-const columnTop = () => `${yFrac(lineY()) * 100}%`;
-/** Solid through the middle and out at both ends, so it has no hard edge. */
-const COLUMN_MASK =
-  "linear-gradient(to bottom, transparent 0%, #000 28%, #000 72%, transparent 100%)";
+const linesStyle = (dim: number, layer: "outline" | "highlight") => ({
+  ...boxStyle(),
+  ...maskStyle(`url(${layer === "outline" ? FIGURE.lines : FIGURE.highlight})`),
+  "background-color": sideColour(light()[layer]),
+  opacity: String(Number(lineOpacity(dim)) * light()[layer].opacity),
+});
+
+/**
+ * The band strip sits straight over the arms, its bottom just clear of the
+ * landmark names above the line. Those names are HTML at a rem size, so the
+ * room they need is rem on top of the source-y point they hang from; in source
+ * units alone it would be too little on a phone and too much on a projector.
+ */
+const NAME_ROOM = "1.35rem";
+const nameFrac = () => yFrac(lineY() - landmarkLift());
+const stripBottom = () => `calc(${(1 - nameFrac()) * 100}% + ${NAME_ROOM})`;
+/**
+ * A column that belongs to the strip — the band under the pointer, the
+ * timeline being previewed, the live stretch — runs from the strip's foot down through the
+ * line, so the cell and its stretch of arm read as one thing. Solid where it
+ * meets the strip, fading out below the line. The preview keeps this shape
+ * with the strip off too: a full bar over the arms reads as "this much of it",
+ * where a thin column round the line only looks like a thicker line.
+ */
+const LINK_MASK =
+  "linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%)";
+const linkStyle = () => ({
+  top: `calc(${nameFrac() * 100}% - ${NAME_ROOM})`,
+  height: `calc(${(yFrac(lineY()) - nameFrac()) * 100}% + ${NAME_ROOM} + ${scrub().columnPx}px)`,
+  "-webkit-mask-image": LINK_MASK,
+  "mask-image": LINK_MASK,
+});
 /*
  * The same band for the parts drawn in the SVG is `columnFrom`/`columnTo` in
  * `src/scrub.ts`: the columns are capped in pixels, that is the same cap at
  * the width the stage usually gets. Both ends fade out, so the few units
  * between them never show.
  */
+
 
 export default function ArmStage(props: Props) {
   const [dragging, setDragging] = createSignal(false);
@@ -154,6 +208,12 @@ export default function ArmStage(props: Props) {
     observer.observe(stage);
     onCleanup(() => observer.disconnect());
   });
+
+  // The stage is the first thing in this component and keeps the crop's
+  // aspect, so its width alone says where the line is. The crop is live in dev.
+  createEffect(() =>
+    props.onLineTop?.((stageWidth() * (lineY() - cropTop())) / FIGURE.width),
+  );
 
   /** Pointer x -> position along the arm span. The crop never touches x. */
   const posFromClientX = (clientX: number): number => {
@@ -197,13 +257,65 @@ export default function ArmStage(props: Props) {
     e.preventDefault();
   };
 
-  /** Kept after it goes away, so the length row has something to fade out along. */
-  const [lastLength, setLastLength] = createSignal("\u00a0");
+  /**
+   * The lines over the card: near now, the reading as a length, so the arm
+   * stays a ruler; under it, where on the reader's own arm the marker stands.
+   * One line each, not joined with a dot — two readings, not one phrase.
+   * Either can be missing, so they are kept after they go away and have
+   * something to fade out along.
+   */
+  const over = () =>
+    [fob().showLength ? props.readoutLength : undefined, props.readoutBody]
+      .filter((line): line is string => Boolean(line));
+  const [lastOver, setLastOver] = createSignal<string[]>(["\u00a0"]);
   createEffect(() => {
-    if (props.readoutLength) setLastLength(props.readoutLength);
+    if (over().length > 0) setLastOver(over());
   });
 
-  const rows = createMemo(() => bandRows(props.bands, props.timeline.spanYears));
+  /** The card's rows: the years, and the line under them. */
+  const cardRows = () => {
+    return (
+      <div
+        class="flex"
+        classList={{
+          "flex-col": fob().cardLayout === "stack",
+          "items-baseline": fob().cardLayout === "line",
+        }}
+        style={{
+          gap: `${fob().cardRowGap + (fob().cardLayout === "line" ? 0.5 : 0)}rem`,
+          "align-items":
+            fob().cardLayout === "stack" ? fob().cardAlign : undefined,
+        }}
+      >
+        <Show when={fob().showYears}>
+          <div class="text-accent text-xs font-semibold tabular-nums whitespace-nowrap sm:text-sm">
+            {props.readoutYears}
+          </div>
+        </Show>
+        <Show when={fob().showSub && props.readoutSub}>
+          {(line) => (
+            <div class="text-base-content/55 text-[0.6rem] tabular-nums whitespace-nowrap">
+              {line()}
+            </div>
+          )}
+        </Show>
+      </div>
+    );
+  };
+
+  /**
+   * A fact about what is still ahead draws its future in the margin past the
+   * right fingertip — right where the end caption sits. The bars already
+   * change colour at now, so the caption stands down rather than sit in the
+   * middle of the future.
+   */
+  const factAhead = () =>
+    props.fact?.points.some((p) => p.yearsAgo < 0) ?? false;
+
+  const rows = createMemo(() =>
+    bandRows(props.bands, props.timeline.spanYears),
+  );
+  const stripOn = () => props.showBands && rows().length > 0;
 
   /** The cell the pointer is on in the strip, null when it leaves. */
   const [hoveredBand, setHoveredBand] = createSignal<PlacedBand | null>(null);
@@ -298,6 +410,9 @@ export default function ArmStage(props: Props) {
     return placed;
   });
 
+  /** The scan steps back while a fact is drawn over it. */
+  const figureDim = () => (props.fact ? FACT_DIM : 1);
+
   const markerPct = () => `${xFrac(props.pos) * 100}%`;
   /** Source y -> a `top` for the HTML overlays sitting on the band. */
   const bandAt = (y: number) => `${yFrac(y) * 100}%`;
@@ -328,13 +443,28 @@ export default function ArmStage(props: Props) {
             width={FIGURE.width}
             height={FIGURE.height}
             class="figure-ink pointer-events-none absolute inset-x-0 w-full"
-            style={imageStyle()}
+            style={imageStyle(figureDim())}
             draggable={false}
           />
-          {/* The traced contours on top of it, in the theme's own ink. */}
+          <Show when={light().scan.colour === "custom"}>
+            <div
+              class="figure-lines pointer-events-none absolute inset-x-0 w-full"
+              style={scanColourStyle(figureDim())}
+            />
+          </Show>
+          {/*
+            The traced contours on top of it: the whole outline, softer, then
+            the highlight — the top edge of the arms, lit from above — over it.
+            Both are the theme's own ink unless the Light tab says otherwise —
+            see `src/light.ts`.
+          */}
           <div
-            class="figure-lines text-base-content/90 pointer-events-none absolute inset-x-0 w-full"
-            style={linesStyle()}
+            class="figure-lines pointer-events-none absolute inset-x-0 w-full"
+            style={linesStyle(figureDim(), "outline")}
+          />
+          <div
+            class="figure-lines pointer-events-none absolute inset-x-0 w-full"
+            style={linesStyle(figureDim(), "highlight")}
           />
         </div>
 
@@ -348,14 +478,11 @@ export default function ArmStage(props: Props) {
         <Show when={props.previewFrom !== undefined}>
           <div
             data-preview-span
-            class="border-accent/70 bg-accent/10 pointer-events-none absolute -translate-y-1/2 border-x"
+            class="border-accent/70 bg-accent/10 pointer-events-none absolute border-x"
             style={{
               left: `${xFrac(props.previewFrom!) * 100}%`,
               width: `max(2px, ${(xFrac(1) - xFrac(props.previewFrom!)) * 100}%)`,
-              top: columnTop(),
-              height: columnHeight(),
-              "-webkit-mask-image": COLUMN_MASK,
-              "mask-image": COLUMN_MASK,
+              ...linkStyle(),
             }}
           />
         </Show>
@@ -370,41 +497,90 @@ export default function ArmStage(props: Props) {
         <Show when={hoveredBand()}>
           {(b) => (
             <div
-              class="pointer-events-none absolute -translate-y-1/2"
+              class="pointer-events-none absolute"
               style={{
                 left: `${xFrac(b().from) * 100}%`,
                 width: `max(2px, ${(xFrac(b().to) - xFrac(b().from)) * 100}%)`,
-                top: columnTop(),
-                height: columnHeight(),
+                ...linkStyle(),
                 "background-color": `color-mix(in oklab, ${b().color} 14%, transparent)`,
                 "border-left": `1px solid color-mix(in oklab, ${b().color} 60%, transparent)`,
                 "border-right": `1px solid color-mix(in oklab, ${b().color} 60%, transparent)`,
-                "-webkit-mask-image": COLUMN_MASK,
-                "mask-image": COLUMN_MASK,
               }}
             />
           )}
         </Show>
 
-        {/* How long the live event ran, marked on the arms it covers. */}
-        <Show when={liveStretch()}>
-          {(e) => (
-            <div
-              class="border-accent/45 bg-accent/[0.09] pointer-events-none absolute -translate-y-1/2 border-x"
-              classList={{
-                "transition-[left,width] duration-[260ms] ease-out":
-                  !dragging(),
-              }}
-              style={{
-                left: `${xFrac(e().from) * 100}%`,
-                width: `${(xFrac(e().to) - xFrac(e().from)) * 100}%`,
-                top: columnTop(),
-                height: columnHeight(),
-                "-webkit-mask-image": COLUMN_MASK,
-                "mask-image": COLUMN_MASK,
-              }}
+        {/* A fun fact's two gaps, each a bar over the arms it covers. */}
+        <Show when={props.fact}>
+          {(fact) => (
+            <FactBars
+              fact={fact()}
+              spanYears={props.timeline.spanYears}
+              stageWidth={stageWidth()}
             />
           )}
+        </Show>
+
+        {/*
+          How long the live event ran: a bar over the arms it covers, the same
+          shape as a fun fact's gap, with how long it ran written in it.
+          A thin column round the line read as a thicker line, not as a length
+          of time. A stretch that began before the arm did fades in from the
+          left fingertip instead of starting there, so it does not claim to.
+          While a fact is up it has the arm, so this stands down.
+        */}
+        <Show when={!props.fact && liveStretch()}>
+          {(e) => {
+            const cut = () => e().event.yearsAgo > props.timeline.spanYears;
+            const edge =
+              "1px solid color-mix(in oklab, var(--color-accent) 55%, transparent)";
+            const mask = () =>
+              cut()
+                ? `${LINK_MASK}, linear-gradient(to right, transparent 0%, #000 12%)`
+                : LINK_MASK;
+            const mid = () => (e().from + e().to) / 2;
+            const anchor = () => (mid() < 0.15 ? 0 : mid() > 0.85 ? 1 : 0.5);
+            return (
+              <>
+                <div
+                  class="bg-accent/[0.1] pointer-events-none absolute"
+                  classList={{
+                    "transition-[left,width] duration-[260ms] ease-out":
+                      !dragging(),
+                  }}
+                  style={{
+                    left: `${xFrac(e().from) * 100}%`,
+                    width: `max(2px, ${(xFrac(e().to) - xFrac(e().from)) * 100}%)`,
+                    ...linkStyle(),
+                    "border-left": cut() ? undefined : edge,
+                    "border-right": edge,
+                    "-webkit-mask-image": mask(),
+                    "mask-image": mask(),
+                    "-webkit-mask-composite": "source-in",
+                    "mask-composite": "intersect",
+                  }}
+                />
+                <span
+                  class="text-accent bg-base-100/95 pointer-events-none absolute rounded px-1 text-[0.58rem] leading-tight font-semibold whitespace-nowrap tabular-nums sm:text-[0.66rem]"
+                  style={{
+                    left: `${xFrac(e().from + (e().to - e().from) * anchor()) * 100}%`,
+                    // Over the line, inside its own bar: under it is where
+                    // the knob's readout hangs, and the marker is usually on
+                    // one of the stretch's edges.
+                    top: `calc(${yFrac(lineY()) * 100}% - ${factRows().nameRem}rem)`,
+                    transform: `translate(-${anchor() * 100}%, -100%)`,
+                  }}
+                >
+                  {formatYears(e().event.yearsAgo - e().event.endYearsAgo!)}
+                </span>
+              </>
+            );
+          }}
+        </Show>
+
+        {/* Under the SVG, so an event dot still wins its own hover. */}
+        <Show when={DEV && bodyMarks()}>
+          <BodyMarks spanYears={props.timeline.spanYears} />
         </Show>
 
         <svg
@@ -424,6 +600,12 @@ export default function ArmStage(props: Props) {
           />
 
           {/* Bands and ticks fade back in whenever the timeline changes. */}
+          <Show when={props.fact}>
+            {(fact) => (
+              <FactDots fact={fact()} spanYears={props.timeline.spanYears} />
+            )}
+          </Show>
+
           <Show when={props.timeline.id} keyed>
             <g class="timeline-fade">
               <For each={ordered()}>
@@ -435,25 +617,22 @@ export default function ArmStage(props: Props) {
                       opacity={on() ? 1 : 0.8}
                     >
                       {/*
-                        How long it ran, or how unsure the date is: a bar lying
-                        along the line, under the dots.
+                        How unsure the date is: a bar lying along the line,
+                        under the dot. A stretch gets no bar of its own here —
+                        a line full of them reads as a thicker line, not as
+                        lengths. Its two dots mark the edges, and the block
+                        over the arms shows it while its card is live.
                       */}
-                      <Show when={e.to - e.from > 0.002}>
+                      <Show when={!e.stretch && e.to - e.from > 0.002}>
                         <line
                           x1={xUnits(e.from)}
                           x2={xUnits(e.to)}
                           y1={lineY()}
                           y2={lineY()}
                           stroke="currentColor"
-                          stroke-width={e.stretch ? scrub().stretchWidth : scrub().slackWidth}
+                          stroke-width={scrub().slackWidth}
                           stroke-linecap="round"
-                          class={
-                            !e.stretch
-                              ? "text-base-content/35"
-                              : on()
-                                ? "text-accent/60"
-                                : "text-base-content/40"
-                          }
+                          class="text-base-content/35"
                         />
                       </Show>
                       <For each={e.stretch ? [e.from, e.to] : [e.t]}>
@@ -546,16 +725,21 @@ export default function ArmStage(props: Props) {
         </svg>
 
         {/*
-          The named spans, laid over the head — the one stretch of clear paper
-          the outstretched arms leave. Coarsest at the top, finest under it, so
-          the strip still reads down into the arms. It sits inside the stage
-          now, so it does not cost the drawing any height; the pointer events
+          The named spans, laid just over the arms and clear of the landmark
+          names. Coarsest at the top, finest under it, so the strip reads down
+          into the arms. Up by the head it ran under the header and the top
+          row was cut off. It sits inside the stage, so it does not cost the
+          drawing any height; the pointer events
           stop here, or picking a span would scrub as well.
         */}
-        <Show when={props.showBands && rows().length > 0}>
+        <Show when={stripOn()}>
           <div
             class="absolute inset-x-0"
-            style={{ bottom: `${(1 - yFrac(STRIP_BOTTOM)) * 100}%` }}
+            style={{
+              bottom: props.fact
+                ? `calc(${(1 - yFrac(lineY())) * 100}% + ${factLift(props.fact, props.timeline.spanYears, stageWidth())}rem)`
+                : stripBottom(),
+            }}
             onPointerDown={(e) => e.stopPropagation()}
           >
             <Show when={props.timeline.id} keyed>
@@ -589,19 +773,34 @@ export default function ArmStage(props: Props) {
           Landmarks: the few events whose name is written on the arm itself, so
           the reader can see where they fall without scrubbing onto them.
         */}
-        <For each={landmarks()}>
-          {(mark) => (
-            <span
-              class={LANDMARK_CLASS}
-              style={{
-                left: `${mark.at * 100}%`,
-                top: bandAt(lineY() - landmarkLift()),
-              }}
-            >
-              {mark.label}
-            </span>
+        <Show
+          when={props.fact}
+          fallback={
+            <For each={landmarks()}>
+              {(mark) => (
+                <span
+                  class={LANDMARK_CLASS}
+                  style={{
+                    left: `${mark.at * 100}%`,
+                    top: bandAt(lineY() - landmarkLift()),
+                  }}
+                >
+                  {mark.label}
+                </span>
+              )}
+            </For>
+          }
+        >
+          {/* A fact names its own three moments, so the landmark names stand
+              down rather than fight them for the same strip of arm. */}
+          {(fact) => (
+            <FactNames
+              fact={fact()}
+              spanYears={props.timeline.spanYears}
+              stageWidth={stageWidth()}
+            />
           )}
-        </For>
+        </Show>
 
         {/*
           The two ends of the span, in the margins beyond the fingertips: the
@@ -618,16 +817,18 @@ export default function ArmStage(props: Props) {
         >
           {props.timeline.startLabel}
         </span>
-        <span
-          class={CAPTION_CLASS}
-          style={{
-            left: `calc(100% - ${rightMargin()})`,
-            "max-width": rightMargin(),
-            top: bandAt(captionY()),
-          }}
-        >
-          {props.timeline.endLabel}
-        </span>
+        <Show when={!factAhead()}>
+          <span
+            class={CAPTION_CLASS}
+            style={{
+              left: `calc(100% - ${rightMargin()})`,
+              "max-width": rightMargin(),
+              top: bandAt(captionY()),
+            }}
+          >
+            {props.timeline.endLabel}
+          </span>
+        </Show>
 
         {/*
           The scrubber: an empty ring riding the fingertip line. Its size, its
@@ -647,6 +848,7 @@ export default function ArmStage(props: Props) {
             props.readoutYears,
             props.readoutSub,
             props.readoutLength,
+            props.readoutBody,
           ]
             .filter(Boolean)
             .join(", ")}
@@ -660,11 +862,11 @@ export default function ArmStage(props: Props) {
             left: markerPct(),
             top: bandAt(fobY()),
             "touch-action": "none",
-            "border-width": `${scrub().fobBorder}px`,
-            "--fob-size": `${scrub().fobSize}px`,
-            "--fob-size-wide": `${scrub().fobSizeWide}px`,
-            "--fob-halo": `${scrub().fobHalo}px`,
-            "--fob-press": dragging() ? scrub().fobPress : 1,
+            "border-width": `${fob().fobBorder}px`,
+            "--fob-size": `${fob().fobSize}px`,
+            "--fob-size-wide": `${fob().fobSizeWide}px`,
+            "--fob-halo": `${fob().fobHalo}px`,
+            "--fob-press": dragging() ? fob().fobPress : 1,
           }}
           onPointerDown={(e) => {
             e.stopPropagation();
@@ -690,44 +892,41 @@ export default function ArmStage(props: Props) {
       <div
         class="rail pointer-events-none"
         style={{
-          "--rail-gap": `${scrub().railGap}rem`,
-          "--rail-gap-wide": `${scrub().railGapWide}rem`,
+          "--rail-gap": `${fob().railGap}rem`,
+          "--rail-gap-wide": `${fob().railGapWide}rem`,
         }}
       >
-        {/* `data-marker-anchor` is where the line to the live card starts. */}
+        {/*
+          `data-marker-anchor` is where the line to the live card starts.
+        */}
         <div
           data-marker-anchor
-          class="border-accent/35 bg-base-100/85 w-fit -translate-x-1/2 rounded-full border text-center shadow-sm"
+          class="relative w-fit -translate-x-1/2 border-solid"
           classList={{
+            "shadow-sm": fob().cardShadow,
             "transition-[margin] duration-[260ms] ease-out": !dragging(),
           }}
           style={{
-            padding: `${scrub().railPadY}rem ${scrub().railPadX}rem`,
-            "margin-left": `clamp(${scrub().railEdge}rem, ${markerPct()}, calc(100% - ${scrub().railEdge}rem))`,
+            padding: `${fob().railPadY}rem ${fob().railPadX}rem`,
+            "margin-left": `clamp(${fob().railEdge}rem, ${markerPct()}, calc(100% - ${fob().railEdge}rem))`,
+            "border-radius": cardRadius(),
+            "border-width": `${fob().cardBorder}px`,
+            "border-color": `color-mix(in oklab, var(--color-accent) ${fob().cardBorderInk * 100}%, transparent)`,
+            "background-color": `color-mix(in oklab, var(--color-base-100) ${fob().cardFill * 100}%, transparent)`,
+            "text-align": fob().cardAlign,
           }}
         >
-          <div class="text-accent text-xs font-semibold tabular-nums whitespace-nowrap sm:text-sm">
-            {props.readoutYears}
-          </div>
-          <Show when={props.readoutSub}>
-            {(line) => (
-              <div class="text-base-content/55 text-[0.6rem] tabular-nums whitespace-nowrap">
-                {line()}
-              </div>
-            )}
-          </Show>
           {/*
-            The same reading as a length, so the arm stays a ruler. It only
-            runs while the distance is still hand-sized, so the row keeps its
-            height either way and fades instead of popping: the pill, and the
-            list under it, hold still.
+            Over the card and under the knob. Out of the flow, so it never
+            moves the card: it only fades in and out.
           */}
           <div
-            class="text-base-content/40 text-[0.55rem] tabular-nums whitespace-nowrap transition-opacity duration-200"
-            classList={{ "opacity-0": !props.readoutLength }}
+            class="text-base-content/65 bg-base-100/70 pointer-events-none absolute bottom-full left-1/2 mb-0.5 flex -translate-x-1/2 flex-col items-center rounded px-1 text-[0.7rem] tabular-nums whitespace-nowrap transition-opacity duration-300 sm:text-xs"
+            classList={{ "opacity-0": over().length === 0 }}
           >
-            {lastLength()}
+            <For each={lastOver()}>{(line) => <div>{line}</div>}</For>
           </div>
+          {cardRows()}
         </div>
       </div>
     </div>

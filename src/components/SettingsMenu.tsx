@@ -1,7 +1,9 @@
 import { Show, createSignal, onCleanup, onMount, type JSX } from 'solid-js'
 import Segmented from './Segmented'
 import { THEME_CHOICES, THEME_LABEL, type ThemeChoice } from '../theme'
-import { DEV } from '../dev'
+import { DEV, bodyMarks, setBodyMarks } from '../dev'
+import KofiLink from './KofiLink'
+import { AboutButton } from './About'
 import type { Detail } from '../data'
 
 const DETAIL_OPTIONS = [
@@ -41,6 +43,8 @@ interface Props {
   onOpenProto: () => void
   /** Opens the data browser. Dev mode only. */
   onOpenData: () => void
+  /** Opens the odd-facts panel. Dev mode only. */
+  onOpenOdd: () => void
 }
 
 /** A label above its control, so the menu reads as a column of settings. */
@@ -188,9 +192,9 @@ export default function SettingsMenu(props: Props) {
             />
           </Field>
 
-          <Field label="Timelines" hint="Named spans under the arms.">
+          <Field label="Time periods" hint="Named periods under the arms.">
             <Segmented
-              label="Named spans under the arms"
+              label="Named periods under the arms"
               options={BANDS_OPTIONS}
               value={props.showBands ? 'on' : 'off'}
               onChange={(next) => props.onShowBands(next === 'on')}
@@ -232,12 +236,44 @@ export default function SettingsMenu(props: Props) {
                     props.onOpenData()
                   }}
                 />
+                <DevButton
+                  label="Odd facts"
+                  onClick={() => {
+                    setOpen(false)
+                    props.onOpenOdd()
+                  }}
+                />
               </div>
               <span class="text-base-content/35 text-[0.62rem]">
-                Live knobs, candidate rulers, and every row in `data/` as a table.
+                Live knobs, candidate rulers, every row in `data/` as a table, and the
+                two-gap facts.
+              </span>
+              <span class="mt-1.5 text-[0.6rem] tracking-[0.14em] uppercase" style={{ color: 'var(--dev)' }}>
+                Body marks
+              </span>
+              <Segmented
+                label="Body marks on the arms"
+                options={BANDS_OPTIONS}
+                value={bodyMarks() ? 'on' : 'off'}
+                onChange={(next) => setBodyMarks(next === 'on')}
+              />
+              <span class="text-base-content/35 text-[0.62rem]">
+                Wrist, elbow, knuckles and the rest, as purple lines. Hover one
+                for where it sits and how much people differ.
               </span>
             </div>
           </Show>
+
+          {/* Last, under a rule: the same two ways off the page as the footer
+              corner, for the reader who looks here first. Support, then About.
+              Clicking About closes the menu first, so the box is not opened
+              underneath it. */}
+          <div class="border-base-300 flex items-center gap-1.5 border-t pt-3">
+            <KofiLink always />
+            <div class="contents" onClick={() => setOpen(false)}>
+              <AboutButton always />
+            </div>
+          </div>
         </div>
       </Show>
     </div>

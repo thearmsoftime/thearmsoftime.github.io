@@ -449,3 +449,117 @@ Things I had to choose rather than read off a source.
     `wikipedia` / `source` / `sourceTitle` fields, 153 events with a valid
     `certainty`, no trailing or doubled commas. Run a real parser before
     trusting it in a build.
+
+---
+
+## 7. Odd facts — two gaps that share a moment
+
+A different kind of row, added 2026-09-29. Not an event and not a band: a
+**oddity** is three moments, and what it shows is the *two gaps between them*.
+The middle moment is the hinge both gaps share.
+
+Why the shape is worth having its own entity:
+
+- Both gaps are fractions of the same span, so the fact holds at any arm span.
+  Nothing in the sentence has to name a millimetre or a year.
+- The reader can measure both gaps on their own arm. That is the whole trick:
+  the surprise is not a number, it is that the bar they expected to be shorter
+  is longer.
+- The third point is usually *now*, which is why the fact lands: the far thing
+  turns out to be nearer to us than to the thing next to it.
+
+They live in `data/oddities/<id>.json`, one file each, and each names the
+timelines whose span makes the two gaps big enough to see. Cleopatra is a
+`modern` fact only: on the humans arm the whole of her story is a fingernail.
+
+### The set as it stands (17)
+
+| id | Timelines | Older gap | Younger gap |
+| --- | --- | --- | --- |
+| `o-cleopatra` | modern | pyramid → Cleopatra, 2,544 yr | Cleopatra → Moon, 1,999 yr |
+| `o-mammoth` | modern | pyramid → last mammoths, 600 yr | mammoths → now, 4,000 yr |
+| `o-oxford` | modern | Oxford → Aztec empire, 332 yr | Aztec → now, 598 yr |
+| `o-harvard` | modern | Harvard → *Principia*, 51 yr | *Principia* → now, 339 yr |
+| `o-fax` | modern | fax → telephone, 33 yr | telephone → now, 150 yr |
+| `o-tools-fire` | humans | tools → fire, 2.51 Myr | fire → now, 790 kyr |
+| `o-neanderthal` | humans | split → end, 560 kyr | end → now, 40 kyr |
+| `o-writing` | humans | *sapiens* → writing, 310 kyr | writing → now, 5.3 kyr |
+| `o-trex` | life, earth | *Stegosaurus* → *T. rex*, 83 Myr | *T. rex* → now, 67 Myr |
+| `o-sharks` | life, earth | sharks → forests, 65 Myr | forests → now, 385 Myr |
+| `o-single-cells` | life | first life → large animals, 3.13 Gyr | animals → now, 575 Myr |
+| `o-oxygen` | life | first life → oxygen, 1.27 Gyr | oxygen → now, 2.43 Gyr |
+| `o-earth-late` | universe | Big Bang → Earth, 9.25 Gyr | Earth → now, 4.54 Gyr |
+| `o-earth-too-hot` | universe | Big Bang → now, 13.787 Gyr | now → too hot, 1 Gyr |
+| `o-eclipses` | universe | Big Bang → now, 13.787 Gyr | now → last eclipse, 600 Myr |
+| `o-sun-swallows` | universe | Big Bang → now, 13.787 Gyr | now → Earth swallowed, 7.59 Gyr |
+| `o-last-stars` | universe | Big Bang → now, 13.787 Gyr | now → last stars, 10^14 yr |
+
+### The future, and why it needs no new arm
+
+The right fingertip stays *now*. A fact about the future is the same three
+points with the hinge at zero: everything so far is the arm span, and what is
+ahead is measured in more of it. On the universe span, at any arm length:
+
+| Ahead | As a share of the whole span | Reads as |
+| --- | --- | --- |
+| Last total eclipse, ~600 Myr | 4 % | half a palm past the fingertip |
+| Earth too hot for life, ~1 Gyr | 7 % | about a hand |
+| Sun swallows the Earth, 7.59 Gyr | 55 % | more than half the span again |
+| Last stars go out, 10^14 yr | 7,250 spans | a line of people kilometres long |
+
+In the data a future moment is written `yearsAhead`; the loader keeps it as a
+negative `yearsAgo`, so one number sorts the whole line and the drawing needs
+no second case.
+
+### Which ones the arm can actually show
+
+Added with the Fun fact button: a fact is only offered on a timeline where both
+gaps cover at least 4 % of the span — about a palm on a 1.90 m arm. Below that
+the two rules are hairlines and the three names land in a heap, so the drawing
+would say the opposite of the truth.
+
+That leaves **11 of the 17**, and the six it drops are worth reading as a
+finding, not as a bug:
+
+| Dropped | Smaller gap, as a share of the arm | Wanted |
+| --- | --- | --- |
+| `o-trex`, `o-sharks` | 1.8 % of the Life arm | a timeline of the last ~250 Myr |
+| `o-neanderthal` | 0.6 % of the Humans arm | a timeline of the last ~500 kyr |
+| `o-writing` | 0.08 % of the Humans arm | same |
+| `o-harvard` | 1.1 % of the Modern arm | a timeline of the last ~500 yr |
+| `o-fax` | 0.7 % of the Modern arm | same |
+
+Four of the five gaps between our timelines show up here at once. Between
+Modern humans (4,600 yr) and Humans (7 Myr) there is a factor of 1,500, and
+between Humans and Life a factor of 530. Any fact whose moments fall inside one
+of those gaps has nowhere to be drawn. A sixth timeline of roughly a hundred
+million years, and a seventh of a few hundred years, would give five of these
+six a home.
+
+### Sources, and what is still thin
+
+Every point carries its own `wikipedia` and `source`, because most of them are
+not events in `data/events/` — Cleopatra earns one line in one comparison, not
+a card on the arm. Dates that *are* already events were copied from those files
+so the two never disagree.
+
+Still to fix before any of this is shown to a visitor:
+
+1. **First sharks at 450 Ma is the weakest date in the set.** Marked
+   `disputed`. The oldest scales usually read as shark are Late Ordovician and
+   contested; unambiguous teeth are ~410 Ma and *Doliodus* is 397 Ma. The claim
+   survives either way — trees are 385 Ma — but the number needs a real paper,
+   not a Wikipedia overview.
+2. **Last total solar eclipse, ~600 Myr.** Widely repeated, sourced here to
+   Wikipedia's lunar-distance article. Marked `medium`. Find the calculation.
+3. **Cleopatra's death, 30 BC.** Sourced to Britannica. Fine for the claim, but
+   it is the only Britannica citation in the whole database.
+4. **Oxford's 1096.** "Teaching existed in some form" is the university's own
+   careful wording, not a founding date. Marked `medium`.
+5. **The fax fact is the only one that is merely amusing.** It teaches nothing
+   about deep time. Keep it or cut it — it is the test case for whether the set
+   is about scale or about trivia.
+6. **`o-harvard` and `o-oxford` are both European/American institutions.** The
+   set as a whole leans that way. Wanted: an oddity with its hinge outside
+   Europe — the Mediterranean refilling, Angkor, Great Zimbabwe, the Polynesian
+   crossings.

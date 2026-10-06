@@ -1,0 +1,34 @@
+{
+  "id": "o-earth-late",
+  "timelines": [
+    "universe"
+  ],
+  "label": "Earth is late",
+  "line": "Two thirds of the universe's history had already passed before the Earth existed.",
+  "points": [
+    {
+      "label": "Big Bang",
+      "yearsAgo": 13787000000,
+      "uncertaintyYears": 20000000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Big_Bang",
+      "source": "https://arxiv.org/abs/1807.06209",
+      "sourceTitle": "Planck 2018 results VI"
+    },
+    {
+      "label": "Earth forms",
+      "yearsAgo": 4540000000,
+      "uncertaintyYears": 50000000,
+      "wikipedia": "https://en.wikipedia.org/wiki/History_of_Earth",
+      "source": "https://en.wikipedia.org/wiki/Age_of_Earth",
+      "sourceTitle": "Age of Earth, after Dalrymple 2001"
+    },
+    {
+      "label": "Now",
+      "yearsAgo": 0
+    }
+  ],
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Chronology_of_the_universe",
+  "source": "https://arxiv.org/abs/1807.06209",
+  "sourceTitle": "Planck 2018 results VI"
+}

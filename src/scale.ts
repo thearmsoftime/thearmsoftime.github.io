@@ -1,6 +1,6 @@
 import {
+  formatFingers,
   formatGenerations,
-  formatLength,
   formatMm,
   formatYears,
   generationsOf,
@@ -32,12 +32,26 @@ export const fractionOf = (yearsAgo: number, spanYears: number): number =>
 export const yearsAgoAt = (fraction: number, spanYears: number): number =>
   (1 - clamp01(fraction)) * spanYears;
 
+/**
+ * Whether another card starts inside a stretch, all on the 0-1 arm. Such a
+ * stretch is read at its start only, like a moment. The strip runs in start
+ * order, so Egypt's card sits left of the Great Pyramid's and Athens' cards:
+ * if Egypt held the marker for its whole length, the strip would sit on Egypt
+ * while the card lit up was two to its right. The live card and the strip
+ * both ask this, so they always agree.
+ */
+export const startsInside = (from: number, to: number, starts: number[]): boolean =>
+  starts.some((t) => t > from && t < to);
+
 interface Reference {
   years: number;
   label: string;
 }
 
-/** Spans a person has a feel for, used for the nail-file comparison. */
+/**
+ * Spans a person has a feel for, matched to one nail-file swipe. The scale bar
+ * dropped that row; the ruler workbench still reads it.
+ */
 export const REFERENCES: Reference[] = [
   { years: MINUTE, label: "A minute" },
   { years: HOUR, label: "An hour" },
@@ -78,17 +92,36 @@ export function pickReference(yearsPerSwipe: number): Reference {
 }
 
 /**
+ * A long human life, for the one ruler that runs the other way. The round 80
+ * the dev reference list already uses: a life a reader has seen, not an
+ * average dragged down by childhood deaths.
+ */
+export const LIFE_YEARS = 80;
+
+/**
+ * A life is only offered as a ruler where it is at least half a finger long.
+ * A finger is a fixed share of the span, so this is a gate on the timeline,
+ * not on the arm span: Modern humans passes, Humans is a thousand times short.
+ */
+const LIFE_MIN_FINGERS = 0.5;
+
+/**
  * The rulers the scale cell can be read in. The arrows beside it step through
  * them: a millimetre is honest, a hair and a finger are things the hand knows.
+ * A life turns it round — a stretch of time, and how many fingers it takes.
  */
-export type YardstickId = "mm" | "hair" | "finger";
+export type YardstickId = "life" | "mm" | "hair" | "finger";
 
 export interface Yardstick {
   id: YardstickId;
   /** What the cell calls it, e.g. "A finger (19.8 mm)". */
   label: (armSpanM: number) => string;
   /** How thick it is, in millimetres, on an arm of this span. */
-  mm: (armSpanM: number) => number;
+  mm?: (armSpanM: number) => number;
+  /** Or a stretch of time, read back as a length in fingers. */
+  years?: number;
+  /** Whether a timeline this long can show it at all. */
+  offered?: (spanYears: number) => boolean;
 }
 
 /**
@@ -99,8 +132,16 @@ export interface Yardstick {
 export const fingerMm = (armSpanM: number): number =>
   Math.max(1, Math.round((armSpanM * 1000) / FINGERS_PER_SPAN));
 
+/** First in the list is the default, so a timeline that has a life opens on it. */
 export const YARDSTICKS: readonly Yardstick[] = [
-  { id: "mm", label: (span) => `1 mm of ${span.toFixed(2)} m`, mm: () => 1 },
+  {
+    id: "life",
+    label: () => `One life (${LIFE_YEARS} years)`,
+    years: LIFE_YEARS,
+    offered: (spanYears) =>
+      (LIFE_YEARS * FINGERS_PER_SPAN) / spanYears >= LIFE_MIN_FINGERS,
+  },
+  { id: "mm", label: () => "Each mm of arm", mm: () => 1 },
   {
     id: "hair",
     label: () => `A hair (${formatMm(HAIR_MM)})`,
@@ -113,39 +154,56 @@ export const YARDSTICKS: readonly Yardstick[] = [
   },
 ];
 
+/** The rulers this timeline can be read in, in ring order. */
+export const yardsticksFor = (spanYears: number): readonly Yardstick[] =>
+  YARDSTICKS.filter((y) => y.offered?.(spanYears) ?? true);
+
 export const yardstickOf = (id: YardstickId): Yardstick =>
   YARDSTICKS.find((y) => y.id === id) ?? YARDSTICKS[0]!;
 
 /** One ruler along the ring, either way, for the arrows beside the cell. */
-export function stepYardstick(id: YardstickId, direction: -1 | 1): YardstickId {
-  const count = YARDSTICKS.length;
-  const at = YARDSTICKS.findIndex((y) => y.id === id);
-  return YARDSTICKS[(at + direction + count) % count]!.id;
+export function stepYardstick(
+  ring: readonly Yardstick[],
+  id: YardstickId,
+  direction: -1 | 1,
+): YardstickId {
+  const count = ring.length;
+  const at = ring.findIndex((y) => y.id === id);
+  return ring[(at + direction + count) % count]!.id;
 }
 
 export const parseYardstick = (raw: string): YardstickId | undefined =>
   YARDSTICKS.some((y) => y.id === raw) ? (raw as YardstickId) : undefined;
+
+/**
+ * The ruler is picked per timeline — a life on Modern humans, a millimetre on
+ * the Universe — and stored as "modern:life,universe:hair". A pair that no
+ * longer parses is dropped, not the whole list.
+ */
+export function parseYardsticks(raw: string): Record<string, YardstickId> {
+  const picked: Record<string, YardstickId> = {};
+  for (const pair of raw.split(",")) {
+    const [timeline, id] = pair.split(":");
+    const yardstick = id ? parseYardstick(id) : undefined;
+    if (timeline && yardstick) picked[timeline] = yardstick;
+  }
+  return picked;
+}
+
+export const writeYardsticks = (picked: Record<string, YardstickId>): string =>
+  Object.entries(picked)
+    .map(([timeline, id]) => `${timeline}:${id}`)
+    .join(",");
 
 export interface ScaleReadout {
   yearsPerMetre: number;
   yearsPerMm: number;
   /** The ruler on show, e.g. "A hair (0.07 mm)" */
   unitLabel: string;
-  /** What that ruler covers, e.g. "508 thousand years" */
+  /** What that ruler covers, e.g. "508 thousand years", or "1.7 fingers" */
   perUnit: string;
-  /** e.g. "18.9 thousand generations" */
-  perUnitGenerations: string;
-  /** The millimetre, always, for anything that wants it straight. */
-  perMm: string;
-  perMmGenerations: string;
-  /** e.g. "726 thousand years" */
-  nailFile: string;
-  /** e.g. "27 thousand generations" */
-  nailFileGenerations: string;
-  /** e.g. "All of Homo sapiens" */
-  comparisonLabel: string;
-  /** e.g. "41 µm" */
-  comparisonLength: string;
+  /** e.g. "18.9 thousand generations"; none for a life, which is time already */
+  perUnitGenerations?: string;
 }
 
 export function scaleReadout(
@@ -156,12 +214,19 @@ export function scaleReadout(
 ): ScaleReadout {
   const yearsPerMetre = spanYears / armSpanM;
   const yearsPerMm = yearsPerMetre / 1000;
-  const yearsPerSwipe = yearsPerMm * NAIL_FILE_MM;
-  const ref = pickReference(yearsPerSwipe);
-  const refMetres = ref.years / yearsPerMetre;
   const unit = yardstickOf(yardstick);
-  const yearsPerUnit = yearsPerMm * unit.mm(armSpanM);
 
+  if (unit.years !== undefined) {
+    const yearsPerFinger = yearsPerMm * fingerMm(armSpanM);
+    return {
+      yearsPerMetre,
+      yearsPerMm,
+      unitLabel: unit.label(armSpanM),
+      perUnit: formatFingers(unit.years / yearsPerFinger),
+    };
+  }
+
+  const yearsPerUnit = yearsPerMm * (unit.mm?.(armSpanM) ?? 1);
   return {
     yearsPerMetre,
     yearsPerMm,
@@ -170,15 +235,5 @@ export function scaleReadout(
     perUnitGenerations: formatGenerations(
       generationsOf(yearsPerUnit, generationYears),
     ),
-    perMm: formatYears(yearsPerMm),
-    perMmGenerations: formatGenerations(
-      generationsOf(yearsPerMm, generationYears),
-    ),
-    nailFile: formatYears(yearsPerSwipe),
-    nailFileGenerations: formatGenerations(
-      generationsOf(yearsPerSwipe, generationYears),
-    ),
-    comparisonLabel: ref.label,
-    comparisonLength: formatLength(refMetres),
   };
 }

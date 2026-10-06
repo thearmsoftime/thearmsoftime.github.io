@@ -5,11 +5,11 @@ import { Group, Knob } from './Knob'
 import type { ProtoTab } from './types'
 
 /**
- * Everything around the knob: how far the timeline is drawn under the
- * fingertips, how thick it is, how big the ring is and how much air it keeps,
- * how big the event dots are, and how the names and the readout sit off the
- * line. None of it is measured off anything — it is all picked by eye, which
- * is exactly what this tab is for. See `src/scrub.ts`.
+ * Everything along the line: how far the timeline is drawn under the
+ * fingertips, how thick it is, how big the event dots are, and how the names
+ * sit off the line. None of it is measured off anything — it is all picked by
+ * eye, which is exactly what this tab is for. See `src/scrub.ts`. The knob and
+ * its card are on the Knob tab.
  */
 
 const KEY = 'protoscrub'
@@ -25,7 +25,6 @@ interface KnobSpec {
 }
 
 const px = (v: number) => `${Math.round(v * 10) / 10}px`
-const rem = (v: number) => `${v.toFixed(2)}rem`
 
 const GROUPS: { title: string; knobs: KnobSpec[] }[] = [
   {
@@ -41,49 +40,6 @@ const GROUPS: { title: string; knobs: KnobSpec[] }[] = [
         show: px,
       },
       { key: 'lineWidth', label: 'Thickness', min: 1, max: 16, step: 0.5, show: px },
-    ],
-  },
-  {
-    title: 'Ring',
-    knobs: [
-      { key: 'fobSize', label: 'Size', hint: 'on a phone', min: 12, max: 80, step: 1, show: px },
-      {
-        key: 'fobSizeWide',
-        label: 'Size wide',
-        hint: 'from 40rem up',
-        min: 12,
-        max: 96,
-        step: 1,
-        show: px,
-      },
-      { key: 'fobBorder', label: 'Edge', min: 0, max: 8, step: 0.5, show: px },
-      {
-        key: 'fobHalo',
-        label: 'Halo',
-        hint: 'clear paper around it',
-        min: 0,
-        max: 16,
-        step: 0.5,
-        show: px,
-      },
-      {
-        key: 'fobLift',
-        label: 'Lift',
-        hint: 'off the line, up is more',
-        min: -60,
-        max: 60,
-        step: 1,
-        show: px,
-      },
-      {
-        key: 'fobPress',
-        label: 'Press',
-        hint: 'how much it grows when dragged',
-        min: 1,
-        max: 1.8,
-        step: 0.01,
-        show: (v) => `${v.toFixed(2)}x`,
-      },
     ],
   },
   {
@@ -106,7 +62,6 @@ const GROUPS: { title: string; knobs: KnobSpec[] }[] = [
   {
     title: 'Bars',
     knobs: [
-      { key: 'stretchWidth', label: 'How long it ran', min: 1, max: 40, step: 1, show: px },
       { key: 'slackWidth', label: 'How unsure', min: 1, max: 24, step: 1, show: px },
       {
         key: 'columnUnits',
@@ -149,35 +104,6 @@ const GROUPS: { title: string; knobs: KnobSpec[] }[] = [
         max: 40,
         step: 1,
         show: px,
-      },
-    ],
-  },
-  {
-    title: 'Readout',
-    knobs: [
-      {
-        key: 'railGap',
-        label: 'Pull up',
-        // The whole run from the line down to the crop edge, because that is
-        // the gap between the knob and its reading — the figure has faded out
-        // long before then, so the pill may sit well up inside the band.
-        hint: 'up into the band, towards the knob',
-        min: 0,
-        max: 14,
-        step: 0.05,
-        show: rem,
-      },
-      { key: 'railGapWide', label: 'Pull up wide', min: 0, max: 14, step: 0.05, show: rem },
-      { key: 'railPadX', label: 'Padding across', min: 0, max: 2.5, step: 0.05, show: rem },
-      { key: 'railPadY', label: 'Padding down', min: 0, max: 2.5, step: 0.05, show: rem },
-      {
-        key: 'railEdge',
-        label: 'Off the edge',
-        hint: 'how far it keeps from each side',
-        min: 0,
-        max: 16,
-        step: 0.25,
-        show: rem,
       },
     ],
   },

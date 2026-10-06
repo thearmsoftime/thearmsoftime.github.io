@@ -3,20 +3,22 @@ import Header from "./components/Header";
 import { ScaleRail, ScaleRow } from "./components/ScaleBar";
 import ArmStage, { type NudgeKind } from "./components/ArmStage";
 import EventCards from "./components/EventCards";
+import AboutDialog, { AboutButton } from "./components/About";
+import KofiLink from "./components/KofiLink";
 import MarkerLink from "./components/MarkerLink";
 import TimelinePreviewLink from "./components/TimelinePreviewLink";
 import {
   bandsFor,
   eventsFor,
-  generationCredit,
   meta,
   showsGenerations,
   visibleTimelines,
   type Detail,
 } from "./data";
-import { factFor } from "./facts";
 import ListHeading from "./components/ListHeading";
+import { factsFor } from "./oddities";
 import { FIT, cropAspect, tune } from "./figure";
+import { CARD_MAX_VH, layout } from "./layout";
 import {
   formatCalendarYear,
   formatGenerations,
@@ -29,12 +31,16 @@ import {
 import {
   clamp01,
   fractionOf,
-  parseYardstick,
+  parseYardsticks,
   scaleReadout,
+  startsInside,
+  writeYardsticks,
+  yardsticksFor,
   yearsAgoAt,
   type YardstickId,
 } from "./scale";
 import { DEV } from "./dev";
+import { bodyAt } from "./body";
 import { createStoredSignal } from "./prefs";
 import {
   applyThemeChoice,
@@ -42,7 +48,6 @@ import {
   watchSystemTheme,
   type ThemeChoice,
 } from "./theme";
-import type { TimelineEvent } from "./types";
 
 /*
   The three dev workbenches are loaded on demand, so a visitor downloads none
@@ -53,6 +58,7 @@ import type { TimelineEvent } from "./types";
 const Prototype = lazy(() => import("./prototype/Prototype"));
 const DevPanel = lazy(() => import("./components/DevPanel"));
 const DataPanel = lazy(() => import("./components/DataPanel"));
+const OddityPanel = lazy(() => import("./components/OddityPanel"));
 
 const MIN_SPAN_M = 0.5;
 const MAX_SPAN_M = 2.6;
@@ -62,8 +68,11 @@ const STEP: Record<Exclude<NudgeKind, "event">, number> = {
   coarse: 0.02,
   page: 0.1,
 };
-/** About a hand: as far back as the length under the readout still means something. */
-const HAND_M = 0.2;
+/**
+ * About a fingertip: as far back as the length over the readout is shown.
+ * Past that the body part says where the marker is better than a number does.
+ */
+const FINGERTIP_M = 0.02;
 /** Short enough that people think in calendar years, not in "years ago". */
 const CALENDAR_SPAN_YEARS = 12000;
 /**
@@ -71,7 +80,7 @@ const CALENDAR_SPAN_YEARS = 12000;
  * below keeps a usable share of the viewport. The figure is a tall window —
  * the head down to the belly — so the height it is allowed is what sets how
  * long the arms draw, and the ruler is the point: it gets everything the cards
- * and the two bars do not need. `Size` in the prototype panel is this number.
+ * and the two bars do not need.
  */
 const armsMaxWidth = () =>
   `min(130rem, calc(min(${tune().maxVh}vh, ${FIT.maxRem}rem) * ${cropAspect()}))`;
@@ -116,11 +125,31 @@ export default function App() {
     (raw) => (raw === "1" ? true : raw === "0" ? false : undefined),
     (on) => (on ? "1" : "0"),
   );
-  const [yardstick, setYardstick] = createStoredSignal<YardstickId>(
-    "yardstick",
-    "mm",
-    parseYardstick,
-  );
+  const [pickedYardsticks, setPickedYardsticks] = createStoredSignal<
+    Record<string, YardstickId>
+  >("yardsticks", {}, parseYardsticks, writeYardsticks);
+  /** How far down the stage the fingertip line runs, for the scale numbers. */
+  const [lineTop, setLineTop] = createSignal(0);
+  // The room above the tray, and what is drawn in it. Measured, so the line
+  // can be put at a share of that room rather than wherever centring left it.
+  const [roomH, setRoomH] = createSignal(0);
+  const [bodyH, setBodyH] = createSignal(0);
+  /** Watch one box's height for as long as it is on the page. */
+  const heightOf = (set: (px: number) => void) => (el: HTMLElement) => {
+    const observer = new ResizeObserver(([entry]) => set(entry!.contentRect.height));
+    observer.observe(el);
+    onCleanup(() => observer.disconnect());
+  };
+  /**
+   * How far down the arms start. The line goes at its share of the room, the
+   * same on every timeline; only when the drawing would run into the tray is
+   * it pushed back up, and never above the bar.
+   */
+  const armsLift = () =>
+    Math.max(
+      0,
+      Math.min(layout().lineShare * roomH() - lineTop(), roomH() - bodyH()),
+    );
   const [pos, setPos] = createSignal(0.5);
   /**
    * The card the reader last put the strip on. Events can share one instant —
@@ -152,6 +181,18 @@ export default function App() {
     (raw) => (raw === "1" ? true : raw === "0" ? false : undefined),
     (on) => (on ? "1" : "0"),
   );
+  const [oddOpen, setOddOpen] = createStoredSignal(
+    "oddpanel",
+    false,
+    (raw) => (raw === "1" ? true : raw === "0" ? false : undefined),
+    (on) => (on ? "1" : "0"),
+  );
+  /**
+   * The fun fact on show, by id rather than by index: the list changes with
+   * the timeline, and an id that is not on the new one simply shows nothing
+   * instead of landing on whatever happens to sit at that index.
+   */
+  const [factId, setFactId] = createSignal<string | null>(null);
   const [theme, setThemeSignal] = createSignal<ThemeChoice>(readThemeChoice());
 
   const setTheme = (next: ThemeChoice) => {
@@ -184,32 +225,88 @@ export default function App() {
 
   /**
    * A moment has one stop on the arm; something that lasted has two, one per
-   * edge. Both the live card and the alt-arrow stepping run off these.
+   * edge, unless another card starts inside it. Both the live card and the
+   * alt-arrow stepping run off these.
    */
-  const positioned = createMemo(() =>
-    events().map((event) => {
-      const t = fractionOf(event.yearsAgo, spanYears());
-      const stops =
+  const facts = createMemo(() => factsFor(timelineId()));
+  const liveFact = createMemo(() => facts().find((f) => f.id === factId()));
+
+  /**
+   * The button never repeats itself: the first press lands somewhere random,
+   * and every press after that steps on through the list. The marker follows
+   * to the moment the two gaps share, so the readout says the date the fact
+   * turns on.
+   */
+  /**
+   * Where the fact's card sits: the moment its two gaps share, or now when the
+   * fact is about what is still ahead — the arm ends at the fingertip.
+   */
+  const factPos = createMemo(() => {
+    const shown = liveFact();
+    if (!shown) return undefined;
+    return fractionOf(Math.max(shown.points[1].yearsAgo, 0), spanYears());
+  });
+
+  const nextFact = () => {
+    const list = facts();
+    if (list.length === 0) return;
+    const current = list.findIndex((f) => f.id === factId());
+    const next =
+      current < 0
+        ? list[Math.floor(Math.random() * list.length)]!
+        : list[(current + 1) % list.length]!;
+    setFactId(next.id);
+    const hinge = next.points[1].yearsAgo;
+    if (hinge >= 0) setPos(fractionOf(hinge, spanYears()));
+  };
+
+  const positioned = createMemo(() => {
+    const items: { id: string; t: number; end?: number }[] = events().map((event) => ({
+      id: event.id,
+      t: fractionOf(event.yearsAgo, spanYears()),
+      end:
         event.endYearsAgo === undefined
-          ? [t]
-          : [t, fractionOf(event.endYearsAgo, spanYears())];
-      return { event, t, stops };
-    }),
-  );
+          ? undefined
+          : fractionOf(event.endYearsAgo, spanYears()),
+    }));
+    // The fun fact has a card in the strip like everything else here, so it
+    // has to be something the marker can be nearest to. Without this the
+    // marker sits on the fact and the event behind it lights up instead.
+    const at = factPos();
+    if (at !== undefined) items.push({ id: liveFact()!.id, t: at });
+    // A stretch with another card starting inside it keeps only its start
+    // stop: its far edge would light its card while the strip, which runs in
+    // start order, stands on the cards inside it. See `startsInside`.
+    const starts = items.map((item) => item.t);
+    return items.map(({ id, t, end }) => ({
+      id,
+      t,
+      moment: end === undefined,
+      stops: end === undefined || startsInside(t, end, starts) ? [t] : [t, end],
+    }));
+  });
 
   const nearest = createMemo(() => {
-    let best: { event: TimelineEvent; t: number } | null = null;
+    let best: { id: string; t: number } | null = null;
     let bestDistance = Infinity;
     let bestRank = -1;
     for (const item of positioned()) {
       // The nearer edge speaks for a stretch, so both ends of it pick the card up.
       const distance = Math.min(...item.stops.map((s) => Math.abs(s - pos())));
-      // Two events can land on the exact same point. Settle it: the card the
-      // reader picked first, then a moment over something that merely lasted
+      // Two cards can land on the exact same point. Settle it: the fun fact
+      // first — its hinge is usually an event, and the whole reason the marker
+      // is standing there is the fact, not the card behind it. Then the card
+      // the reader picked, then a moment over something that merely lasted
       // through it — at that instant the asteroid is the thing that happens,
       // and without this its card could never be reached at all.
       const rank =
-        item.event.id === pickedId() ? 2 : item.stops.length === 1 ? 1 : 0;
+        item.id === liveFact()?.id
+          ? 3
+          : item.id === pickedId()
+            ? 2
+            : item.moment
+              ? 1
+              : 0;
       if (distance < bestDistance || (distance === bestDistance && rank > bestRank)) {
         bestDistance = distance;
         bestRank = rank;
@@ -232,10 +329,23 @@ export default function App() {
     return 1 - hovered.spanYears / spanYears();
   });
 
+  /**
+   * The ruler is kept per timeline. One this timeline does not offer — a life
+   * on the Universe — falls back to the first it does.
+   */
+  const yardsticks = createMemo(() => yardsticksFor(spanYears()));
+  const yardstick = createMemo((): YardstickId => {
+    const picked = pickedYardsticks()[timelineId()];
+    return yardsticks().some((y) => y.id === picked)
+      ? picked!
+      : yardsticks()[0]!.id;
+  });
+  const setYardstick = (id: YardstickId) =>
+    setPickedYardsticks((prev) => ({ ...prev, [timelineId()]: id }));
+
   const scale = createMemo(() =>
     scaleReadout(spanYears(), armSpanM(), meta.generationYears, yardstick()),
   );
-  const fact = createMemo(() => factFor(timeline()?.id ?? ""));
 
   const withCalendar = createMemo(() => spanYears() <= CALENDAR_SPAN_YEARS);
 
@@ -257,13 +367,21 @@ export default function App() {
   });
 
   /**
+   * Where on the reader's own arm the marker stands, when it is on a body
+   * part: something they can touch. See `src/body.ts`.
+   */
+  const markerBody = createMemo(() =>
+    bodyAt(1 - markerYearsAgo() / spanYears()),
+  );
+
+  /**
    * The same reading as a distance: how far back from the right fingertip the
-   * marker stands. Only while it is still hand-sized — past that the length is
-   * an arm's length nobody feels, and the years say it better.
+   * marker stands. Only in the last two centimetres — past that the knuckles
+   * and the wrist say it better.
    */
   const markerLength = createMemo(() => {
     const metres = markerYearsAgo() / scale().yearsPerMetre;
-    if (metres > HAND_M) return undefined;
+    if (metres > FINGERTIP_M) return undefined;
     return `${metres > 0 ? formatLength(metres) : "0 mm"} from now`;
   });
 
@@ -307,6 +425,9 @@ export default function App() {
         onOpenDev={() => setDevOpen(true)}
         onOpenData={() => setDataOpen(true)}
         onOpenProto={() => setProtoOpen(true)}
+        onOpenOdd={() => setOddOpen(true)}
+        onFact={facts().length > 0 ? nextFact : undefined}
+        factOn={liveFact() !== undefined}
       />
 
       {/*
@@ -340,6 +461,16 @@ export default function App() {
         />
       </Show>
 
+      <Show when={DEV && oddOpen()}>
+        <OddityPanel
+          timelineId={timelineId()}
+          armSpanM={armSpanM()}
+          spanYears={spanYears()}
+          onClose={() => setOddOpen(false)}
+          onPick={(yearsAgo) => setPos(fractionOf(yearsAgo, spanYears()))}
+        />
+      </Show>
+
       <Show
         when={timeline()}
         fallback={
@@ -354,14 +485,23 @@ export default function App() {
         {(activeTimeline) => (
           <main class="relative flex min-h-0 flex-1 flex-col">
             {/*
-              Everything sits at the top: a gap between the bar and the head
-              reads as a white banner over the drawing. The scale numbers flank
-              the arms, so the list below gets the height they used to take as
-              a band.
+              The arms take the height the card tray does not need. Their line
+              sits at a set share of that height (`src/layout.ts`), not in the
+              middle of whatever is drawn: bands and labels differ per
+              timeline, and centring them made the man jump when the timeline
+              changed. The scale numbers flank the arms, so the list below
+              gets the height they used to take as a band.
             */}
-            <div class="w-full shrink-0 px-0 pb-1.5 sm:px-4">
-              <div class="mx-auto flex w-full max-w-[130rem] items-center justify-center gap-4 xl:gap-8">
-                <div class="hidden lg:flex">
+            <div
+              ref={heightOf(setRoomH)}
+              class="flex w-full shrink-0 grow flex-col px-0 pb-1.5 sm:px-4"
+            >
+              <div ref={heightOf(setBodyH)} style={{ "margin-top": `${armsLift()}px` }}>
+              <div class="mx-auto flex w-full max-w-[130rem] items-start justify-between gap-4 xl:gap-8">
+                <div
+                  class="hidden -translate-y-1/2 lg:flex"
+                  style={{ "margin-top": `${lineTop()}px` }}
+                >
                   <ScaleRail
                     side="left"
                     scale={scale()}
@@ -370,6 +510,7 @@ export default function App() {
                     totalGenerations={totalGenerations()}
                     showGenerations={withGenerations()}
                     yardstick={yardstick()}
+                    yardsticks={yardsticks()}
                     onYardstick={setYardstick}
                   />
                 </div>
@@ -380,20 +521,37 @@ export default function App() {
                     bands={bands()}
                     events={events()}
                     pos={pos()}
-                    onPos={setPos}
-                    onNudge={nudge}
-                    onEnd={setPos}
-                    nearestId={nearest()?.event.id ?? null}
+                    // Moving the marker on the arm is done with the fact, as
+                    // picking a card is: the fact is about where it stood.
+                    onPos={(next) => {
+                      setFactId(null);
+                      setPos(next);
+                    }}
+                    onNudge={(direction, kind) => {
+                      setFactId(null);
+                      nudge(direction, kind);
+                    }}
+                    onEnd={(edge) => {
+                      setFactId(null);
+                      setPos(edge);
+                    }}
+                    nearestId={nearest()?.id ?? null}
                     showBands={showBands()}
                     showUncertainty={showUncertainty()}
                     readoutYears={markerReadout()}
                     readoutSub={markerSub()}
                     readoutLength={markerLength()}
+                    readoutBody={markerBody()}
                     previewFrom={previewFrom()}
+                    fact={liveFact()}
+                    onLineTop={setLineTop}
                   />
                 </div>
 
-                <div class="hidden lg:flex">
+                <div
+                  class="hidden -translate-y-1/2 lg:flex"
+                  style={{ "margin-top": `${lineTop()}px` }}
+                >
                   <ScaleRail
                     side="right"
                     scale={scale()}
@@ -402,6 +560,7 @@ export default function App() {
                     totalGenerations={totalGenerations()}
                     showGenerations={withGenerations()}
                     yardstick={yardstick()}
+                    yardsticks={yardsticks()}
                     onYardstick={setYardstick}
                   />
                 </div>
@@ -414,28 +573,52 @@ export default function App() {
                 totalGenerations={totalGenerations()}
                 showGenerations={withGenerations()}
                 yardstick={yardstick()}
+                yardsticks={yardsticks()}
                 onYardstick={setYardstick}
               />
+              </div>
             </div>
 
             {/*
-              The cards take everything the arms and the two bars left over.
-              The cards themselves stop at their own cap; the extra height goes
-              to the strip around them, so its scrollbar sits at the bottom of
-              the screen rather than cutting across the middle of it.
+              The cards sit on a tray of their own, the footer's tint, so the
+              strip reads as one band under the arms and the cards lift off it.
+              Every card is the same height, so the tray is the same height on
+              every timeline and the arms above it stay put. On a short screen
+              it is the part that gives, so the arms never get squeezed.
             */}
-            <div class="mx-auto flex w-full max-w-[130rem] min-h-0 flex-1 flex-col px-3 pt-1.5 pb-2 sm:px-6">
+            <div
+              class="bg-base-200 flex min-h-0 shrink flex-col"
+              style={{
+                "--card-h": `min(${layout().cardHeightRem}rem, ${CARD_MAX_VH}vh)`,
+                "--card-gap": `${layout().cardGapRem}rem`,
+              }}
+            >
+            <div
+              class="mx-auto flex w-full max-w-[130rem] min-h-0 flex-1 flex-col px-3 sm:px-6"
+              style={{
+                "padding-top": `${layout().trayTopRem}rem`,
+                "padding-bottom": `${layout().trayBottomRem}rem`,
+              }}
+            >
               <EventCards
                 events={events()}
                 timelineId={timelineId()}
-                nearestId={nearest()?.event.id ?? null}
+                nearestId={nearest()?.id ?? null}
                 pos={pos()}
                 spanYears={activeTimeline().spanYears}
                 markerYearsAgo={markerYearsAgo()}
                 showGenerations={withGenerations()}
                 showCalendar={withCalendar()}
                 showUncertainty={showUncertainty()}
+                fact={liveFact()}
+                onFactNext={nextFact}
+                onFactClose={() => setFactId(null)}
                 onPick={(event) => {
+                  // Picking any other card is done with the fact: the reader
+                  // has moved on to an event, and leaving the fact up would
+                  // hold the arm's names and the dimmed drawing against a
+                  // marker that is no longer standing on it.
+                  setFactId(null);
                   setPickedId(event.id);
                   setPos(fractionOf(event.yearsAgo, activeTimeline().spanYears));
                 }}
@@ -445,11 +628,12 @@ export default function App() {
                 }}
               />
             </div>
+            </div>
 
             {/* Ties the readout under the knob to the card it is standing on. */}
             <MarkerLink
               pos={pos()}
-              nearestId={nearest()?.event.id ?? null}
+              nearestId={nearest()?.id ?? null}
               timelineId={timelineId()}
             />
           </main>
@@ -462,60 +646,22 @@ export default function App() {
         redrawKey={`${timelineId()}:${previewFrom() ?? ""}:${showBands()}`}
       />
 
-      <footer class="border-base-300/60 text-base-content/40 shrink-0 border-t px-3 py-1 text-center text-[0.62rem] leading-snug sm:px-6">
-        {/* What the cards are and how to drive them, right under them. */}
-        <ListHeading
-          count={events().length}
-          action="drag the strip, or click a card, to move the marker"
-          line={fact() ?? timeline()?.note}
-        />
-
-        Figure: Leonardo da Vinci, <em>Vitruvian Man</em> (c. 1490), public
-        domain via{" "}
-        <a
-          class="link link-hover"
-          href="https://commons.wikimedia.org/wiki/File:Da_Vinci_Vitruve_Luc_Viatour.jpg"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Wikimedia Commons
-        </a>
-        . After the{" "}
-        <a
-          class="link link-hover"
-          href="https://www.youtube.com/watch?v=uMXt0eGXuZc"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Natural History Museum of Los Angeles County
-        </a>
-        . One generation = {meta.generationYears} years
-        <Show when={generationCredit} fallback=".">
-          {(credit) => (
-            <>
-              , after{" "}
-              <Show
-                when={credit().url}
-                fallback={<span title={credit().detail}>{credit().label}</span>}
-              >
-                {(href) => (
-                  <a
-                    class="link link-hover"
-                    href={href()}
-                    title={credit().detail}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {credit().label}
-                  </a>
-                )}
-              </Show>
-              .
-            </>
-          )}
-        </Show>{" "}
-        Data {meta.generated}.
+      {/* One line: how to drive the cards, and the two ways off the page in
+          the bottom-right corner. The credits live in the About box. */}
+      {/* Same 75rem as the bar at the top, so the two frame the page alike. */}
+      <footer class="bg-base-200 text-base-content/70 shrink-0 px-3 py-1.5 sm:px-6">
+        <div class="mx-auto flex max-w-[75rem] items-center gap-3">
+          <div class="min-w-0 flex-1">
+            <ListHeading action="drag the strip, or click a card, to move the marker" />
+          </div>
+          <div class="flex shrink-0 items-center gap-3">
+            <KofiLink quiet />
+            <AboutButton quiet />
+          </div>
+        </div>
       </footer>
+
+      <AboutDialog />
     </div>
   );
 }

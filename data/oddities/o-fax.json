@@ -1,0 +1,32 @@
+{
+  "id": "o-fax",
+  "timelines": [
+    "modern"
+  ],
+  "label": "Fax before telephone",
+  "line": "A machine for sending pictures down a wire was patented before the telephone was invented.",
+  "points": [
+    {
+      "label": "Fax machine patented",
+      "yearsAgo": 183,
+      "wikipedia": "https://en.wikipedia.org/wiki/Fax",
+      "source": "https://en.wikipedia.org/wiki/Alexander_Bain_(inventor)",
+      "sourceTitle": "English Wikipedia (secondary)"
+    },
+    {
+      "label": "The telephone",
+      "yearsAgo": 150,
+      "wikipedia": "https://en.wikipedia.org/wiki/Telephone",
+      "source": "https://en.wikipedia.org/wiki/Invention_of_the_telephone",
+      "sourceTitle": "English Wikipedia (secondary)"
+    },
+    {
+      "label": "Now",
+      "yearsAgo": 0
+    }
+  ],
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Fax",
+  "source": "https://en.wikipedia.org/wiki/Alexander_Bain_(inventor)",
+  "sourceTitle": "English Wikipedia (secondary)"
+}

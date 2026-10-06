@@ -14,7 +14,8 @@
       "simple": true
     },
     "life": {
-      "simple": true
+      "simple": true,
+      "landmark": true
     }
   }
 }

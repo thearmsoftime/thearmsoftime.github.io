@@ -119,3 +119,44 @@ export interface Meta {
   generationSource?: string
   note?: string
 }
+
+/**
+ * One of the three moments an oddity hangs on. It carries its own source,
+ * because most of them are not in `data/events/`: Cleopatra earns a mention in
+ * one comparison, not a card of her own on the arm.
+ */
+export interface OddityPoint extends Sourced {
+  label: string
+  /**
+   * Counted back from now, like an event — and negative for a moment still
+   * ahead, which is the only place in the data where that happens. The files
+   * write those as `yearsAhead`; the loader flips the sign, so one number
+   * orders the whole line: oldest first, now at zero, the future past it.
+   */
+  yearsAgo: number
+  uncertaintyYears?: number
+}
+
+/** Oldest first. The middle one is the hinge the two gaps share. */
+export type OddityPoints = [OddityPoint, OddityPoint, OddityPoint]
+
+/**
+ * Two gaps sharing a middle moment — the shape of every fact that makes people
+ * stop. Cleopatra is nearer to the Moon landing than to the pyramid she lived
+ * beside; the Sun has more time left than the Earth has had.
+ *
+ * Both gaps are fractions of the same span, so an oddity holds at any arm span
+ * and the reader can measure both with their own fingers. That is why it is
+ * worth having its own entity rather than being written into copy.
+ */
+export interface Oddity extends Sourced {
+  id: string
+  /** Only the timelines the two gaps are big enough to see on. */
+  timelines: TimelineId[]
+  /** A short name for the dev browser. Not the sentence. */
+  label: string
+  /** The sentence on screen. */
+  line: string
+  points: OddityPoints
+  certainty?: Certainty
+}

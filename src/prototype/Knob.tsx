@@ -94,3 +94,63 @@ export function Choice<T extends string>(props: ChoiceProps<T>) {
     </div>
   )
 }
+
+/** A yes or no, as a small checkbox with its name on the left. */
+export function Toggle(props: { label: string; hint?: string; on: boolean; onFlip: (on: boolean) => void }) {
+  return (
+    <label class="block cursor-pointer">
+      <span class="flex items-center justify-between gap-2">
+        <span class="text-[0.68rem] font-medium">{props.label}</span>
+        <input
+          type="checkbox"
+          class="checkbox checkbox-xs"
+          style={{ '--input-color': 'var(--dev)', color: 'var(--dev-content)' }}
+          checked={props.on}
+          onChange={(e) => props.onFlip(e.currentTarget.checked)}
+        />
+      </span>
+      <Show when={props.hint}>
+        {(hint) => <span class="text-base-content/35 text-[0.58rem]">{hint()}</span>}
+      </Show>
+    </label>
+  )
+}
+
+interface FlagsProps<K extends string> {
+  label: string
+  options: readonly { key: K; label: string }[]
+  on: (key: K) => boolean
+  onFlip: (key: K, on: boolean) => void
+}
+
+/** Several yes-or-nos side by side, as a DaisyUI join: any number can be on. */
+export function Flags<K extends string>(props: FlagsProps<K>) {
+  return (
+    <div class="flex items-center justify-between gap-2">
+      <span class="text-[0.68rem] font-medium">{props.label}</span>
+      <div class="join">
+        <For each={props.options}>
+          {(option) => (
+            <button
+              type="button"
+              class="btn btn-xs join-item h-5 min-h-0 px-1.5 text-[0.58rem] font-medium"
+              aria-pressed={props.on(option.key)}
+              style={
+                props.on(option.key)
+                  ? {
+                      'background-color': 'var(--dev)',
+                      'border-color': 'var(--dev)',
+                      color: 'var(--dev-content)',
+                    }
+                  : undefined
+              }
+              onClick={() => props.onFlip(option.key, !props.on(option.key))}
+            >
+              {option.label}
+            </button>
+          )}
+        </For>
+      </div>
+    </div>
+  )
+}

@@ -24,11 +24,15 @@ a purple thing on screen is a thing that does not ship. Keep new dev UI in it.
 | `src/prototype/Prototype.tsx` | The frame: drag, tab strip, Copy, Reset. Never holds a knob. Mounted all session; `open` comes from `App`. |
 | `src/prototype/tabs.ts` | The list of tabs, left to right. |
 | `src/prototype/types.ts` | `ProtoTab` — what a tab must export. |
-| `src/prototype/FigureTab.tsx` | The Vitruvian window: top cut, bottom cut, fade, size. |
+| `src/prototype/Knob.tsx` | The parts a tab is built from: `Knob` (slider), `Group`, `Choice` (pick one), `Toggle` (checkbox), `Flags` (a DaisyUI join, any number on). |
+| `src/prototype/KnobTab.tsx` | The ring and the readout card under it. Copies into `src/fob.ts`. |
+| `src/prototype/ScrubTab.tsx` | The line, the dots, the bars, the names. Copies into `src/scrub.ts`. |
+| `src/prototype/LayoutTab.tsx` | Where the arm line sits on the page; room, gap and height of the cards. Copies into `src/layout.ts`. |
+| `src/prototype/FactTab.tsx` | A fun fact's words: how far the names sit over the line and the measures under it. Copies into `src/factRows.ts`. |
 
 ## Adding a tab
 
-One new file next to `FigureTab.tsx`, one line in `tabs.ts`. The strip only
+One new file next to `KnobTab.tsx`, one line in `tabs.ts`. The strip only
 draws when there are two or more tabs.
 
 A tab exports a `ProtoTab`:

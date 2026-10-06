@@ -200,3 +200,33 @@ export function formatLength(metres: number): string {
 
 /** A thickness in millimetres, for the ruler labels. */
 export const formatMm = (mm: number): string => `${sig(mm, 3)} mm`
+
+/** "1.7 fingers": two figures is as fine as anyone lays fingers on an arm. */
+export function formatFingers(fingers: number): string {
+  const count = sig(fingers, 2)
+  return count === '1' ? '1 finger' : `${count} fingers`
+}
+
+/**
+ * A stretch of time said as a share of the reader's own reach: the wording the
+ * future needs, because a moment still ahead has no place on the arm and
+ * "seven and a half billion years" means nothing on its own.
+ *
+ * Proportions only, never a length: the arm span is a setting, so "half a
+ * span" holds at 0.50 m and at 2.60 m alike. The body words are the ones the
+ * ruler table already uses — a hand is a span/18, a palm a span/24.
+ */
+export function formatSpanShare(fraction: number): string {
+  if (!Number.isFinite(fraction) || fraction <= 0) return 'no further'
+  if (fraction >= 20) return 'thousands of arm spans further'
+  if (fraction >= 3) return `${Math.round(fraction)} more arm spans`
+  if (fraction >= 1.6) return 'two more arm spans'
+  if (fraction >= 0.85) return 'another whole arm span'
+  if (fraction >= 0.45) return 'more than half an arm span'
+  if (fraction >= 0.28) return 'about a third of an arm span'
+  if (fraction >= 0.14) return 'about a forearm'
+  if (fraction >= 0.09) return 'about two hands'
+  if (fraction >= 0.045) return 'about a hand'
+  if (fraction >= 0.02) return 'about a palm'
+  return 'a fingertip further'
+}

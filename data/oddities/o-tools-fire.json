@@ -1,0 +1,32 @@
+{
+  "id": "o-tools-fire",
+  "timelines": [
+    "humans"
+  ],
+  "label": "Tools before fire",
+  "line": "People were shaping stone tools for millions of years before there is good evidence of cooking on fire.",
+  "points": [
+    {
+      "label": "Oldest stone tools",
+      "yearsAgo": 3300000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Lomekwi",
+      "source": "https://www.nature.com/articles/nature14464",
+      "sourceTitle": "Harmand et al. 2015, Nature"
+    },
+    {
+      "label": "Cooking on fire",
+      "yearsAgo": 790000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Control_of_fire_by_early_humans",
+      "source": "https://www.science.org/doi/10.1126/science.1095443",
+      "sourceTitle": "Goren-Inbar et al. 2004, Science"
+    },
+    {
+      "label": "Now",
+      "yearsAgo": 0
+    }
+  ],
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Control_of_fire_by_early_humans",
+  "source": "https://www.science.org/doi/10.1126/science.1095443",
+  "sourceTitle": "Goren-Inbar et al. 2004, Science"
+}

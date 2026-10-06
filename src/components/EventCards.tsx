@@ -1,7 +1,9 @@
-import { For, Show, createEffect, createSignal, onCleanup, onMount } from 'solid-js'
-import type { TimelineEvent } from '../types'
+import { For, Show, createEffect, createMemo, createSignal, onCleanup, onMount } from 'solid-js'
+import type { Oddity, TimelineEvent } from '../types'
+import FactCard from './FactCard'
 import Sources from './Sources'
-import { clamp01, fractionOf } from '../scale'
+import { clamp01, fractionOf, startsInside } from '../scale'
+import { bodyAt } from '../body'
 import {
   formatCalendarYear,
   formatGenerationsAgo,
@@ -26,6 +28,14 @@ interface Props {
   showCalendar: boolean
   /** Print each date's ± error bar. Off, the dates read as round numbers. */
   showUncertainty: boolean
+  /**
+   * The fun fact on show, if any. It is squeezed into the strip as a card of
+   * its own, at the moment its two gaps share, so the marker has something
+   * real to land on — see `FactCard`.
+   */
+  fact?: Oddity
+  onFactNext: () => void
+  onFactClose: () => void
   onPick: (event: TimelineEvent) => void
   /**
    * Dragging the strip is scrubbing: the strip tells the marker where it now
@@ -60,6 +70,26 @@ interface Anchor {
 }
 
 /**
+ * What the strip holds, in the order it holds it: every event, plus the fun
+ * fact when one is up. `measure` walks the cards in the DOM and this list side
+ * by side, so the two have to be the same length and the same order.
+ *
+ * The events and the fact go in as they arrive, not wrapped in anything: `For`
+ * keys on identity, and a fresh wrapper per pass would throw away every card
+ * in the strip and build it again each time the fact changed.
+ */
+type Item = TimelineEvent | Oddity
+
+const isFact = (item: Item): item is Oddity => 'points' in item
+
+/** Where a card sits in time. A fact sits on the moment its two gaps share. */
+const startOf = (item: Item): number =>
+  isFact(item) ? Math.max(item.points[1].yearsAgo, 0) : item.yearsAgo
+
+const endOf = (item: Item): number | undefined =>
+  isFact(item) ? undefined : item.endYearsAgo
+
+/**
  * The events laid out the way the arms run: oldest at the left fingertip, now
  * at the right. One card per event, on a rail.
  */
@@ -77,6 +107,24 @@ export default function EventCards(props: Props) {
   let swallowClick = false
   const [dragging, setDragging] = createSignal(false)
 
+  /**
+   * The events, with the fact dropped in at its own moment in time. Oldest
+   * first, the way the arms run. A fact sits on the moment its two gaps share,
+   * which is the one the marker is sent to when it opens.
+   */
+  const items = createMemo<Item[]>(() => {
+    const fact = props.fact
+    if (!fact) return props.events
+    const list: Item[] = [...props.events]
+    // The hinge, or now when the fact is about what is still ahead: the strip
+    // ends at now and there is nothing further right than that.
+    const hinge = startOf(fact)
+    const at = list.findIndex((item) => startOf(item) < hinge)
+    if (at < 0) list.push(fact)
+    else list.splice(at, 0, fact)
+    return list
+  })
+
   const stillMotion =
     typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)')
 
@@ -88,13 +136,21 @@ export default function EventCards(props: Props) {
   const measure = () => {
     const cards = strip?.querySelectorAll<HTMLElement>('[data-event]')
     if (!cards) return
+    const list = items()
+    const starts = list.map((item) => fractionOf(startOf(item), props.spanYears))
     let floor = -Infinity
     anchors = Array.from(cards, (el, i) => {
-      const event = props.events[i]
-      const a = Math.max(fractionOf(event?.yearsAgo ?? 0, props.spanYears), floor)
-      const b = Math.max(fractionOf(event?.endYearsAgo ?? event?.yearsAgo ?? 0, props.spanYears), a)
+      const item = list[i]
+      const from = item ? startOf(item) : 0
+      const start = fractionOf(from, props.spanYears)
+      const end = fractionOf((item && endOf(item)) ?? from, props.spanYears)
+      const a = Math.max(start, floor)
+      // A stretch holds the middle for its whole length only when no other
+      // card starts inside it. Otherwise it would hold on through every card
+      // inside it, and the live card would sit off to the right.
+      const b = Math.max(startsInside(start, end, starts) ? start : end, a)
       floor = b
-      return { id: event?.id ?? '', a, b, center: el.offsetLeft + el.offsetWidth / 2 }
+      return { id: item?.id ?? '', a, b, center: el.offsetLeft + el.offsetWidth / 2 }
     })
   }
 
@@ -231,7 +287,7 @@ export default function EventCards(props: Props) {
 
   // Remeasure whenever the cards themselves change, then take the strip there.
   createEffect(() => {
-    props.events
+    items()
     props.spanYears
     requestAnimationFrame(() => {
       measure()
@@ -312,20 +368,55 @@ export default function EventCards(props: Props) {
           onPointerMove={onPointerMove}
           onPointerUp={endPointer}
           onPointerCancel={endPointer}
-          class="timeline-fade card-strip relative flex min-h-0 flex-1 items-stretch overflow-x-auto overflow-y-hidden py-1"
+          class="timeline-fade card-strip relative flex min-h-0 flex-1 items-stretch overflow-x-auto overflow-y-hidden pt-1 pb-4"
           classList={{ 'cursor-grabbing no-select': dragging(), 'cursor-grab': !dragging() }}
           data-dragging={dragging() ? '' : undefined}
         >
           <Show
-            when={props.events.length > 0}
+            when={items().length > 0}
             fallback={
-              <li class="text-base-content/45 grid h-full w-full place-items-center p-8 text-center text-sm">
+              <li class="text-base-content/70 grid h-full w-full place-items-center p-8 text-center text-sm">
                 Nothing on this timeline yet.
               </li>
             }
           >
-            <For each={props.events}>
-              {(event) => {
+            <For each={items()}>
+              {(item) => {
+                // The fun fact is a guest in the strip: its own card, in the
+                // second colour, at the moment its two gaps share.
+                if (isFact(item)) {
+                  return (
+                    /*
+                      The strip measures card centres in pixels, and for a third
+                      of a second this one is still growing as it squeezes in.
+                      Measure again once it has stopped, or every anchor to the
+                      right of it is out by half a card.
+                    */
+                    <li
+                      data-event={item.id}
+                      class="fact-squeeze flex h-(--card-h) w-56 shrink-0 flex-col overflow-hidden [--fact-w:14rem] sm:w-64 sm:[--fact-w:16rem]"
+                      onAnimationEnd={() => {
+                        measure()
+                        schedule()
+                      }}
+                    >
+                      <span class="relative flex h-3 shrink-0 items-center" aria-hidden="true">
+                        <span class="bg-secondary/50 h-px w-full" />
+                        <span
+                          data-rail-dot
+                          class="bg-secondary ring-secondary/25 absolute left-1/2 size-1.5 -translate-x-1/2 rounded-full ring-3"
+                        />
+                      </span>
+                      <FactCard
+                        fact={item}
+                        spanYears={props.spanYears}
+                        onNext={props.onFactNext}
+                        onClose={props.onFactClose}
+                      />
+                    </li>
+                  )
+                }
+                const event = item
                 const nearest = () => props.nearestId === event.id
                 const end = () => event.endYearsAgo
                 // Older than the marker: the arm has already passed it. A stretch
@@ -337,15 +428,14 @@ export default function EventCards(props: Props) {
                   props.markerYearsAgo <= event.yearsAgo &&
                   props.markerYearsAgo >= end()!
                 /*
-                 * The strip is as tall as the space the arms left; a card stops
-                 * well short of that. The slack ends up below the cards, and
-                 * that is where the scrollbar rides — so it sits at the bottom
-                 * of the screen instead of cutting across the middle of it.
+                 * Every card is `--card-h` tall, set on the tray from
+                 * `src/layout.ts`. The scrollbar rides under the cards, 1 rem
+                 * below them: the `pb-4` on the strip.
                  */
                 return (
                   <li
                     data-event={event.id}
-                    class="flex max-h-[min(15rem,40vh)] w-56 shrink-0 flex-col sm:w-64"
+                    class="flex h-(--card-h) w-56 shrink-0 flex-col sm:w-64"
                   >
                     {/* The rail: card by card the segments join into one line. */}
                     <span class="relative flex h-3 shrink-0 items-center" aria-hidden="true">
@@ -370,13 +460,17 @@ export default function EventCards(props: Props) {
                     <div
                       role="button"
                       tabindex="0"
-                      class="border-base-300/60 hover:bg-base-200/70 focus-visible:ring-accent/40 rounded-box mx-1 flex min-h-0 flex-1 cursor-pointer flex-col overflow-hidden border border-t-[3px] px-3 py-2 text-left transition-colors focus-visible:ring-2 focus-visible:outline-none"
+                      class="bg-base-100 focus-visible:ring-accent/40 rounded-box mx-[calc(var(--card-gap)/2)] flex min-h-0 flex-1 cursor-pointer flex-col overflow-hidden border px-4 py-3 text-left transition focus-visible:ring-2 focus-visible:outline-none"
                       classList={{
-                        'border-t-accent bg-accent/[0.07]': nearest(),
+                        // The live card: one thin line in the accent and a soft
+                        // lift off the tray. Nothing louder than that.
+                        'border-accent shadow-md shadow-accent/10': nearest(),
                         // Inside a stretch: the marker is standing in it, so keep it lit.
-                        'border-t-accent/40': during() && !nearest(),
-                        'border-t-base-content/20 opacity-45': gone() && !nearest(),
-                        'border-t-transparent': !gone() && !during() && !nearest(),
+                        'border-accent/40': during() && !nearest(),
+                        'border-base-300 hover:border-base-content/25': !during() && !nearest(),
+                        // Past cards step back, but only so far: their small grey text still
+                        // has to clear 4.5:1 on the card.
+                        'opacity-85': gone() && !nearest(),
                       }}
                       onClick={() => {
                         // The mouse-up that ends a drag still fires a click here.
@@ -391,7 +485,7 @@ export default function EventCards(props: Props) {
                       }}
                       aria-current={nearest() ? 'true' : undefined}
                     >
-                      <span class="block text-sm tabular-nums">
+                      <span class="font-display block text-lg leading-tight tabular-nums sm:text-xl">
                         <Show
                           when={end() !== undefined}
                           fallback={(() => {
@@ -405,7 +499,7 @@ export default function EventCards(props: Props) {
                                 {/* The error bar rides along grey and small, so the
                                     date stays the thing the eye lands on. */}
                                 <Show when={date.bar}>
-                                  <span class="text-base-content/45 mx-0.5 text-[0.8em]">
+                                  <span class="text-base-content/70 mx-0.5 text-[0.8em]">
                                     {date.bar}
                                   </span>
                                 </Show>
@@ -417,9 +511,10 @@ export default function EventCards(props: Props) {
                           {formatYearsAgoStretch(event.yearsAgo, end()!)}
                         </Show>
                       </span>
-                      <span class="flex flex-wrap items-baseline gap-x-2 text-[0.65rem] tabular-nums">
+                      {/* One quiet line under the date, its parts joined by a middle dot. */}
+                      <span class="text-base-content/80 mt-0.5 text-[0.65rem] tabular-nums [&>*+*]:before:mx-1 [&>*+*]:before:content-['·']">
                         <Show when={props.showCalendar}>
-                          <span class="text-base-content/55">
+                          <span>
                             {formatCalendarYear(event.yearsAgo)}
                             <Show when={end() !== undefined}>
                               {' – '}
@@ -428,28 +523,47 @@ export default function EventCards(props: Props) {
                           </span>
                         </Show>
                         <Show when={props.showGenerations}>
-                          <span class="text-base-content/45">
+                          <span>
                             {formatGenerationsAgo(event.generationsAgo)}
                           </span>
                         </Show>
                         {/* A moment carries its error bar in the date line above; a
                             stretch says how long it lasted instead. */}
                         <Show when={end() !== undefined}>
-                          <span class="text-base-content/35">
+                          <span>
                             lasted {formatYears(event.yearsAgo - end()!)}
                           </span>
                         </Show>
                       </span>
+                      {/* Where it lands on the reader's own arm, when that is a
+                          body part: a row of its own. A stretch goes by where
+                          it starts. The date's ± counts, always — the knob
+                          that hides the ± on the arm does not move the body. */}
+                      <Show
+                        when={
+                          // A stretch that began before the arm did has no
+                          // start on the body to name.
+                          event.yearsAgo <= props.spanYears &&
+                          bodyAt(
+                          1 - event.yearsAgo / props.spanYears,
+                          (event.uncertaintyYears ?? 0) / props.spanYears,
+                          )
+                        }
+                      >
+                        {(body) => (
+                          <span class="text-base-content/70 mt-0.5 text-[0.65rem]">{body()}</span>
+                        )}
+                      </Show>
 
-                      <span class="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-0.5">
-                        <span class="text-sm leading-snug font-semibold">{event.label}</span>
+                      <span class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                        <span class="font-display text-base leading-snug">{event.label}</span>
                         <Show when={event.certainty === 'disputed'}>
                           <span class="badge badge-warning badge-xs">disputed</span>
                         </Show>
                       </span>
 
                       <Show when={event.description}>
-                        <span class="text-base-content/55 card-blurb mt-0.5 min-h-0 flex-1 overflow-hidden text-xs">
+                        <span class="text-base-content/80 card-blurb mt-1 min-h-0 flex-1 overflow-hidden text-xs leading-relaxed">
                           {event.description}
                         </span>
                       </Show>

@@ -1,0 +1,33 @@
+{
+  "id": "o-mammoth",
+  "timelines": [
+    "modern"
+  ],
+  "label": "Mammoths and the pyramid",
+  "line": "Mammoths were still alive on an Arctic island when the Great Pyramid was finished.",
+  "points": [
+    {
+      "label": "Great Pyramid finished",
+      "yearsAgo": 4600,
+      "wikipedia": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+      "source": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+      "sourceTitle": "English Wikipedia (secondary)"
+    },
+    {
+      "label": "The last mammoths die",
+      "yearsAgo": 4000,
+      "uncertaintyYears": 100,
+      "wikipedia": "https://en.wikipedia.org/wiki/Wrangel_Island",
+      "source": "https://www.cell.com/cell/fulltext/S0092-8674(24)00577-4",
+      "sourceTitle": "Dehasque et al. 2024, Cell"
+    },
+    {
+      "label": "Now",
+      "yearsAgo": 0
+    }
+  ],
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Woolly_mammoth",
+  "source": "https://www.cell.com/cell/fulltext/S0092-8674(24)00577-4",
+  "sourceTitle": "Dehasque et al. 2024, Cell"
+}

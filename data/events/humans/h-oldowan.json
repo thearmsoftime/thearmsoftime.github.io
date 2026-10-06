@@ -11,7 +11,7 @@
   "sourceTitle": "Smithsonian Human Origins: Tools & Food",
   "timelines": {
     "humans": {
-      "simple": true
+      "simple": false
     }
   }
 }

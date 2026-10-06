@@ -1,0 +1,34 @@
+{
+  "id": "o-eclipses",
+  "timelines": [
+    "universe"
+  ],
+  "label": "The last total eclipse",
+  "line": "The Moon drifts away a little each year. One day it will be too small to cover the Sun, and total eclipses will stop.",
+  "points": [
+    {
+      "label": "Big Bang",
+      "yearsAgo": 13787000000,
+      "uncertaintyYears": 20000000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Big_Bang",
+      "source": "https://arxiv.org/abs/1807.06209",
+      "sourceTitle": "Planck 2018 results VI"
+    },
+    {
+      "label": "Now",
+      "yearsAgo": 0
+    },
+    {
+      "label": "The last total eclipse",
+      "yearsAhead": 600000000,
+      "uncertaintyYears": 100000000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Solar_eclipse",
+      "source": "https://en.wikipedia.org/wiki/Lunar_distance",
+      "sourceTitle": "English Wikipedia (secondary)"
+    }
+  ],
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Solar_eclipse",
+  "source": "https://en.wikipedia.org/wiki/Lunar_distance",
+  "sourceTitle": "English Wikipedia (secondary)"
+}

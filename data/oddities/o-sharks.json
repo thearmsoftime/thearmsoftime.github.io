@@ -1,0 +1,35 @@
+{
+  "id": "o-sharks",
+  "timelines": [
+    "life",
+    "earth"
+  ],
+  "label": "Sharks and trees",
+  "line": "Sharks were swimming in the sea before the first trees grew on land.",
+  "points": [
+    {
+      "label": "First sharks",
+      "yearsAgo": 450000000,
+      "uncertaintyYears": 30000000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Shark",
+      "source": "https://en.wikipedia.org/wiki/Evolution_of_fish",
+      "sourceTitle": "English Wikipedia (secondary)"
+    },
+    {
+      "label": "First forests",
+      "yearsAgo": 385000000,
+      "uncertaintyYears": 5000000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Archaeopteris",
+      "source": "https://www.nature.com/articles/24923",
+      "sourceTitle": "Stein et al., Gilboa forest"
+    },
+    {
+      "label": "Now",
+      "yearsAgo": 0
+    }
+  ],
+  "certainty": "disputed",
+  "wikipedia": "https://en.wikipedia.org/wiki/Shark",
+  "source": "https://en.wikipedia.org/wiki/Evolution_of_fish",
+  "sourceTitle": "English Wikipedia (secondary)"
+}

@@ -1,0 +1,32 @@
+{
+  "id": "o-neanderthal",
+  "timelines": [
+    "humans"
+  ],
+  "label": "Neanderthals",
+  "line": "Neanderthals were a people of their own for far longer than they have been gone.",
+  "points": [
+    {
+      "label": "Neanderthals split off",
+      "yearsAgo": 600000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Neanderthal",
+      "source": "https://www.nature.com/articles/nature12886",
+      "sourceTitle": "Prufer et al. 2014, Nature"
+    },
+    {
+      "label": "Neanderthals end",
+      "yearsAgo": 40000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Neanderthal_extinction",
+      "source": "https://www.nature.com/articles/nature13621",
+      "sourceTitle": "Higham et al. 2014, Nature"
+    },
+    {
+      "label": "Now",
+      "yearsAgo": 0
+    }
+  ],
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Neanderthal",
+  "source": "https://www.nature.com/articles/nature13621",
+  "sourceTitle": "Higham et al. 2014, Nature"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "o-sun-swallows",
+  "timelines": [
+    "universe"
+  ],
+  "label": "The Sun swallows the Earth",
+  "line": "The Sun will swell up and take the Earth with it. That is still more than half an arm span away.",
+  "points": [
+    {
+      "label": "Big Bang",
+      "yearsAgo": 13787000000,
+      "uncertaintyYears": 20000000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Big_Bang",
+      "source": "https://arxiv.org/abs/1807.06209",
+      "sourceTitle": "Planck 2018 results VI"
+    },
+    {
+      "label": "Now",
+      "yearsAgo": 0
+    },
+    {
+      "label": "The Sun swallows the Earth",
+      "yearsAhead": 7590000000,
+      "uncertaintyYears": 100000000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Red_giant",
+      "source": "https://academic.oup.com/mnras/article/386/1/155/977284",
+      "sourceTitle": "Schroder & Smith 2008, MNRAS"
+    }
+  ],
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Red_giant",
+  "source": "https://academic.oup.com/mnras/article/386/1/155/977284",
+  "sourceTitle": "Schroder & Smith 2008, MNRAS"
+}

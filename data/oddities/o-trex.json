@@ -1,0 +1,35 @@
+{
+  "id": "o-trex",
+  "timelines": [
+    "life",
+    "earth"
+  ],
+  "label": "Tyrannosaurus and Stegosaurus",
+  "line": "Tyrannosaurus lived nearer in time to us than to Stegosaurus.",
+  "points": [
+    {
+      "label": "Stegosaurus",
+      "yearsAgo": 150000000,
+      "uncertaintyYears": 5000000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Stegosaurus",
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/stegosaurus.html",
+      "sourceTitle": "Natural History Museum, Dino Directory"
+    },
+    {
+      "label": "Tyrannosaurus",
+      "yearsAgo": 67000000,
+      "uncertaintyYears": 1000000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Tyrannosaurus",
+      "source": "https://www.nhm.ac.uk/discover/dino-directory/tyrannosaurus.html",
+      "sourceTitle": "Natural History Museum, Dino Directory"
+    },
+    {
+      "label": "Now",
+      "yearsAgo": 0
+    }
+  ],
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Tyrannosaurus",
+  "source": "https://www.nhm.ac.uk/discover/dino-directory/tyrannosaurus.html",
+  "sourceTitle": "Natural History Museum, Dino Directory"
+}

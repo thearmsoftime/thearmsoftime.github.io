@@ -1,0 +1,34 @@
+{
+  "id": "o-earth-too-hot",
+  "timelines": [
+    "universe"
+  ],
+  "label": "Earth gets too hot",
+  "line": "The Sun brightens as it ages. Earth has about a hand of liveable time left, just past the fingertip.",
+  "points": [
+    {
+      "label": "Big Bang",
+      "yearsAgo": 13787000000,
+      "uncertaintyYears": 20000000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Big_Bang",
+      "source": "https://arxiv.org/abs/1807.06209",
+      "sourceTitle": "Planck 2018 results VI"
+    },
+    {
+      "label": "Now",
+      "yearsAgo": 0
+    },
+    {
+      "label": "Earth too hot for life",
+      "yearsAhead": 1000000000,
+      "uncertaintyYears": 200000000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Future_of_Earth",
+      "source": "https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2015JD023302",
+      "sourceTitle": "Wolf & Toon 2015, JGR Atmospheres"
+    }
+  ],
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Future_of_Earth",
+  "source": "https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2015JD023302",
+  "sourceTitle": "Wolf & Toon 2015, JGR Atmospheres"
+}

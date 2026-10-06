@@ -11,7 +11,7 @@
   "sourceTitle": "Smithsonian Human Origins",
   "timelines": {
     "humans": {
-      "simple": true
+      "simple": false
     }
   }
 }

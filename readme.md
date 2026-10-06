@@ -16,7 +16,12 @@ timelines — there were no humans to count.
 
 The whole thing is one screen: a single slim bar at the top, the arms, the
 readouts, then the events — a strip of cards running left to right like the
-arms, or a list down the page. Nothing scrolls but the events.
+arms, or a list down the page. Nothing scrolls but the events. The cards sit
+on a tinted tray, all one height, so the tray is the same on every timeline.
+The arms take the rest of the height, and their line sits at a set share of it
+([src/layout.ts](src/layout.ts)), so the man stays put when the timeline
+changes. The top bar and the footer stop at 75rem (1200 px). A card's date source is not linked
+when it is the same page as its Wikipedia link.
 
 After the Natural History Museum of Los Angeles County's
 [At Arm's Length: A Short History of Earth](https://www.youtube.com/watch?v=uMXt0eGXuZc).
@@ -47,38 +52,47 @@ how many events, arm span, theme.
 - **Timeline** — five, each one a whole arm span: Universe (13.8 Ga), Earth
   (4.54 Ga), Life (3.7 Ga, from the first traces), Humans (7 Ma, from the split
   with chimpanzees) and Modern humans (4,600 years, from the Great Pyramid).
-  **Earth** and **Modern humans** are still being worked on, so they only
+  **Earth** and **Humans** are still being worked on, so they only
   appear in dev mode: add `?dev=1` to the URL
   (`http://localhost:5173/?dev=1`). The flag is read once, at load, and nothing
   is stored; a timeline kept from a dev visit falls back to Universe without it.
   Dev mode also adds a **Prototype** panel, under Dev in the settings menu:
   a floating box of live sliders for numbers that ship as constants, in tabs.
-  **Figure** holds the top cut, the bottom cut and the height, and copies back
-  into `src/figure.ts`. **Fade** holds the run-out into air — over the head,
-  under the arms, at each fingertip, a circle that hides or keeps what is
-  inside it, and a dimmer on each of the two layers — and copies back into
-  `src/fade.ts`. Everything on the Fade tab but the run-out under the arms sits
-  at "does nothing" by default, so it is a workbench and not a second look.
-  **Scrub** holds the sizes and distances around the knob — how far the
-  timeline is drawn under the fingertips and how thick it is, the ring's size,
-  edge, halo, lift and press, the event dots, the bars, the names above the
-  line and the readout rail — and copies back into `src/scrub.ts`.
+  **Knob** holds the ring the reader drags — its lift, size, edge, halo and
+  press — and the card under it: how close it rides, its padding, corners,
+  paper and edge, which rows it shows, and how they line up. It copies back
+  into `src/fob.ts`. Its switches ship at what the card has always done, so
+  they are a workbench and not a second look. **Scrub** holds everything along
+  the line — how far the timeline is drawn under the fingertips and how thick
+  it is, the event dots, the bars and the names above the line — and copies
+  back into `src/scrub.ts`. **Rail** holds the two scale numbers at the
+  screen's edges — how far in they sit, how big the number is, accent or
+  plain — and copies back into `src/rail.ts`. Both sides share those values.
+  **Light** colours the drawing — the scan, the whole outline, and the
+  highlight on the top edge of the arms — and slides it up or down under the
+  line. It copies back
+  into `src/light.ts`.
   Drag until it looks right, press Copy, paste the block back into the file it
   names. Where the box sits, which tab is open and every value are remembered. Everything behind the flag
   is purple, and nothing else in the app is, so a purple thing on screen is a
   thing that does not ship.
-- **Timelines** — the named spans (eons, periods, species, ages) on their own strip
-  above the arms, coarsest row at the top and the finest against the fingertip
-  line. Two rows at most: more than that reads as a wall of little boxes, so
+- **Time periods** — the named spans (eons, periods, species, ages) on their own strip
+  just above the arms, clear of the landmark names, coarsest row at the top and
+  the finest nearest the line. Two rows at most: more than that reads as a wall of little boxes, so
   the finest families are left off. On by default; switch them off to read the
   arms bare.
 - **Simple / All** — Simple is the default: about fourteen turning points per
   timeline, listed in each timeline's `keyEvents`. All shows everything the data
   holds.
-- **Scale unit** — an arrow each side of the scale readout steps the ruler:
-  **1 mm**, **a hair** (0.07 mm), **a finger**. A finger is a 96th of the span,
-  rounded to whole millimetres — Vitruvius counts a man as 24 palms of 4
-  fingers — so it stays a finger at any arm span. On 1.90 m it is 20 mm.
+- **Scale unit** — two numbers sit out at the screen's edges, level with the
+  fingertip line: the whole span on the left, one ruler on the right. An arrow
+  each side of the ruler steps it: **1 mm**, **a hair** (0.07 mm), **a
+  finger**. A finger is a 96th of the span, rounded to whole millimetres —
+  Vitruvius counts a man as 24 palms of 4 fingers — so it stays a finger at
+  any arm span. On 1.90 m it is 20 mm. **One life** (80 years) turns it round:
+  how many fingers a life takes. It is only offered where a life is at least
+  half a finger, which today is Modern humans alone, and there it is the
+  default. The ruler is kept per timeline.
 - **Numbers** — **Plain** or **Science**. Plain is the default: each date is a
   round number, the way a person says it. Science adds the ± error bar to the
   date line, grey and small, sharing one unit — "130 ±5 million years ago". A
@@ -111,17 +125,23 @@ timeline, say) falls back to the default. The marker itself is not kept.
   wins, then a moment over something that merely lasted through it. Otherwise
   the moment's card could never be reached: it owns a single point, and the
   range around it would take every one of them.
+  A stretch with other cards starting inside it — Egypt of the pharaohs, with
+  the Great Pyramid and Athens — counts at its start only, like a moment. The
+  strip runs in start order, so held for its whole length it would keep the
+  middle while the live card sat two cards to the right. `startsInside` in
+  `src/scale.ts` is the one rule; the live card and the strip both ask it.
 - **Timeline preview** — point at another timeline in the bar and the arms show
   what it would cover, without picking it: its whole span as a highlighted
   block running from where it starts to the right fingertip, because every
-  timeline ends at now. Two thin curves fall from the button onto the block's
+  timeline ends at now. The block reaches from the names down through the
+  line, the same full bar a hovered band gets, with the strip on or off. Two thin curves fall from the button onto the block's
   two edges, the same line the live card gets. The one already picked answers
   too: it is the whole arm, fingertip to fingertip. A longer one has nowhere to
   sit on this arm, so it shows nothing. On the long spans the block is a
   sliver at the very end of the arm, which is the point, so it is held to a
   couple of pixels rather than allowed to vanish.
 - **Span preview** — point at a cell in the timeline strip and that span is painted
-  down the whole drawing in its own colour. A cell is a few pixels tall, so a
+  in its own colour from the cell down through the line. A cell is a few pixels tall, so a
   long span like the dinosaurs' reads there as a stripe of colour rather than
   as a stretch of arm; this puts it back on the arm without moving the marker.
 - **The link** — on cards, a thin line runs from the readout under the knob to
@@ -150,8 +170,9 @@ padding, so the first and the last card can sit in the middle like any other.
 
 Timeline data lives in [`data/`](data/), split one entity per file, and is
 imported at build time, so a change to it shows up on the next dev reload. It
-holds five timelines (`universe`, `earth`, `life`, `humans`, `modern`), 60 bands
-and 173 events, every one of them with a Wikipedia link and a date source.
+holds five timelines (`universe`, `earth`, `life`, `humans`, `modern`), 60 bands,
+173 events and 17 odd facts, every one of them with a Wikipedia link and a date
+source.
 [`research/research.md`](research/research.md) is the working notes behind it:
 the spans, the scale maths, the band tables and the full source list.
 
@@ -161,6 +182,7 @@ data/
   timelines/<id>.json       one file per timeline
   bands/<group>.json        bands, grouped by the timeline they start on
   events/<group>/<id>.json  one file per event
+  oddities/<id>.json        one file per odd fact
 ```
 
 The `<group>` folder is where a thing *starts*, not everywhere it shows. There
@@ -186,6 +208,12 @@ Shape:
 // data/bands/earth.json — a list
 [{ "id", "label", "kind", "fromYearsAgo", "toYearsAgo",
    "timelines": ["timeline id", ...], "wikipedia", "source", "sourceTitle" }]
+
+// data/oddities/o-cleopatra.json
+{ "id", "label", "line", "certainty", "wikipedia", "source", "sourceTitle",
+  "timelines": ["timeline id", ...],
+  "points": [ { "label", "yearsAgo" | "yearsAhead", "uncertaintyYears",
+                "wikipedia", "source", "sourceTitle" }, ... ] }
 
 // data/events/earth/e-first-life.json
 { "id", "label", "description", "yearsAgo", "endYearsAgo", "uncertaintyYears",
@@ -216,14 +244,18 @@ screen has to know an event can live in two places.
 A **band's** `timelines` stays a plain list: a band has nothing to set per
 timeline. The Proterozoic is the same band on Earth and on Life.
 
-A timeline only takes what fits inside its span; anything older is dropped.
+A timeline only takes what fits inside its span; anything older is dropped. A
+stretch only has to end inside it — Egypt of the pharaohs was already old when
+the Great Pyramid went up — and its bar fades in from the left fingertip.
 
 - `yearsAgo` counts back from now (`0` = now, taken as 2026). Position along
   the arms is `x = 1 - yearsAgo / spanYears`.
 - `endYearsAgo` makes an event a **stretch** instead of a moment: something
   that lasted, like the age of dinosaurs. `yearsAgo` is then the older edge and
-  `endYearsAgo` the younger one. The arm draws a bar with a tick on each edge,
-  and the card says how long it ran instead of how well it is pinned. Leave it
+  `endYearsAgo` the younger one. The arm puts a dot on each edge and nothing
+  between them. While its card is live, a bar over the arms shows the length,
+  the same shape as a fun fact's gap, with how long it ran written in it. The
+  card says how long it ran instead of how well it is pinned. Leave it
   out for a moment. A band is still the way to name a *part of the timeline* —
   an eon, a species, an age; a stretch is one the reader should meet as an
   event. Do not call a stretch a range: the ± on a date is a range too, and
@@ -242,9 +274,9 @@ A timeline only takes what fits inside its span; anything older is dropped.
 - `note` on a timeline is the quiet line above the events. The tooltip on its
   button in the top bar is built instead from `startLabel`, `endLabel` and
   `spanYears`, so it stays one short line.
-- `meta.generationSource` and `meta.generated` are shown in the credit line at
-  the foot of the page: the paper the 26.9 years comes from, and the date of
-  the data.
+- `meta.generationSource` and `meta.generated` are shown under Credits in
+  the About box: the paper the 26.9 years comes from, and the date of the
+  data.
 - `kind` groups bands into families — `eon`, `era`, `period`, `epoch`,
   `species`, `culture` — and the timeline strip draws one row per family, coarsest
   at the top. `MAX_BAND_ROWS` in `src/figure.ts` caps the strip at **two**
@@ -255,6 +287,112 @@ A timeline only takes what fits inside its span; anything older is dropped.
   row survives the cap. A band is named only when its cell is wide enough to
   hold the name; the rest carry it in a DaisyUI `tooltip`, which is also where
   the family shows up. Clicking one moves the marker to where it starts.
+
+### Odd facts
+
+An **oddity** is three moments, and what it shows is the *two gaps between
+them*. The middle moment is the hinge both gaps share.
+
+> Cleopatra lived nearer in time to the first Moon landing than to the building
+> of the Great Pyramid.
+
+Both gaps are fractions of the same span, so the fact holds at any arm span —
+nothing in the sentence has to name a millimetre or a year — and the reader can
+measure both on their own arm. The surprise is not the number. It is that the
+bar they expected to be shorter is longer.
+
+Each file names the timelines whose span makes its two gaps big enough to see.
+Cleopatra is a `modern` fact only: on the humans arm her whole story is a
+fingernail. Every point carries its own source, because most of them are not
+events — Cleopatra earns one line in one comparison, not a card on the arm.
+
+**The future is the same shape.** The right fingertip stays *now*; a fact about
+what is ahead simply puts the hinge there, so everything so far is the arm span
+and what is left is measured in more of it. In the files a future moment is
+written `yearsAhead`, and the loader keeps it as a negative `yearsAgo` — the
+one place in the data where that number goes below zero — so a single value
+sorts the whole line and the drawing needs no second case. Earth has about a
+hand of liveable time left; the Sun takes it more than half a span further on.
+
+**On screen: the Fun fact button**, next to Settings in the top bar. It puts
+one fact on the arm — the three moments dotted on the line, each gap a bar of
+its own colour over the arms it covers — and squeezes a card
+into the event strip at the moment the two gaps share, where it says the fact
+in words. Press the button again for another; it never repeats itself in a row.
+
+It squeezes in: the card opens out from nothing and pushes its neighbours
+apart, so the reader sees it arrive rather than find it already sitting there.
+`.fact-squeeze` in `src/index.css` does it, animating width because pushing the
+neighbours is the whole point — a transform would slide over them.
+
+Two things follow from the card being *in* the strip rather than in a banner of
+its own. The marker lands on it, so the card that lights up is the fact's own
+and no event is wrongly picked out — put the fact anywhere else and the marker
+sits on it while some unrelated card three along takes the highlight. And the
+one-screen budget does not change: no new row, nothing to scroll.
+
+Picking any other card closes the fact, and so does moving the marker on the
+arm — dragging, a tap, the keys. The reader has moved on, and leaving it up would hold the arm's names and the dimmed drawing against a
+marker that is no longer standing on it.
+
+A fact's hinge is usually an event: the oxygen fact turns on the same date as
+the Great Oxygen Event card. Both cards then sit at the same point on the arm,
+so the fact wins that tie in `nearest()` — the reader is standing there because
+of the fact, not because of the card behind it.
+
+The bars are the same shape as the band under the pointer in the strip: from
+the names down through the line, fading out below it, whether the strip is on
+or not. The names sit just above the line, each centred over its moment; the
+two measures sit just under it. The hinge's name goes up one more row only
+when it would touch a neighbour. Now gets no name of its own: the bars change
+colour at the fingertip, and a fact about the future hides the *Now* caption,
+because the margin it sits in is where the future is drawn. A moment on the
+left fingertip gets no name either: the start caption in the margin already
+says it.
+
+The scan is turned down to `FACT_DIM` while a fact is up (`src/fade.ts`). The
+fact puts two bars, three dots and five words on the same strip of arm the
+drawing already fills; at full strength the drawing wins and none of it reads.
+
+The three moments are marked **whether or not they are events in `data/`, and
+whether or not the short list keeps them**. Cleopatra has no card on any arm
+and never will; the fact still has to show where she falls.
+
+**A fact is only offered where it can be read.** `MIN_GAP` in
+`src/oddities.ts` is the gate: both gaps have to cover at least **4 %** of the
+span, about a palm on a 1.90 m arm. Tyrannosaurus lived nearer to us than to
+Stegosaurus, but on the 3.7-billion-year Life arm both gaps are two per cent —
+two hairlines and three names on top of each other. It stays in the data and
+waits for a timeline short enough to hold it. `odditiesFor()` gives what the
+files pin to a timeline, `factsFor()` what that arm can actually draw; today
+that is 11 of the 17.
+
+`?dev=1` → Settings → **Odd facts** lists every one of them as bars, readable
+or not, and says which are too small for the arm they are on and why.
+
+### Body marks
+
+`?dev=1` → Settings → **Body marks** draws the parts of the arm as purple
+lines on both arms: the two knuckles of the middle finger, the big knuckle,
+the base of the thumb, the wrist, the elbow, the shoulder, the armpit, the nipple and the middle of the chest. Each has a faint band for how
+much one grown-up differs from the next. Hover a line for its share of the
+span, that spread, and the date it lands on in this timeline. The switch is
+remembered.
+
+They are a typical adult with the span taken as the height, rounded so the
+parts fit the span — the hand and fingers are firm, the shoulder and armpit
+rough. The list is [src/body.ts](src/body.ts).
+
+The lines are dev-only; the words are not. When the marker stands inside a
+part's spread, "at your wrist" fades in over the readout card, between it and
+the knob. In the last 2 cm it gets a line above it with the length from now
+("12 mm from now"), and an event card whose date falls on one gets a row saying so under
+its date. The card counts the date's ±: a part whose middle falls inside it
+is named, so the Great Oxygen Event (± 100 million years) sits at the nipple
+on the Earth arm. The readout does not — the marker is a point. No left or right: the drawing faces the reader, so its hands are the
+mirror of theirs, and that is not worth a sentence on screen. Where
+two spreads overlap — shoulder and armpit — the
+nearer middle wins, in `bodyAt()`.
 
 ### Reading the data as a table
 
@@ -318,8 +456,9 @@ is true on the first line of `eventsFor` and the draft path is never walked.
 ### The punchy line per timeline
 
 `src/facts.ts` carries one line per timeline, lifted from "The lines worth putting
-on the screen" in `research/research.md`, and it shows above the event list.
-Each is written as a proportion, never as a fixed count of years or
+on the screen" in `research/research.md`. It is **not on screen** right now:
+the footer dropped it, because the scale numbers already say what the arm is
+worth. The lines are kept for a place that needs them. Each is written as a proportion, never as a fixed count of years or
 millimetres, so it stays true at any arm span — the live numbers next to it are
 the scale bar's job.
 
@@ -335,11 +474,17 @@ the scale bar's job.
 | [src/scrub.ts](src/scrub.ts) | The timeline line, the ring, the dots, and the sizes around them |
 | [src/scale.ts](src/scale.ts) | Scale maths, years, generations, all formatting |
 | [src/data.ts](src/data.ts) | Globs and sanitises `data/`, folds in the per-timeline settings, and holds the dev-only timeline list |
-| [src/dev.ts](src/dev.ts) | The `?dev=1` flag |
+| [src/dev.ts](src/dev.ts) | The `?dev=1` flag, and the Body marks switch |
+| [src/body.ts](src/body.ts) | Where the knuckles, wrist, elbow and the rest fall along the span, and the "at your wrist" phrase |
+| [src/components/BodyMarks.tsx](src/components/BodyMarks.tsx) | Dev only: those as purple lines on the arms, with a hover card. Lazy |
 | [src/prototype/](src/prototype/) | Dev only: the floating panel of live knobs for numbers that ship as constants |
 | [src/components/DataPanel.tsx](src/components/DataPanel.tsx) | Dev only: the whole of `data/` as a table, one row per file, with an editor |
 | [src/drafts.ts](src/drafts.ts) | Dev only: the draft edits themselves. The one dev module on the visitor's path |
 | [src/edits.ts](src/edits.ts) | Dev only: changing a draft, and the prompt they copy out as. Lazy, with the browser |
+| [src/oddities.ts](src/oddities.ts) | The odd facts — two gaps that share a moment — and the gate on which arm may show one |
+| [src/components/FactMarks.tsx](src/components/FactMarks.tsx) | A fact on the arm: a dot per moment, a coloured bar per gap |
+| [src/components/FactCard.tsx](src/components/FactCard.tsx) | The fact's own card in the strip: the sentence, and the difference in numbers |
+| [src/components/OddityPanel.tsx](src/components/OddityPanel.tsx) | Dev only: every odd fact as bars, readable on this arm or not |
 | [src/facts.ts](src/facts.ts) | The one punchy line per timeline, from the research notes |
 | [src/components/Header.tsx](src/components/Header.tsx) | The one bar: title, timeline, timelines, events, arm span, theme |
 | [src/components/Segmented.tsx](src/components/Segmented.tsx) | The pill of buttons, used three times in the bar |
@@ -348,6 +493,8 @@ the scale bar's job.
 | [src/components/TimelinePreviewLink.tsx](src/components/TimelinePreviewLink.tsx) | The two curves from a hovered timeline button onto the span it would cover |
 | [src/components/ScaleBar.tsx](src/components/ScaleBar.tsx) | The scale numbers: two rails beside the arms, one line on small screens |
 | [src/components/EventCards.tsx](src/components/EventCards.tsx) | The card strip and its source links |
+| [src/components/About.tsx](src/components/About.tsx) | The About box: what it is, how to read it, use in a classroom or museum, the licence, the credits (drawing, idea, generation, data date), Ko-fi |
+| [src/components/KofiLink.tsx](src/components/KofiLink.tsx) | The Ko-fi button, as a plain link |
 
 Generations are a human measure, so `showsGenerations()` in `src/data.ts` is the
 single gate: it is true for the `humans` and `modern` timelines, and it drives the
@@ -426,8 +573,7 @@ Nothing ends on a hard edge. [`src/fade.ts`](src/fade.ts) holds the drawing in
 air on every side: a run-out over the head, one under the arms, one at each
 fingertip, and a soft circle that takes the face out. What is left is the pair
 of arms, which is all the ruler needs. Each of those is a mask layer, and they
-are intersected, so a layer only ever takes ink away. The **Fade** tab of the
-prototype panel is where those numbers are picked.
+are intersected, so a layer only ever takes ink away.
 
 ## The lines
 
@@ -463,3 +609,50 @@ cut from the scan as well, one layer shorter.
 A CSS `filter` cannot help here — filters apply to what an element paints, not
 to the pixels a mask is sampled from. So grain is cleaned in the trace itself,
 in GIMP, and not in the stylesheet.
+
+### Light from above
+
+The drawing is three layers, faintest at the back. The scan is almost
+nothing. Over it sits the whole trace, softer. On top sits the highlight,
+[`public/vitruvian-man-highlight.webp`](public/vitruvian-man-highlight.webp):
+only the top edge of the arms, where the light falls, at near full ink. Each
+layer has only its own colour and opacity; there are no shadow tricks. All
+three can slide up or down together under the line, which stays put. Both traces are exported from the same GIMP file, in the same
+box. The scan is warmed towards brown ink. All of it is in
+[`src/light.ts`](src/light.ts), and the prototype panel's **Light** tab tunes
+it.
+
+A tint on the scan only moves the dark theme: the light theme inverts the scan
+to black ink first, and no tint moves black. So the scan can also be painted
+the way the trace is — a colour cut out through the scan as a luminance mask —
+and then it reads the same on paper and on dark.
+
+## Licence
+
+Free to use, change and sell. Only keep the credit. The full text is in
+[LICENSE](LICENSE); the About box in the footer says the same in short.
+
+| Part | Licence |
+| --- | --- |
+| The code | [MIT](https://opensource.org/license/mit) |
+| The data, the research notes, the words on screen, the design | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| The figure | Public domain (see **Image credit** above) |
+
+Both licences allow commercial use and both ask for attribution. The credit
+line is **The Arms of Time**, with a link back where the medium allows one. The
+string lives once, as `CREDIT` in
+[`src/components/About.tsx`](src/components/About.tsx).
+
+## Support
+
+The footer is one line: how to drive the cards, then two quiet text links —
+Support on Ko-fi and About — in the bottom-right corner. The same two sit at
+the foot of the Settings menu as pills, Support first. The About box repeats Ko-fi as a larger solid
+button.
+
+Ko-fi hands out a widget script (`storage.ko-fi.com/cdn/widget/Widget_2.js`).
+It is **not** used: it would be the only thing on the page fetched from another
+host, and it draws itself with `document.write`, which a Solid render has no
+place for. [`src/components/KofiLink.tsx`](src/components/KofiLink.tsx) is a
+plain `<a>` to the same page, in Ko-fi's blue. Changing the page means changing
+`KOFI_URL` there.

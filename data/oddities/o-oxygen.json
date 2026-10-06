@@ -1,0 +1,34 @@
+{
+  "id": "o-oxygen",
+  "timelines": [
+    "life"
+  ],
+  "label": "Before oxygen",
+  "line": "Life was here for more than a billion years before there was oxygen to breathe.",
+  "points": [
+    {
+      "label": "First life",
+      "yearsAgo": 3700000000,
+      "uncertaintyYears": 100000000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Earliest_known_life_forms",
+      "source": "https://www.nature.com/articles/nature19355",
+      "sourceTitle": "Nutman et al. 2016, Nature"
+    },
+    {
+      "label": "Oxygen fills the air",
+      "yearsAgo": 2430000000,
+      "uncertaintyYears": 50000000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Great_Oxidation_Event",
+      "source": "https://www.science.org/doi/10.1126/sciadv.1600134",
+      "sourceTitle": "Luo et al. 2016, Science Advances"
+    },
+    {
+      "label": "Now",
+      "yearsAgo": 0
+    }
+  ],
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/Great_Oxidation_Event",
+  "source": "https://www.science.org/doi/10.1126/sciadv.1600134",
+  "sourceTitle": "Luo et al. 2016, Science Advances"
+}

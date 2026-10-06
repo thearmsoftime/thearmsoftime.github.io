@@ -9,9 +9,9 @@ import { FIGURE, cropHeight, cropTop } from './figure'
  * by a soft circle. What is left is the pair of arms, which is all the ruler
  * needs — and none of it ends on a hard edge.
  *
- * The dimmers per layer are still workbench only, sitting at "does nothing".
- * The prototype panel's Fade tab is the only thing that moves any of this, so
- * a visitor gets exactly the constant below and nothing more.
+ * The dimmers per layer sit at "does nothing". The prototype panel's Fade tab
+ * used to move them; it is gone, so the signal below only ever holds the
+ * constants — bring a tab back to tune them again.
  *
  * Every position is source y (or a fraction of the image box), the same units
  * as `figure.ts`, because the mask is cut from the scan's own box.
@@ -142,7 +142,7 @@ export function fadeLayers(): string[] {
  * WebKit `source-in` against an empty backdrop can wipe a single layer out.
  */
 export function maskStyle(lead?: string): Record<string, string> {
-  const layers = lead ? [lead, ...fadeLayers()] : fadeLayers()
+  const layers = [...(lead ? [lead] : []), ...fadeLayers()]
   const image = layers.join(', ')
   const modes = layers.map((_, i) => (lead && i === 0 ? 'luminance' : 'alpha')).join(', ')
 
@@ -164,5 +164,13 @@ export function maskStyle(lead?: string): Record<string, string> {
 }
 
 /** The theme picks the scan's strength; this is a dimmer on top of it. */
-export const inkOpacity = (): string => `calc(var(--figure-opacity) * ${fade().ink})`
-export const lineOpacity = (): string => String(fade().lineInk)
+/**
+ * How far the drawing is turned down while a fact is being measured on it. The
+ * fact puts two rules, three ticks and five words on the same strip of arm the
+ * scan already fills; at full strength the scan wins and none of it reads.
+ */
+export const FACT_DIM = 0.45
+
+export const inkOpacity = (dim = 1): string =>
+  `calc(var(--figure-opacity) * ${fade().ink} * ${dim})`
+export const lineOpacity = (dim = 1): string => String(fade().lineInk * dim)

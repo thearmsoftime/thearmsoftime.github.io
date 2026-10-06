@@ -1,0 +1,32 @@
+{
+  "id": "o-writing",
+  "timelines": [
+    "humans"
+  ],
+  "label": "Before writing",
+  "line": "People who looked like us lived for three hundred thousand years before anyone wrote anything down.",
+  "points": [
+    {
+      "label": "Homo sapiens",
+      "yearsAgo": 315000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Jebel_Irhoud",
+      "source": "https://www.nature.com/articles/nature22336",
+      "sourceTitle": "Hublin et al. 2017, Nature"
+    },
+    {
+      "label": "Writing",
+      "yearsAgo": 5300,
+      "wikipedia": "https://en.wikipedia.org/wiki/History_of_writing",
+      "source": "https://en.wikipedia.org/wiki/Cuneiform",
+      "sourceTitle": "English Wikipedia (secondary)"
+    },
+    {
+      "label": "Now",
+      "yearsAgo": 0
+    }
+  ],
+  "certainty": "high",
+  "wikipedia": "https://en.wikipedia.org/wiki/History_of_writing",
+  "source": "https://www.nature.com/articles/nature22336",
+  "sourceTitle": "Hublin et al. 2017, Nature"
+}

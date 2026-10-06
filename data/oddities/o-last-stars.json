@@ -1,0 +1,33 @@
+{
+  "id": "o-last-stars",
+  "timelines": [
+    "universe"
+  ],
+  "label": "The last stars",
+  "line": "Everything so far is one arm span. The last stars burn out thousands of arm spans further on.",
+  "points": [
+    {
+      "label": "Big Bang",
+      "yearsAgo": 13787000000,
+      "uncertaintyYears": 20000000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Big_Bang",
+      "source": "https://arxiv.org/abs/1807.06209",
+      "sourceTitle": "Planck 2018 results VI"
+    },
+    {
+      "label": "Now",
+      "yearsAgo": 0
+    },
+    {
+      "label": "The last stars go out",
+      "yearsAhead": 100000000000000,
+      "wikipedia": "https://en.wikipedia.org/wiki/Future_of_an_expanding_universe",
+      "source": "https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.69.337",
+      "sourceTitle": "Adams & Laughlin 1997, Rev. Mod. Phys."
+    }
+  ],
+  "certainty": "medium",
+  "wikipedia": "https://en.wikipedia.org/wiki/Future_of_an_expanding_universe",
+  "source": "https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.69.337",
+  "sourceTitle": "Adams & Laughlin 1997, Rev. Mod. Phys."
+}

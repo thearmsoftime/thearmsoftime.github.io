@@ -20,6 +20,8 @@
   --color-primary-content: oklch(18% 0.04 84);
   --color-secondary: oklch(72% 0.11 200);
   --color-secondary-content: oklch(16% 0.03 200);
+  /* A fun fact's second gap, beside secondary's first: clear of the accent. */
+  --fact-near: oklch(74% 0.12 318);
   --color-accent: oklch(84% 0.16 84);
   --color-accent-content: oklch(17% 0.04 84);
   --color-neutral: oklch(26% 0.008 65);
@@ -57,6 +59,7 @@
   --color-primary-content: oklch(98% 0.006 85);
   --color-secondary: oklch(45% 0.1 240);
   --color-secondary-content: oklch(98% 0.006 85);
+  --fact-near: oklch(47% 0.14 318);
   --color-accent: oklch(50% 0.18 32);
   --color-accent-content: oklch(98% 0.006 85);
   --color-neutral: oklch(30% 0.015 60);
@@ -130,7 +133,8 @@
   --dev-content: oklch(17% 0.04 300);
   /* The scan is white ink on a black card: screen drops the card onto the page. */
   --figure-blend: screen;
-  --figure-filter: none;
+  /* Not `none`: the Light tab adds its tint after this, and `none` takes no company. */
+  --figure-filter: brightness(1);
   --figure-opacity: 0.2;
 }
 
@@ -170,7 +174,8 @@ body {
 }
 
 .figure-ink {
-  filter: var(--figure-filter);
+  /* `--figure-tint` is the Light tab's, dev only. See `src/light.ts`. */
+  filter: var(--figure-filter) var(--figure-tint, brightness(1));
   mix-blend-mode: var(--figure-blend);
   opacity: var(--figure-opacity);
 }
@@ -220,7 +225,7 @@ body {
   The scrubber ring, and the rail its readout rides on. Both want one size on a
   phone and a bigger one from 40rem up, and both are live numbers in dev — a
   Tailwind class cannot be a variable, so they come in as custom properties and
-  the rules below spend them. See `src/scrub.ts`.
+  the rules below spend them. See `src/fob.ts`.
 
   The ring owns its whole transform, because the press is a number too, and its
   halo is a shadow rather than a Tailwind ring for the same reason.
@@ -304,6 +309,38 @@ html.theme-shift * {
 
 .timeline-fade {
   animation: timeline-fade 0.5s ease both;
+}
+
+/*
+ * A fun fact arriving in the event strip: it opens out from nothing and pushes
+ * the cards on either side apart, so the reader sees it squeeze in rather than
+ * find it already sitting there. Width, because pushing the neighbours is the
+ * whole point — a transform would slide over them instead.
+ *
+ * The final width is handed in as `--fact-w`, since it is a Tailwind class on
+ * the element and changes at the `sm` breakpoint. The card inside keeps its
+ * own width and is clipped, so the words do not reflow on every frame.
+ */
+@keyframes fact-squeeze {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: var(--fact-w);
+    opacity: 1;
+  }
+}
+
+.fact-squeeze {
+  /*
+   * `backwards`, never `both`: the end of the animation has to hand the card
+   * back to its own width from the class. With `both` the card keeps the
+   * keyframe's width for good, so anything that stops the animation running —
+   * a browser that skips it, a frame that never comes — leaves a card nobody
+   * can see.
+   */
+  animation: fact-squeeze 0.32s cubic-bezier(0.22, 0.8, 0.28, 1) backwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
