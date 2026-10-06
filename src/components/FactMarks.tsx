@@ -54,6 +54,41 @@ interface Props {
   spanYears: number
 }
 
+/** The arrowhead for a moment off the drawing, in figure units: long and narrow, so it never reads as a dot. */
+const ARROW_LONG = 16
+const ARROW_HALF = 7
+
+/**
+ * A moment too far ahead to draw gets an arrow, not a dot. A dot at the cap
+ * would sit at a false date; the arrow says "on past here", and the measure
+ * under the bar says how far.
+ */
+function OffEnd() {
+  const tip = () => xUnits(1 + BEYOND_CAP)
+  const back = () => tip() - ARROW_LONG
+  return (
+    <g opacity="0.55">
+      {/* Dashed, so it is not mistaken for more arm. */}
+      <line
+        x1={xUnits(1) + 10}
+        x2={back()}
+        y1={lineY()}
+        y2={lineY()}
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-dasharray="5 5"
+      />
+      <path
+        d={`M ${tip()} ${lineY()} L ${back()} ${lineY() - ARROW_HALF} L ${back()} ${lineY() + ARROW_HALF} Z`}
+        fill="currentColor"
+        stroke-width="1.5"
+        stroke-linejoin="round"
+        class="stroke-base-100"
+      />
+    </g>
+  )
+}
+
 /** The dots on the line. A bare `<g>`, for inside the stage's svg. */
 export function FactDots(props: Props) {
   const stops = createMemo(() => stopsOf(props.fact, props.spanYears))
@@ -61,15 +96,17 @@ export function FactDots(props: Props) {
     <g class="text-base-content">
       <For each={stops()}>
         {(stop) => (
-          <circle
-            cx={xUnits(tOf(stop))}
-            cy={lineY()}
-            r="5"
-            fill="currentColor"
-            stroke-width="1.5"
-            class="stroke-base-100"
-            opacity={stop.beyond ? 0.55 : 1}
-          />
+          <Show when={!isCut(stop)} fallback={<OffEnd />}>
+            <circle
+              cx={xUnits(tOf(stop))}
+              cy={lineY()}
+              r="5"
+              fill="currentColor"
+              stroke-width="1.5"
+              class="stroke-base-100"
+              opacity={stop.beyond ? 0.55 : 1}
+            />
+          </Show>
         )}
       </For>
     </g>

@@ -253,7 +253,11 @@ screen has to know an event can live in two places.
 - `landmark` writes the event's name on the arm itself, just above the line,
   instead of only on its card. For the few fixed points a reader should see
   without scrubbing — `u-earth` on the universe timeline. Keep the list short:
-  the names sit on the drawing.
+  the names sit on the drawing. Names that crowd are pushed apart, and where
+  a push would carry a name too far off its dot the name is left off on that
+  screen; the dot and the card stay.
+  [`src/landmarks.ts`](src/landmarks.ts) picks which; how far a name may
+  slide is `landmarkSlide` in `src/scrub.ts`.
 - `label` and `description` say it differently on one timeline. Both optional;
   without them the event's own wording is used.
 
@@ -342,6 +346,11 @@ written `yearsAhead`, and the loader keeps it as a negative `yearsAgo` — the
 one place in the data where that number goes below zero — so a single value
 sorts the whole line and the drawing needs no second case. Earth has about a
 hand of liveable time left; the Sun takes it more than half a span further on.
+
+The drawing only has the page margin past the fingertip — a tenth of a span.
+A moment that fits is a dot in it, to scale. One that does not gets a dashed
+arrow to the edge instead, and its bar fades out there: a dot at the edge
+would sit at a false date. The measure under the bar still gives the real gap.
 
 **On screen: the Fun fact button**, next to Settings in the top bar. It puts
 one fact on the arm — its moments dotted on the line, each gap a bar of
@@ -433,6 +442,8 @@ it writes back to the files.
 It shows what a single file cannot. Each row carries a chip per timeline it is
 on, marked `★` for `simple`, `▲` for `landmark` and `✎` where that timeline
 overrides the wording, so a disagreement between two timelines is one glance.
+The chip shows the timeline's name; hover it for the key in the file
+(`timelines.modern` for History).
 **Missing something** filters to the rows with no Wikipedia link, no date
 source or no description — the standing rule is that every event and band
 carries both links, and this is how that gets checked. The foot counts each
@@ -447,9 +458,9 @@ would type into the file.
 per-timeline flags: the shared `label` and `description`, then `simple`,
 `landmark` and the per-timeline overrides, one block per timeline the event is
 on. Edits are drafts. They live in `localStorage`, never touch a file, and the
-app reads them on top of the real data — so a new label lands on the arm and on
-the card while the box is still open. That is why the panel is docked to the
-bottom of the screen instead of centred: the arms have to stay visible.
+app reads them on top of the real data — so a new label is already on the arm
+and on the card when the box closes. The box takes 90 % of the screen each
+way, because the table needs the room more than the arm needs to show behind it.
 
 **Copy as prompt** turns every draft into a block to paste into a chat:
 
@@ -502,6 +513,7 @@ the scale bar's job.
 | [src/figure.ts](src/figure.ts) | The crop band, where the fingertips and chest sit, and the band rows |
 | [src/fade.ts](src/fade.ts) | How the drawing runs out into air, as a list of mask layers |
 | [src/scrub.ts](src/scrub.ts) | The timeline line, the ring, the dots, and the sizes around them |
+| [src/landmarks.ts](src/landmarks.ts) | Where the landmark names go, and which are left off when they crowd |
 | [src/scale.ts](src/scale.ts) | Scale maths, years, generations, all formatting |
 | [src/data.ts](src/data.ts) | Globs and sanitises `data/`, folds in the per-timeline settings, and holds the dev-only timeline list |
 | [src/dev.ts](src/dev.ts) | The `?dev=1` flag, and the Body marks switch |

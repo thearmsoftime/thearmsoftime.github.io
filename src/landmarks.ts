@@ -2,10 +2,11 @@
  * Where the landmark names go on the arm, and which of them fit at all.
  *
  * Names that would collide are pushed apart, but a push only helps so far: on
- * a phone four names on History slide so far that "Roman Empire" sits over
- * the wrong dot. A name off its own dot is a drawing that lies, so the one
- * whose loss frees the rest is left off instead. Its dot and its card stay;
- * only the name on the arm stands down.
+ * a phone, Roman Empire and Islam begins sit so close on History that pushing
+ * the names apart carries one about 40 px off its dot. A name off
+ * its own dot is a drawing that lies, so the one whose loss frees the rest is
+ * left off instead. Its dot and its card stay; only the name on the arm
+ * stands down.
  *
  * Map labelling solves the same thing in two dimensions. One row of a handful
  * of names needs no library for it.

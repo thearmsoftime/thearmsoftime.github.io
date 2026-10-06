@@ -374,13 +374,13 @@ export default function DataPanel(props: Props) {
   return (
     <Portal>
       {/*
-        Docked to the bottom, not centred like the ruler workbench, and behind
-        a much lighter veil: the arms have to stay visible above it. Editing a
-        label and watching it land on the arm is the whole point, and a modal
-        over the middle of the screen would hide exactly the thing being judged.
+        Nearly the whole screen: the table is wide and long, and room to read
+        it beats a sliver of arm above it. A fixed height, not a cap, so the
+        box does not jump as a filter changes the row count. Drafts still land
+        on the arm and the cards live; close the box to see them.
       */}
       <div
-        class="fixed inset-0 z-50 flex items-end justify-center bg-black/20 p-3"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/20 p-3"
         onClick={(e) => {
           if (e.target === e.currentTarget) props.onClose()
         }}
@@ -388,7 +388,7 @@ export default function DataPanel(props: Props) {
         <div
           role="dialog"
           aria-label="Data browser"
-          class="rounded-box bg-base-100 flex max-h-[68vh] w-full max-w-7xl flex-col border shadow-2xl"
+          class="rounded-box bg-base-100 flex h-[90vh] w-[90vw] flex-col border shadow-2xl"
           // Purple: this is a dev workbench, not part of what a visitor sees.
           style={{ 'border-color': 'color-mix(in oklab, var(--dev) 45%, transparent)' }}
         >
@@ -667,7 +667,9 @@ export default function DataPanel(props: Props) {
                             The whole reason the table exists: one chip per
                             timeline the event is on, carrying that timeline's
                             own settings. ★ simple, ▲ landmark, ✎ its own
-                            wording here.
+                            wording here. The chip says the name, the same as
+                            the filter and the editor: History is `modern` in
+                            the files, and the key to type is on hover.
                           */}
                           <td class="py-1.5 pe-3">
                             <div class="flex flex-wrap gap-1">
@@ -686,6 +688,7 @@ export default function DataPanel(props: Props) {
                                       'border-accent/50 text-accent': id === props.timelineId,
                                     }}
                                     title={[
+                                      `timelines.${id}`,
                                       on().simple ? '★ simple: kept in Simple mode' : 'not simple',
                                       on().landmark ? '▲ landmark: named on the arm' : undefined,
                                       on().label ? `label: ${on().label}` : undefined,
@@ -694,7 +697,7 @@ export default function DataPanel(props: Props) {
                                       .filter(Boolean)
                                       .join(' · ')}
                                   >
-                                    {id}
+                                    {timelines.find((t) => t.id === id)?.label ?? id}
                                     {on().simple ? ' ★' : ''}
                                     {on().landmark ? ' ▲' : ''}
                                     {on().label || on().description ? ' ✎' : ''}

@@ -3,12 +3,14 @@ dist
 .DS_Store
 *.local
 
-# design-sync (claude.ai/design)
+# design-sync (claude.ai/design), local only
 .ds-sync/
 ds-bundle/
-.design-sync/.cache/
-.design-sync/learnings/
-.design-sync/node_modules
+.design-sync/
+
+# Editor settings and Claude screenshots, local only
+.vscode/
+.claude/shots/
 
 # Claude Code worktrees
 .claude/worktrees/
