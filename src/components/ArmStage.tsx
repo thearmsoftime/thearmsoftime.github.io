@@ -27,7 +27,6 @@ import { columnFrom, columnTo, lineY, scrub } from "../scrub";
 import { clamp01 } from "../scale";
 import { placeLandmarks } from "../landmarks";
 import { formatYears } from "../format";
-import { factRows } from "../factRows";
 import { light, scanTint, sideColour } from "../light";
 import { DEV, bodyMarks } from "../dev";
 
@@ -178,6 +177,21 @@ const linesStyle = (dim: number, layer: "outline" | "highlight") => ({
  */
 const NAME_ROOM = "1.35rem";
 const nameFrac = () => yFrac(lineY() - landmarkLift());
+/**
+ * How tall a landmark name draws — LABEL_CLASS's text at leading-tight, plus
+ * its py-0.5 — and the live stretch's measure, which stands on top of it. The
+ * text grows at `sm:`, so the heights are custom properties that grow with it.
+ * Set on the stage, so the measure and its bar read the same ones.
+ */
+const ROW_HEIGHTS =
+  "[--name-h:0.975rem] [--measure-h:0.725rem] sm:[--name-h:1.125rem] sm:[--measure-h:0.825rem]";
+/**
+ * The name's top padding is only paper, so the measure may sit on that. The
+ * live stretch's bar reaches up to hold the measure, past the strip's foot if
+ * it has to: the strip is drawn over it.
+ */
+const MEASURE_SINK = "0.125rem";
+const STRETCH_ROOM = `max(${NAME_ROOM}, var(--name-h) + var(--measure-h) - ${MEASURE_SINK})`;
 const stripBottom = () => `calc(${(1 - nameFrac()) * 100}% + ${NAME_ROOM})`;
 /**
  * A column that belongs to the strip — the band under the pointer, the
@@ -189,9 +203,9 @@ const stripBottom = () => `calc(${(1 - nameFrac()) * 100}% + ${NAME_ROOM})`;
  */
 const LINK_MASK =
   "linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%)";
-const linkStyle = () => ({
-  top: `calc(${nameFrac() * 100}% - ${NAME_ROOM})`,
-  height: `calc(${(yFrac(lineY()) - nameFrac()) * 100}% + ${NAME_ROOM} + ${scrub().columnPx}px)`,
+const linkStyle = (room = NAME_ROOM) => ({
+  top: `calc(${nameFrac() * 100}% - ${room})`,
+  height: `calc(${(yFrac(lineY()) - nameFrac()) * 100}% + ${room} + ${scrub().columnPx}px)`,
   "-webkit-mask-image": LINK_MASK,
   "mask-image": LINK_MASK,
 });
@@ -279,6 +293,18 @@ export default function ArmStage(props: Props) {
   createEffect(() => {
     if (over().length > 0) setLastOver(over());
   });
+
+  /**
+   * The card's own width, so it can be kept on screen. It hangs centred under
+   * the knob, and the knob reaches the fingertip, a tenth of the width in: on
+   * a phone that put half of "13.8 billion years ago" past the edge.
+   */
+  const [cardW, setCardW] = createSignal(0);
+  const watchCard = (el: HTMLElement) => {
+    const observer = new ResizeObserver(() => setCardW(el.offsetWidth));
+    observer.observe(el, { box: "border-box" });
+    onCleanup(() => observer.disconnect());
+  };
 
   /** The card's rows: the years, and the line under them. */
   const cardRows = () => {
@@ -419,7 +445,7 @@ export default function ArmStage(props: Props) {
     <div class="w-full">
       <div
         ref={stage}
-        class="no-select relative w-full touch-pan-y"
+        class={`no-select relative w-full touch-pan-y ${ROW_HEIGHTS}`}
         classList={{
           "cursor-ew-resize": dragging(),
           "cursor-pointer": !dragging(),
@@ -546,7 +572,7 @@ export default function ArmStage(props: Props) {
                   style={{
                     left: `${xFrac(e().from) * 100}%`,
                     width: `max(2px, ${(xFrac(e().to) - xFrac(e().from)) * 100}%)`,
-                    ...linkStyle(),
+                    ...linkStyle(STRETCH_ROOM),
                     "border-left": cut() ? undefined : edge,
                     "border-right": edge,
                     "-webkit-mask-image": mask(),
@@ -559,10 +585,14 @@ export default function ArmStage(props: Props) {
                   class="text-accent bg-base-100/95 pointer-events-none absolute rounded px-1 text-[0.58rem] leading-tight font-semibold whitespace-nowrap tabular-nums sm:text-[0.66rem]"
                   style={{
                     left: `${xFrac(e().from + (e().to - e().from) * anchor()) * 100}%`,
-                    // Over the line, inside its own bar: under it is where
-                    // the knob's readout hangs, and the marker is usually on
-                    // one of the stretch's edges.
-                    top: `calc(${yFrac(lineY()) * 100}% - ${factRows().nameRem}rem)`,
+                    // Over the line, at the top of its own bar: under it is
+                    // where the knob's readout hangs, and the marker is
+                    // usually on one of the stretch's edges. It stands on the
+                    // landmark names rather than among them — Roman Empire's
+                    // name sits on the bar's own left edge. The names are
+                    // source units off the line and this is rem, so a fixed
+                    // rem lift landed in their row on a wide screen.
+                    top: `calc(${nameFrac() * 100}% - var(--name-h) + ${MEASURE_SINK})`,
                     transform: `translate(-${anchor() * 100}%, -100%)`,
                   }}
                 >
@@ -899,6 +929,7 @@ export default function ArmStage(props: Props) {
           `data-marker-anchor` is where the line to the live card starts.
         */}
         <div
+          ref={watchCard}
           data-marker-anchor
           class="relative w-fit -translate-x-1/2 border-solid"
           classList={{
@@ -907,7 +938,9 @@ export default function ArmStage(props: Props) {
           }}
           style={{
             padding: `${fob().railPadY}rem ${fob().railPadX}rem`,
-            "margin-left": `clamp(${fob().railEdge}rem, ${markerPct()}, calc(100% - ${fob().railEdge}rem))`,
+            // Centred under the knob until its edge meets the screen's, then
+            // it stops and the knob runs on over it.
+            "margin-left": `clamp(calc(${cardW() / 2}px + ${fob().railEdge}rem), ${markerPct()}, calc(100% - ${cardW() / 2}px - ${fob().railEdge}rem))`,
             "border-radius": cardRadius(),
             "border-width": `${fob().cardBorder}px`,
             "border-color": `color-mix(in oklab, var(--color-accent) ${fob().cardBorderInk * 100}%, transparent)`,

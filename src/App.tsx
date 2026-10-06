@@ -486,6 +486,22 @@ export default function App() {
         {(activeTimeline) => (
           <main class="relative flex min-h-0 flex-1 flex-col">
             {/*
+              Below xl the scale numbers sit over the arms, under the bar.
+              Outside the room, so the line still sits at its share of the
+              height the arms actually get.
+            */}
+            <ScaleRow
+              scale={scale()}
+              armSpanM={armSpanM()}
+              totalYears={totalYears()}
+              totalGenerations={totalGenerations()}
+              showGenerations={withGenerations()}
+              yardstick={yardstick()}
+              yardsticks={yardsticks()}
+              onYardstick={setYardstick}
+            />
+
+            {/*
               The arms take the height the card tray does not need. Their line
               sits at a set share of that height (`src/layout.ts`), not in the
               middle of whatever is drawn: bands and labels differ per
@@ -502,7 +518,7 @@ export default function App() {
                 {/* From xl only. The rails sit 4.5rem in from their own box
                     (see ScaleRail), so below about 1200 px they ran over the
                     "Big Bang" and "Now" captions — a 1024 x 768 projector is
-                    exactly that. Narrower screens get the one-line ScaleRow. */}
+                    exactly that. Narrower screens get the ScaleRow over the arms. */}
                 <div
                   class="hidden -translate-y-1/2 xl:flex"
                   style={{ "margin-top": `${lineTop()}px` }}
@@ -570,17 +586,6 @@ export default function App() {
                   />
                 </div>
               </div>
-
-              <ScaleRow
-                scale={scale()}
-                armSpanM={armSpanM()}
-                totalYears={totalYears()}
-                totalGenerations={totalGenerations()}
-                showGenerations={withGenerations()}
-                yardstick={yardstick()}
-                yardsticks={yardsticks()}
-                onYardstick={setYardstick}
-              />
               </div>
             </div>
 

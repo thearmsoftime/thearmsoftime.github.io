@@ -195,37 +195,49 @@ export function ScaleRail(props: ScaleProps & { side: "left" | "right" }) {
   );
 }
 
-/** The same numbers in one line, for screens too narrow to carry the rails. */
+/**
+ * The same numbers for screens too narrow to carry the rails: over the arms,
+ * one each side, the way the rails stand. Under the arms they sat between the
+ * knob's readout and the cards, in the path of the line that joins the two,
+ * and on a phone the pair wrapped onto two lines. Label over number, so a
+ * label with arrows never has to share a baseline with the number.
+ */
 export function ScaleRow(props: ScaleProps) {
-  const all = () => [...cells(props).left, ...cells(props).right];
+  const side = (list: () => Cell[], end: boolean) => (
+    <For each={list()}>
+      {(cell) => (
+        <div
+          class="flex min-w-0 flex-col whitespace-nowrap"
+          classList={{ "items-start": !end, "items-end text-right": end }}
+        >
+          <Show
+            when={cell.cycle}
+            fallback={<span class={LABEL_ROW}>{cell.label}</span>}
+          >
+            <CycleLabel
+              label={cell.label}
+              class={`${LABEL_ROW} ${end ? "justify-end" : ""}`}
+              armSpanM={props.armSpanM}
+              yardstick={props.yardstick}
+              yardsticks={props.yardsticks}
+              onYardstick={props.onYardstick}
+            />
+          </Show>
+          <span
+            class="text-xs font-semibold tabular-nums"
+            classList={{ "text-accent": rail().tone === "accent" }}
+          >
+            {cell.value}
+          </span>
+        </div>
+      )}
+    </For>
+  );
 
   return (
-    <div class="flex flex-wrap items-baseline justify-center gap-x-5 gap-y-0.5 px-3 xl:hidden">
-      <For each={all()}>
-        {(cell) => (
-          <div class="flex items-baseline gap-1.5 whitespace-nowrap">
-            <Show
-              when={cell.cycle}
-              fallback={<span class={LABEL_ROW}>{cell.label}</span>}
-            >
-              <CycleLabel
-                label={cell.label}
-                class={LABEL_ROW}
-                armSpanM={props.armSpanM}
-                yardstick={props.yardstick}
-                yardsticks={props.yardsticks}
-                onYardstick={props.onYardstick}
-              />
-            </Show>
-            <span
-              class="text-xs font-semibold tabular-nums"
-              classList={{ "text-accent": rail().tone === "accent" }}
-            >
-              {cell.value}
-            </span>
-          </div>
-        )}
-      </For>
+    <div class="mx-auto flex w-full max-w-[130rem] shrink-0 items-start justify-between gap-4 px-3 pt-2 sm:px-6 xl:hidden">
+      {side(() => cells(props).left, false)}
+      {side(() => cells(props).right, true)}
     </div>
   );
 }

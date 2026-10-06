@@ -100,7 +100,8 @@ how many events, arm span, theme.
   timeline, listed in each timeline's `keyEvents`. All shows everything the data
   holds.
 - **Scale unit** — two numbers sit out at the screen's edges, level with the
-  fingertip line: the whole span on the left, one ruler on the right. An arrow
+  fingertip line (over the arms below 1280 px): the whole span on the left,
+  one ruler on the right. An arrow
   each side of the ruler steps it: **1 mm**, **a hair** (0.07 mm), **a
   finger**. A finger is a 96th of the span, rounded to whole millimetres —
   Vitruvius counts a man as 24 palms of 4 fingers — so it stays a finger at
@@ -168,8 +169,16 @@ timeline, say) falls back to the default. The marker itself is not kept.
 
 The scale numbers sit beside the arms, left and right, rather than in a band
 under them: that height belongs to the event list. Below `xl` (1280 px) they
-fold into one compact line: the rails sit in from the screen's edge, and on a
-1024 x 768 projector they ran over the "Big Bang" and "Now" captions.
+move over the arms, just under the top bar, still one each side: the rails sit
+in from the screen's edge, and on a 1024 x 768 projector they ran over the
+"Big Bang" and "Now" captions. Not under the arms: there they sat between the
+knob's readout and the cards, in the path of the line that joins the two, and
+on a phone the pair wrapped onto two lines.
+
+The readout hangs centred under the knob until its edge meets the screen's,
+then it stops and the knob runs on over it. Near the fingertips on a phone,
+centred, half of "13.8 billion years ago" was off the screen. `railEdge` in
+`src/fob.ts` (Knob tab, *Off the edge*) is the gap it keeps.
 
 The marker readout says the year the marker is on, all the way to the
 fingertip — near now that reads "8,420 years ago", not "under 20 million years
@@ -274,7 +283,9 @@ has its bar fade in from there.
   that lasted, like the age of dinosaurs. `yearsAgo` is then the older edge and
   `endYearsAgo` the younger one. The arm puts a dot on each edge and nothing
   between them. While its card is live, a bar over the arms shows the length,
-  the same shape as a fun fact's gap, with how long it ran written in it. The
+  the same shape as a fun fact's gap, with how long it ran written at its
+  top. That measure stands on the landmark names, never among them: Roman
+  Empire's name sits on its own bar's edge, and the bar grows to hold both. The
   card says how long it ran instead of how well it is pinned. Leave it
   out for a moment. A band is still the way to name a *part of the timeline* —
   an eon, a species, an age; a stretch is one the reader should meet as an
