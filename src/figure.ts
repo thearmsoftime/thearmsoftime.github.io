@@ -4,7 +4,7 @@ import type { Band } from './types'
 
 /**
  * Where the drawing's landmarks sit, as fractions of the image box.
- * Measured off public/vitruvian-man.webp (see readme).
+ * Measured off public/vitruvian-man.webp (see DEVELOPMENT.md).
  */
 export const FIGURE = {
   src: '/vitruvian-man.webp',

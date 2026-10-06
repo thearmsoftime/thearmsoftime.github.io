@@ -1,0 +1,29 @@
+name: Report a mistake
+description: A date, a source or a text on a card is wrong.
+title: 'Mistake: '
+labels: [mistake]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. Every date on the arms should be right and should have a source.
+  - type: input
+    id: card
+    attributes:
+      label: Which card?
+      description: The title on the card, and the timeline it is on. For example "First stars, on Universe".
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What is wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: right
+    attributes:
+      label: What is right, and where does it say so?
+      description: A link to a source helps most.
+    validations:
+      required: true

@@ -5,9 +5,13 @@ fingertip is the beginning, right fingertip is now. Drag the scrubber to move
 through it. The point of the thing is the scale readout: on a 1.90 m span,
 1 mm = 7.26 million years.
 
-[readme.md](readme.md) is the real documentation — layout, data shape, themes,
-the figure measurements. Read it before changing anything. Keep it in step with
-the code; it is written for a reader, not as a changelog.
+[DEVELOPMENT.md](DEVELOPMENT.md) is the real documentation — layout, data
+shape, themes, the figure measurements. Read it before changing anything. Keep
+it in step with the code; it is written for a reader, not as a changelog.
+
+[readme.md](readme.md) is the front page on GitHub, for the public: what it is,
+how to use it, the licence, the use of AI. No code in it — that goes in
+DEVELOPMENT.md. Same voice as the screen.
 
 ## Who it is for
 

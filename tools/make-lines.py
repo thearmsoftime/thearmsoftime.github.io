@@ -49,7 +49,7 @@ GROW = 9            # how far the strong region reaches past the outline
 FEATHER = 22        # and how softly it hands over to the faint layer
 
 # The arms and the chest, in source pixels. Only a region, never drawn, so it
-# only has to enclose the ink — see readme, "The lines".
+# only has to enclose the ink — see DEVELOPMENT.md, "The lines".
 ARM_L = [(508, 314), (470, 316), (400, 316), (330, 315), (268, 317), (255, 318),
          (240, 308), (210, 299), (180, 293), (148, 286), (145, 313), (148, 340),
          (180, 352), (210, 354), (241, 360), (285, 365), (320, 366), (360, 370),
