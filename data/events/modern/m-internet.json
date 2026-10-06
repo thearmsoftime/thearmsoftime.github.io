@@ -1,7 +1,7 @@
 {
   "id": "m-internet",
   "label": "The internet",
-  "description": "The first two computers talk to each other over ARPANET.",
+  "description": "2 computers in California send the first message over ARPANET, the start of the internet.",
   "yearsAgo": 57,
   "uncertaintyYears": 1,
   "generationsAgo": 2.12,

@@ -1,7 +1,7 @@
 {
   "id": "h-vaccine",
   "label": "Vaccination",
-  "description": "Jenner's smallpox vaccine. The first disease we would go on to wipe out.",
+  "description": "Edward Jenner makes the first vaccine, against smallpox. Smallpox is wiped out in 1980.",
   "yearsAgo": 230,
   "uncertaintyYears": 2,
   "generationsAgo": 8.55,

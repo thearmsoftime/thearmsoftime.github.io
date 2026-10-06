@@ -1,7 +1,7 @@
 {
   "id": "h-printing",
   "label": "Printing press",
-  "description": "Gutenberg's movable type. Ideas start travelling faster than the people carrying them.",
+  "description": "Johannes Gutenberg prints with movable metal letters in Germany. Books get cheap and common.",
   "yearsAgo": 586,
   "uncertaintyYears": 5,
   "generationsAgo": 21.8,

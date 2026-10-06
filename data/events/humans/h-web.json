@@ -1,7 +1,7 @@
 {
   "id": "h-web",
   "label": "The World Wide Web",
-  "description": "Written down as a proposal in 1989, just over one generation ago.",
+  "description": "Tim Berners-Lee proposes the web at CERN, a science lab in Switzerland.",
   "yearsAgo": 37,
   "uncertaintyYears": 1,
   "generationsAgo": 1.38,

@@ -1,7 +1,7 @@
 {
   "id": "m-principia",
-  "label": "Newton writes down gravity",
-  "description": "One set of rules for apples, moons and planets alike.",
+  "label": "Newton's law of gravity",
+  "description": "Isaac Newton shows that one force makes apples fall and keeps the Moon going around Earth.",
   "yearsAgo": 339,
   "uncertaintyYears": 1,
   "generationsAgo": 12.6,

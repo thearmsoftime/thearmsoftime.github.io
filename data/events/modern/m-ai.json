@@ -1,7 +1,7 @@
 {
   "id": "m-ai",
-  "label": "Machines that talk",
-  "description": "Large language models reach everyone at once.",
+  "label": "AI chatbots",
+  "description": "Programs like ChatGPT write and talk like a person. Millions use them within weeks.",
   "yearsAgo": 4,
   "uncertaintyYears": 1,
   "generationsAgo": 0.15,

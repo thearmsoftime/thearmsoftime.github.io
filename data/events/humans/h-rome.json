@@ -1,7 +1,7 @@
 {
   "id": "h-rome",
   "label": "Roman Empire",
-  "description": "Augustus becomes the first emperor in 27 BC. The empire in the west ends in AD 476.",
+  "description": "From Augustus, the first emperor, to the fall of the west. The eastern half lasts until 1453.",
   "yearsAgo": 2052,
   "endYearsAgo": 1550,
   "uncertaintyYears": 0,

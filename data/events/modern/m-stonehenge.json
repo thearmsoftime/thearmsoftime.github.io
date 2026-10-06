@@ -1,7 +1,7 @@
 {
   "id": "m-stonehenge",
-  "label": "Stonehenge finished",
-  "description": "The big sarsen stones go up in England while the pyramids are still new.",
+  "label": "Stonehenge",
+  "description": "The big stones of Stonehenge go up in England, at about the same time as the pyramids.",
   "yearsAgo": 4500,
   "uncertaintyYears": 100,
   "generationsAgo": 167,

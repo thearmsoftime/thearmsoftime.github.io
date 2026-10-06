@@ -1,7 +1,7 @@
 {
   "id": "h-penicillin",
   "label": "Antibiotics",
-  "description": "Fleming's mould. Infection stops being a normal way to die.",
+  "description": "Alexander Fleming finds penicillin in a mould. It kills the bacteria that cause infections.",
   "yearsAgo": 98,
   "uncertaintyYears": 1,
   "generationsAgo": 3.64,

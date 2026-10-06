@@ -1,7 +1,7 @@
 {
   "id": "m-transistor",
   "label": "The transistor",
-  "description": "The switch every digital thing is built from.",
+  "description": "A tiny electric switch, made at Bell Labs in the USA. Every computer chip is built from them.",
   "yearsAgo": 79,
   "uncertaintyYears": 1,
   "generationsAgo": 2.94,

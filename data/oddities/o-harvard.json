@@ -4,7 +4,7 @@
     "modern"
   ],
   "label": "Harvard and gravity",
-  "line": "Harvard was already teaching when Newton wrote down how gravity works.",
+  "line": "Harvard University was already teaching students when Isaac Newton explained gravity.",
   "points": [
     {
       "label": "Harvard founded",
@@ -14,7 +14,7 @@
       "sourceTitle": "Harvard, history"
     },
     {
-      "label": "Newton writes down gravity",
+      "label": "Newton's law of gravity",
       "yearsAgo": 339,
       "wikipedia": "https://en.wikipedia.org/wiki/Philosophi%C3%A6_Naturalis_Principia_Mathematica",
       "source": "https://www.royalsociety.org/collections/",

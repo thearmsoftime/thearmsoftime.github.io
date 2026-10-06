@@ -19,9 +19,10 @@ The general public, roughly age 10 to 100. No science background assumed. Many
 readers are not native English speakers. One screen, on a phone or a projector,
 often with no one there to explain it.
 
-So: nothing on screen may need prior knowledge. A term that is not common
-English (Phanerozoic, stromatolite, Ga) either gets named in plain words as
-well, or does not appear.
+So: nothing on screen may need prior knowledge. But the reader is here to
+learn, so a real name may stay — *Cambrian explosion*, *Homo erectus* — as long
+as the same card says in plain words what it is. A term only experts use
+(Phanerozoic, stromatolite, Ga) does not appear.
 
 ## What it is for
 
@@ -62,20 +63,50 @@ When that work starts:
 
 Informative and plain. Not funny, not chatty, not breathless.
 
-- Short sentences. Common words. One idea each.
-- State the thing; no jokes, no winks, no exclamation marks, no second-person
-  pep ("get ready to...").
+**Simple English**, so it is understood all over the world. Write for someone
+who learned English at school: age 10 and up, or a language learner. Simple is
+about the sentences, not the facts — the reader may learn a new word.
+
+- Short sentences. Common words. One idea each. Aim for under 15 words.
+- **Say what happened: who, what, where.** No riddles, no jokes, no winks, no
+  exclamation marks, no second-person pep ("get ready to..."). If the reader
+  has to work out what the card is about, it is a riddle.
+  - Yes: *Charles Darwin publishes On the Origin of Species. It explains how
+    living things change over time.*
+  - No: *The book that explains everything on the left half of this arm.*
+- **Real names stay, and get explained.** The label is the name the reader
+  would look up: *Cambrian explosion*, *Homo erectus*, *Tiktaalik*. The
+  description says in plain words what it is. Do not swap a real name for a
+  made-up one ("Animals everywhere"). But when the thing has a plain name of
+  its own, use that and put the formal one in the description: *Written laws*,
+  not *Code of Hammurabi*.
+- **No "first" unless it was.** Hammurabi's laws are not the oldest known;
+  "one of the oldest" is. Check before writing *first*, *oldest* or *last*.
+- **No codes and no expert words.** Not *JADES-GS-z14-0*, *biosphere*, *body
+  plans*, *hominin*, *Mesozoic*. Say what they mean: "the most distant galaxy
+  found so far", "all living things", "the early relatives of humans".
+- **Numbers in digits,** written the way the scale bar writes them:
+  *66 years*, *12 seconds*, *300,000 years*, *4.5 billion years*. Never "three
+  hundred thousand years" or "sixty-six". Years before Christ as *3300 BC*.
+  This is about real dates and durations. A length on the arm, or years per
+  length, is still never written down — see *Arm span is a setting* below.
+- **Label:** a name, a few words. **Description:** 1 or 2 short sentences,
+  about 100 characters at most — the card fades out the rest.
+- **Do not repeat what the card already shows.** It prints the date, and on
+  Humans and History the calendar year and the generations too. Use the
+  description for what happened and why it matters.
 - Concrete over abstract: a nail file, a hair, a palm — real objects the reader
   can picture.
 - No hype words: incredible, mind-blowing, staggering, journey.
-- Say what is uncertain when it is uncertain. Honesty is part of the amazement.
+- Say what is uncertain when it is uncertain: "about", "probably", "the
+  oldest found so far". Honesty is part of the amazement.
 
 ## Rules that are easy to break by accident
 
 - **One screen, no scrolling.** `100dvh`, a flex column. Only the event strip
   scrolls, and only sideways.
-- **Arm span is a setting** (0.50–2.60 m). Never write a fixed millimetre or
-  year figure into copy — phrase it as a proportion, the way `src/facts.ts`
+- **Arm span is a setting** (0.50–2.60 m). Never write a length on the arm,
+  or the years one length stands for, into copy — phrase it as a proportion, the way `src/facts.ts`
   does. Live numbers are the scale bar's job.
 - **Every event and band carries a source.** A Wikipedia link plus a date
   source. New data without a source does not go in.

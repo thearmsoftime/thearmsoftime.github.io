@@ -1,7 +1,7 @@
 {
   "id": "h-apollo",
   "label": "People on the Moon",
-  "description": "Roughly two generations ago.",
+  "description": "Neil Armstrong and Buzz Aldrin are the first people to walk on the Moon.",
   "yearsAgo": 57,
   "uncertaintyYears": 1,
   "generationsAgo": 2.12,

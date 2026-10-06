@@ -1,7 +1,7 @@
 {
   "id": "h-origin",
-  "label": "On the Origin of Species",
-  "description": "The book that explains everything on the left half of this arm.",
+  "label": "Darwin's theory of evolution",
+  "description": "Charles Darwin publishes On the Origin of Species. It explains how living things change over time.",
   "yearsAgo": 167,
   "uncertaintyYears": 1,
   "generationsAgo": 6.21,

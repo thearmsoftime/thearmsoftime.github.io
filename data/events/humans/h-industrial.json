@@ -1,7 +1,7 @@
 {
   "id": "h-industrial",
   "label": "Industrial Revolution",
-  "description": "Coal and steam, about nine generations ago. It changed the whole planet.",
+  "description": "Machines driven by coal and steam start doing work done by hand. It begins in Britain.",
   "yearsAgo": 250,
   "uncertaintyYears": 30,
   "generationsAgo": 9.29,

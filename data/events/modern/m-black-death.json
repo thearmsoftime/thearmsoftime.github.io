@@ -1,7 +1,7 @@
 {
   "id": "m-black-death",
   "label": "The Black Death",
-  "description": "About a third of Europe dies in four years.",
+  "description": "A plague spreads across Asia and Europe. It kills 30 to 60% of people in Europe.",
   "yearsAgo": 678,
   "uncertaintyYears": 2,
   "generationsAgo": 25.2,
