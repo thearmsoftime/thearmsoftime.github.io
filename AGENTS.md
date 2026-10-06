@@ -22,7 +22,12 @@ often with no one there to explain it.
 So: nothing on screen may need prior knowledge. But the reader is here to
 learn, so a real name may stay — *Cambrian explosion*, *Homo erectus* — as long
 as the same card says in plain words what it is. A term only experts use
-(Phanerozoic, stromatolite, Ga) does not appear.
+(stromatolite, Ga, biosphere) does not appear.
+
+One exception: **band names.** A band is a named age — Jurassic, Phanerozoic,
+Bronze Age — and its name is the thing itself, so it stays even when only
+experts know it. A band has no room to explain; its strip and dates do that.
+In event descriptions those words still get plain words instead.
 
 ## What it is for
 
