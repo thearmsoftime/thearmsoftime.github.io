@@ -5,10 +5,10 @@
     "universe"
   ],
   "label": "Single cells",
-  "line": "For most of life's story there was nothing bigger than a single cell.",
+  "line": "For most of life's history, nearly every living thing was a single cell. Each was too small to see.",
   "points": [
     {
-      "label": "First life",
+      "label": "Early life",
       "yearsAgo": 3700000000,
       "uncertaintyYears": 100000000,
       "wikipedia": "https://en.wikipedia.org/wiki/Earliest_known_life_forms",
@@ -16,7 +16,7 @@
       "sourceTitle": "Nutman et al. 2016, Nature"
     },
     {
-      "label": "First large animals",
+      "label": "First large life",
       "yearsAgo": 575000000,
       "uncertaintyYears": 5000000,
       "wikipedia": "https://en.wikipedia.org/wiki/Ediacaran_biota",

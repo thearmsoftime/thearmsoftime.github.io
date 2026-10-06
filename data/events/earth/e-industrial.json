@@ -1,7 +1,7 @@
 {
   "id": "e-industrial",
   "label": "Industrial era",
-  "description": "Coal, then oil. Carbon that took 300 million years to bury goes back into the air.",
+  "description": "People burn coal, then oil. Carbon buried for millions of years goes back into the air.",
   "yearsAgo": 250,
   "uncertaintyYears": 30,
   "generationsAgo": 9.29,

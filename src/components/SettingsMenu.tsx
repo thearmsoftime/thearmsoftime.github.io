@@ -18,7 +18,7 @@ const BANDS_OPTIONS = [
 
 const NUMBER_OPTIONS = [
   { value: 'plain' as const, label: 'Plain', title: 'Round numbers, the way people say them' },
-  { value: 'science' as const, label: 'Science', title: 'Each date with its ± error bar' },
+  { value: 'science' as const, label: 'Science', title: 'Each date with how far off it may be (±)' },
 ]
 
 const THEME_OPTIONS = THEME_CHOICES.map((value) => ({ value, label: THEME_LABEL[value] }))
@@ -156,7 +156,7 @@ export default function SettingsMenu(props: Props) {
             />
           </Field>
 
-          <Field label="Arm span" hint="Your own reach, in metres.">
+          <Field label="Arm span" hint="Fingertip to fingertip, in metres.">
             <label class="border-base-300 bg-base-200/70 flex w-fit items-center gap-1.5 rounded-full border px-2.5 py-1">
               <input
                 type="number"
@@ -184,7 +184,7 @@ export default function SettingsMenu(props: Props) {
             />
           </Field>
 
-          <Field label="Numbers" hint="Science adds the ± error bar to each date.">
+          <Field label="Numbers" hint="Science also shows how far off each date may be (±).">
             <Segmented
               label="How dates are written"
               options={NUMBER_OPTIONS}

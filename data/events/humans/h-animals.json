@@ -1,7 +1,7 @@
 {
   "id": "h-animals",
-  "label": "Herds",
-  "description": "Goats and sheep first, then cattle and pigs. Food that walks with you.",
+  "label": "Farm animals",
+  "description": "People in southwest Asia start keeping goats and sheep, then cattle and pigs.",
   "yearsAgo": 10500,
   "uncertaintyYears": 500,
   "generationsAgo": 390,

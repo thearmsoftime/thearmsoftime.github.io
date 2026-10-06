@@ -1,7 +1,7 @@
 {
   "id": "u-out-of-africa",
   "label": "People spread out of Africa",
-  "description": "The move that puts humans on every continent. Invisible at this scale.",
+  "description": "Our species moves into Asia and Europe. In time, people reach every continent but Antarctica.",
   "yearsAgo": 60000,
   "uncertaintyYears": 10000,
   "generationsAgo": 2230,

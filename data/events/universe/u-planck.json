@@ -1,7 +1,7 @@
 {
   "id": "u-planck",
-  "label": "The length of this arm is measured",
-  "description": "The Planck satellite's final results fix the age of the universe at 13.787 billion years.",
+  "label": "Age of the universe measured",
+  "description": "The Planck satellite measures it as 13.787 billion years, to within 20 million years.",
   "yearsAgo": 8,
   "uncertaintyYears": 1,
   "generationsAgo": 0.3,

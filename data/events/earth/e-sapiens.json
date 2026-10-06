@@ -1,7 +1,7 @@
 {
   "id": "e-sapiens",
   "label": "Homo sapiens",
-  "description": "Fossils from Jebel Irhoud, Morocco. Our whole species is 0.13 mm on this arm.",
+  "description": "Our own species, modern humans. The oldest known fossils come from Jebel Irhoud in Morocco.",
   "yearsAgo": 315000,
   "uncertaintyYears": 34000,
   "generationsAgo": 11710,

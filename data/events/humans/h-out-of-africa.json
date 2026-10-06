@@ -1,7 +1,7 @@
 {
   "id": "h-out-of-africa",
-  "label": "The move that peopled the world",
-  "description": "Everyone alive outside Africa descends mostly from this one dispersal. About 2,200 generations ago.",
+  "label": "Our species leaves Africa",
+  "description": "A group of our species leaves Africa. People outside Africa today descend mainly from them.",
   "yearsAgo": 60000,
   "uncertaintyYears": 10000,
   "generationsAgo": 2230,

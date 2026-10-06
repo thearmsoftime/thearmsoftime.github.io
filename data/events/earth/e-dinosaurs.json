@@ -1,7 +1,7 @@
 {
   "id": "e-dinosaurs",
   "label": "Age of dinosaurs",
-  "description": "It starts with Nyasasaurus in Tanzania and ends with the asteroid. Only the birds come through.",
+  "description": "From the earliest known dinosaurs to the asteroid strike. Only birds, a kind of dinosaur, live on.",
   "yearsAgo": 243000000,
   "endYearsAgo": 66000000,
   "uncertaintyYears": 3000000,

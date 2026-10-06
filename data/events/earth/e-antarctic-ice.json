@@ -1,7 +1,7 @@
 {
   "id": "e-antarctic-ice",
   "label": "Antarctica freezes",
-  "description": "A permanent ice sheet forms in the south. The long cooling towards our ice ages begins.",
+  "description": "Ice covers Antarctica and stays. It is a big step in the cooling that leads to the ice ages.",
   "yearsAgo": 33900000,
   "uncertaintyYears": 100000,
   "generationsAgo": 1260223,

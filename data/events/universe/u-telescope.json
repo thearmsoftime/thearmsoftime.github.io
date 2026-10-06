@@ -1,7 +1,7 @@
 {
   "id": "u-telescope",
-  "label": "First telescope views",
-  "description": "Galileo publishes what he saw: moons around Jupiter, mountains on the Moon.",
+  "label": "Galileo's telescope",
+  "description": "Galileo Galilei publishes what he saw: moons going around Jupiter and mountains on the Moon.",
   "yearsAgo": 416,
   "uncertaintyYears": 2,
   "generationsAgo": 15.5,

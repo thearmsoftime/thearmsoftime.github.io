@@ -1,7 +1,7 @@
 {
   "id": "e-columbia",
-  "label": "First big supercontinent",
-  "description": "Columbia, also called Nuna. Continents have been gathering and splitting ever since.",
+  "label": "Columbia",
+  "description": "Nearly all land joins into one giant continent. Since then, continents keep joining and splitting.",
   "yearsAgo": 1800000000,
   "uncertaintyYears": 100000000,
   "generationsAgo": 66914498,

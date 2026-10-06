@@ -4,7 +4,7 @@
     "humans"
   ],
   "label": "Neanderthals",
-  "line": "Neanderthals were a people of their own for far longer than they have been gone.",
+  "line": "Neanderthals were a separate kind of human for over 500,000 years. They have been gone only 40,000 years.",
   "points": [
     {
       "label": "Neanderthals split off",
@@ -14,7 +14,7 @@
       "sourceTitle": "Prufer et al. 2014, Nature"
     },
     {
-      "label": "Neanderthals end",
+      "label": "Neanderthals die out",
       "yearsAgo": 40000,
       "wikipedia": "https://en.wikipedia.org/wiki/Neanderthal_extinction",
       "source": "https://www.nature.com/articles/nature13621",

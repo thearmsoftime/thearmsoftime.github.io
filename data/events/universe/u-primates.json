@@ -1,7 +1,7 @@
 {
   "id": "u-primates",
-  "label": "First primates",
-  "description": "Purgatorius, a mouse-sized climber, appears within a few hundred thousand years of the asteroid.",
+  "label": "Early primates",
+  "description": "Purgatorius is a small tree climber. It may be an early relative of monkeys, apes and us.",
   "yearsAgo": 65900000,
   "uncertaintyYears": 500000,
   "generationsAgo": 2449814,

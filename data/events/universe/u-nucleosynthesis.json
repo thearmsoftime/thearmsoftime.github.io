@@ -1,7 +1,7 @@
 {
   "id": "u-nucleosynthesis",
   "label": "First atomic nuclei",
-  "description": "Within minutes protons and neutrons stick together. Nearly all the hydrogen and helium there will ever be is made now.",
+  "description": "In the first few minutes, the centres of the first atoms form. Most helium today was made then.",
   "yearsAgo": 13787000000,
   "uncertaintyYears": 20000000,
   "generationsAgo": 512527881,

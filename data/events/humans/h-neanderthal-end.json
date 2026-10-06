@@ -1,7 +1,7 @@
 {
   "id": "h-neanderthal-end",
-  "label": "Neanderthals end",
-  "description": "The last of them, after two to five thousand years of living alongside us.",
+  "label": "Neanderthals die out",
+  "description": "A human species of Europe and Asia. They had lived beside our species for 2,000 to 5,000 years.",
   "yearsAgo": 40000,
   "uncertaintyYears": 2000,
   "generationsAgo": 1487,

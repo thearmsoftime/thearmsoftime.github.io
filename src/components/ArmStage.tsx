@@ -839,7 +839,7 @@ export default function ArmStage(props: Props) {
         <button
           type="button"
           role="slider"
-          aria-label="Scrub along the arm span"
+          aria-label="Move through time along the arms"
           aria-valuemin={0}
           aria-valuemax={1000}
           aria-valuenow={Math.round(props.pos * 1000)}

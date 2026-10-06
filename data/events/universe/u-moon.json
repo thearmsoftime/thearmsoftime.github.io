@@ -1,7 +1,7 @@
 {
   "id": "u-moon",
-  "label": "The Moon",
-  "description": "Something about the size of Mars hits Earth. The debris becomes the Moon.",
+  "label": "The Moon forms",
+  "description": "Something the size of Mars probably hits Earth. The pieces thrown out form the Moon.",
   "yearsAgo": 4510000000,
   "uncertaintyYears": 10000000,
   "generationsAgo": 167657993,

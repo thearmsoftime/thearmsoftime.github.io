@@ -1,7 +1,7 @@
 {
   "id": "h-sapiens",
   "label": "Homo sapiens",
-  "description": "Fossils from Jebel Irhoud, Morocco. Our own species, about 11,700 generations back.",
+  "description": "Our own species. The oldest fossils found so far come from Jebel Irhoud, in Morocco.",
   "yearsAgo": 315000,
   "uncertaintyYears": 34000,
   "generationsAgo": 11710,

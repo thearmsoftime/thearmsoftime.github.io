@@ -1,7 +1,7 @@
 {
   "id": "h-holocene",
-  "label": "The climate settles",
-  "description": "The ice age ends. A warm, steady climate for the first time in a hundred thousand years.",
+  "label": "The last ice age ends",
+  "description": "The world warms up. The climate is warm and steady for the first time in over 100,000 years.",
   "yearsAgo": 11700,
   "uncertaintyYears": 100,
   "generationsAgo": 435,

@@ -79,7 +79,7 @@ export default function FactCard(props: Props) {
               <>
                 {formatYears(difference())}{' '}
                 <span class="text-base-content/70">
-                  {younger() < older() ? 'shorter than the gap before it' : 'longer than what came after'}
+                  {younger() < older() ? 'shorter than the gap before it' : 'longer than the gap after it'}
                 </span>
               </>
             }

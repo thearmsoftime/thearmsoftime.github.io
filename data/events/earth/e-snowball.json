@@ -1,7 +1,7 @@
 {
   "id": "e-snowball",
   "label": "Snowball Earth",
-  "description": "Ice reaches the tropics, twice. The Cryogenian period is named for it.",
+  "description": "Ice spreads from the poles to the equator, maybe over the whole Earth. This happens twice.",
   "yearsAgo": 720000000,
   "uncertaintyYears": 5000000,
   "generationsAgo": 26765799,

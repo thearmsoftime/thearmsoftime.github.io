@@ -1,7 +1,7 @@
 {
   "id": "u-tetrapods",
-  "label": "Arms",
-  "description": "Tiktaalik: a fish with a neck, ribs and the beginnings of arms.",
+  "label": "Tiktaalik",
+  "description": "A fish with a neck, ribs and fins with wrist bones. It is part way between fish and land animals.",
   "yearsAgo": 375000000,
   "uncertaintyYears": 5000000,
   "generationsAgo": 13940520,

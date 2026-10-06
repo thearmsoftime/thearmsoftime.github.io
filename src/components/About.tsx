@@ -112,8 +112,8 @@ export default function AboutDialog() {
             The Arms of Time
           </h2>
           <p class="text-base-content/80 max-w-prose text-sm leading-relaxed sm:text-base">
-            A ruler for deep time, laid on the human body. It shows how old the
-            world is, and how short our own part of it has been.
+            Time drawn on the human body. It shows how old the world is, and
+            how short our own part of it has been.
           </p>
         </header>
 
@@ -122,12 +122,12 @@ export default function AboutDialog() {
           <div class="flex flex-col gap-8">
             <Section title="What this is">
               <p>
-                Deep time drawn along the arms of Leonardo's{" "}
+                Time drawn along the arms of Leonardo da Vinci's{" "}
                 <em>Vitruvian Man</em>. The left fingertip is the beginning, the
                 right fingertip is now.
               </p>
               <p>
-                Your own arm span sets the scale. Set it under Settings, and
+                Your own arm span sets the scale. Enter it under Settings. Then
                 every distance on screen is measured on your body.
               </p>
             </Section>
@@ -135,8 +135,8 @@ export default function AboutDialog() {
             <Section title="How to read it">
               <ol class="flex flex-col gap-2">
                 <Step n={1}>
-                  Pick a timeline at the top, from the whole Universe to modern
-                  humans.
+                  Pick a timeline at the top, from the whole Universe to human
+                  history.
                 </Step>
                 <Step n={2}>
                   Drag the marker along the arms. The cards below say what
@@ -184,7 +184,7 @@ export default function AboutDialog() {
             <Section title="Credits">
               <Rows>
                 <Row term="Drawing">
-                  Leonardo da Vinci, <em>Vitruvian Man</em> (c. 1490). Public
+                  Leonardo da Vinci, <em>Vitruvian Man</em> (about 1490). Public
                   domain, via{" "}
                   <OutLink href="https://commons.wikimedia.org/wiki/File:Da_Vinci_Vitruve_Luc_Viatour.jpg">
                     Wikimedia Commons

@@ -1,7 +1,7 @@
 {
   "id": "e-devonian-ext",
   "label": "Late Devonian extinction",
-  "description": "A long series of die-offs in the sea, ending the Devonian.",
+  "description": "A long series of die-offs in the sea ends the Devonian period. One of the 5 biggest extinctions.",
   "yearsAgo": 358860000,
   "uncertaintyYears": 400000,
   "generationsAgo": 13340520,
