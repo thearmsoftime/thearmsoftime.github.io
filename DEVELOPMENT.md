@@ -124,6 +124,25 @@ back on the next visit — `src/prefs.ts` for the timeline, the timeline strip, 
 unit, the event count, the error bars and the arm span, `src/theme.ts` for the theme, which also has to
 land before the first paint. Anything stored that no longer parses (a renamed
 timeline, say) falls back to the default. The marker itself is not kept.
+
+The address bar says where the reader is, so a copied link opens on the same
+spot — `src/link.ts`. Four parameters: `timeline`, then `card` when the marker
+stands right on a card's start, `fact` while a fun fact is up, and `ago` (years
+ago, to four figures) when no card or fact says where the marker
+is. So `?timeline=humans&card=h-sapiens`, or `?timeline=universe&ago=66000000`.
+A link wins over what is stored. A card only All shows switches the reader to
+All, or the link would land on a spot with nothing standing there. Arm span,
+theme and the rest are left out: they belong to the reader, not to the place.
+Other parameters, `?dev=1` among them, are kept.
+
+A click — a timeline, a card, the Fun fact button — pushes a history entry, so
+Back undoes it. Dragging, the strip and the keys only replace the current
+entry, once the hand has rested 250 ms: one drag would otherwise be hundreds of
+entries, and Safari throttles the calls. Back and Forward set the state from
+the address and write nothing back. A bare address keeps the stored timeline,
+on its landing card — Dinosaurs die out on the Universe, `LANDING` in
+`App.tsx` — or the middle of the arm where it has none. It stays bare until
+the reader moves something.
 - **Scrubber** — an empty ring on the fingertip line, so the drawing shows
   through it. Drag it, or press anywhere along the arms.
   With the knob focused: `←` `→` to step, `Shift` for bigger jumps, `Alt` to hop
@@ -381,8 +400,11 @@ sits on it while some unrelated card three along takes the highlight. And the
 one-screen budget does not change: no new row, nothing to scroll.
 
 Picking any other card closes the fact, and so does moving the marker on the
-arm — dragging, a tap, the keys. The reader has moved on, and leaving it up would hold the arm's names and the dimmed drawing against a
-marker that is no longer standing on it.
+arm — dragging, a tap, the keys — or letting go of the strip on another card.
+The reader has moved on, and leaving it up would hold the arm's names and the
+dimmed drawing against a marker that is no longer standing on it. The strip
+waits for the hand to let go (`onScrubEnd`): closed mid-drag, the fact card
+would squeeze out under the hand and every card past it would jump.
 
 A fact's hinge is usually an event: the oxygen fact turns on the same date as
 the Great Oxygen Event card. Both cards then sit at the same point on the arm,
@@ -521,6 +543,7 @@ the scale bar's job.
 | [src/App.tsx](src/App.tsx) | State and the one-screen layout: theme, arm span, timeline, marker |
 | [src/theme.ts](src/theme.ts) | The two themes, the system follow, `localStorage`, the cross-fade |
 | [src/prefs.ts](src/prefs.ts) | Signals that remember themselves in `localStorage` |
+| [src/link.ts](src/link.ts) | Where the reader is, in the address bar: reading a shared link, and keeping the bar in step |
 | [src/figure.ts](src/figure.ts) | The crop band, where the fingertips and chest sit, and the band rows |
 | [src/fade.ts](src/fade.ts) | How the drawing runs out into air, as a list of mask layers |
 | [src/scrub.ts](src/scrub.ts) | The timeline line, the ring, the dots, and the sizes around them |

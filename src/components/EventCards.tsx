@@ -44,6 +44,8 @@ interface Props {
    * one instant and the position alone cannot say which was meant.
    */
   onScrub: (pos: number, id?: string) => void
+  /** The hand has let go of the strip, on this card. */
+  onScrubEnd?: (id?: string) => void
 }
 
 /**
@@ -108,6 +110,14 @@ export default function EventCards(props: Props) {
   /** Set while the hand owns the strip, so `follow` does not pull against it. */
   let byHand = false
   let handTimer = 0
+  /**
+   * Set from a change in the cards until they are measured again. Taking a
+   * card out — the fact at the far right, when the next fact is elsewhere —
+   * can leave the strip scrolled past its new end, and the browser pulls it
+   * back with a scroll event of its own. That is nobody's hand: read it as one
+   * and the marker leaves the fact it was just sent to.
+   */
+  let settling = false
   /** A mouse press that has turned into a drag, so the click it ends with is dead. */
   let drag: { x: number; left: number; moved: boolean } | null = null
   let swallowClick = false
@@ -291,14 +301,21 @@ export default function EventCards(props: Props) {
    * Any scroll this component did not cause is a hand: a finger, a mouse drag,
    * the wheel, the scrollbar. All of them mean the same thing, so all of them
    * move the marker, and the strip keeps whatever position the hand left it in.
+   *
+   * A new timeline builds a new strip, and the old one can still fire a last
+   * scroll as it is taken apart — mid-glide, say, after the Back button. That
+   * one is nobody's hand: read it as one and the marker jumps to the far end.
    */
-  const onScroll = () => {
+  const onScroll = (e: Event) => {
+    if (e.currentTarget !== strip) return
+    if (settling) written = strip.scrollLeft
     if (Math.abs(strip.scrollLeft - written) < 1) return
     written = strip.scrollLeft
     byHand = true
     clearTimeout(handTimer)
     handTimer = window.setTimeout(() => {
       byHand = false
+      props.onScrubEnd?.(idAt(strip.scrollLeft + strip.clientWidth / 2))
     }, HAND_MS)
     if (frame !== 0) {
       cancelAnimationFrame(frame)
@@ -317,7 +334,9 @@ export default function EventCards(props: Props) {
   createEffect(() => {
     items()
     props.spanYears
+    settling = true
     requestAnimationFrame(() => {
+      settling = false
       measure()
       schedule()
     })

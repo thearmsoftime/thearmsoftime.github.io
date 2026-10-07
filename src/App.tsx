@@ -1,4 +1,13 @@
-import { Show, createMemo, createSignal, lazy, onCleanup } from "solid-js";
+import {
+  Show,
+  batch,
+  createEffect,
+  createMemo,
+  createSignal,
+  lazy,
+  on,
+  onCleanup,
+} from "solid-js";
 import Header from "./components/Header";
 import { ScaleRail, ScaleRow } from "./components/ScaleBar";
 import ArmStage, { type NudgeKind } from "./components/ArmStage";
@@ -42,6 +51,7 @@ import {
 import { DEV } from "./dev";
 import { bodyAt } from "./body";
 import { createStoredSignal } from "./prefs";
+import { createLinkWriter, linkSearch, readLink, type Link } from "./link";
 import {
   applyThemeChoice,
   readThemeChoice,
@@ -256,9 +266,11 @@ export default function App() {
       current < 0
         ? list[Math.floor(Math.random() * list.length)]!
         : list[(current + 1) % list.length]!;
-    setFactId(next.id);
-    const hinge = next.points[1].yearsAgo;
-    if (hinge >= 0) setPos(fractionOf(hinge, spanYears()));
+    pushing(() => {
+      setFactId(next.id);
+      const hinge = next.points[1].yearsAgo;
+      if (hinge >= 0) setPos(fractionOf(hinge, spanYears()));
+    });
   };
 
   const positioned = createMemo(() => {
@@ -391,6 +403,89 @@ export default function App() {
     formatGenerations(generationsOf(spanYears(), meta.generationYears)),
   );
 
+  /*
+    The address bar says where the reader is, so a copied link opens on the
+    same spot. See `src/link.ts`. A card stands for the marker only when the
+    marker is right on its start; otherwise the years ago do.
+  */
+  const link = createMemo((): Link => {
+    const fact = liveFact();
+    const on = nearest();
+    const out: Link = { timeline: timelineId(), fact: fact?.id };
+    if (on && on.id !== fact?.id && Math.abs(on.t - pos()) < 1e-9) out.card = on.id;
+    else if (!fact || Math.abs((factPos() ?? -1) - pos()) > 1e-9)
+      out.ago = markerYearsAgo();
+    return out;
+  });
+
+  /** The timeline the visit started on, for a link that names none. */
+  const homeTimelineId = timelineId();
+  /**
+   * Where a bare address lands, per timeline: a moment everyone knows, close
+   * enough to now that the reader sees how thin it is.
+   */
+  const LANDING: Record<string, string> = { universe: "u-kpg" };
+
+  const applyLink = (next: Link) =>
+    batch(() => {
+      const id = visibleTimelines.some((z) => z.id === next.timeline)
+        ? next.timeline!
+        : homeTimelineId;
+      const span = visibleTimelines.find((z) => z.id === id)?.spanYears ?? 1;
+      setTimelineId(id);
+      const fact = factsFor(id).find((f) => f.id === next.fact);
+      setFactId(fact?.id ?? null);
+      const card = eventsFor(id, "all").find((e) => e.id === next.card);
+      // A card only All shows was shared from All: show it, or the link
+      // lands on a spot with nothing standing there.
+      if (card && !eventsFor(id, detail()).some((e) => e.id === card.id))
+        setDetail("all");
+      setPickedId(card?.id ?? null);
+      if (card) setPos(fractionOf(card.yearsAgo, span));
+      else if (next.ago !== undefined) setPos(fractionOf(next.ago, span));
+      else if (fact) setPos(fractionOf(Math.max(fact.points[1].yearsAgo, 0), span));
+      else {
+        const landing = eventsFor(id, detail()).find((e) => e.id === LANDING[id]);
+        setPickedId(landing?.id ?? null);
+        setPos(landing ? fractionOf(landing.yearsAgo, span) : 0.5);
+      }
+    });
+
+  const writer = createLinkWriter();
+  /** How the next change reaches the address bar. A drag only replaces. */
+  let writeMode: "push" | "replace" | "none" = "replace";
+  /** Run a click's changes as one step the Back button can undo. */
+  function pushing(change: () => void) {
+    writeMode = "push";
+    batch(change);
+    writeMode = "replace";
+  }
+
+  // A bare address keeps the stored timeline, on its landing card if it has one.
+  applyLink(readLink());
+
+  createEffect(
+    on(
+      () => linkSearch(link()),
+      (search) => {
+        if (writeMode === "push") writer.push(search);
+        else if (writeMode === "replace") writer.replace(search);
+      },
+      { defer: true },
+    ),
+  );
+
+  // Back and Forward: the address is already right, so the state follows it
+  // and nothing is written back.
+  const onPopState = () => {
+    writer.drop();
+    writeMode = "none";
+    applyLink(readLink());
+    writeMode = "replace";
+  };
+  window.addEventListener("popstate", onPopState);
+  onCleanup(() => window.removeEventListener("popstate", onPopState));
+
   const nudge = (direction: -1 | 1, kind: NudgeKind) => {
     if (kind === "event") {
       const candidates = positioned()
@@ -410,7 +505,7 @@ export default function App() {
       <Header
         timelines={visibleTimelines}
         timelineId={timelineId()}
-        onTimeline={setTimelineId}
+        onTimeline={(id) => pushing(() => setTimelineId(id))}
         onTimelineHover={setHoverTimelineId}
         showBands={showBands()}
         onShowBands={setShowBands}
@@ -624,18 +719,26 @@ export default function App() {
                 fact={liveFact()}
                 onFactNext={nextFact}
                 onFactClose={() => setFactId(null)}
-                onPick={(event) => {
-                  // Picking any other card is done with the fact: the reader
-                  // has moved on to an event, and leaving the fact up would
-                  // hold the arm's names and the dimmed drawing against a
-                  // marker that is no longer standing on it.
-                  setFactId(null);
-                  setPickedId(event.id);
-                  setPos(fractionOf(event.yearsAgo, activeTimeline().spanYears));
-                }}
+                onPick={(event) =>
+                  pushing(() => {
+                    // Picking any other card is done with the fact: the reader
+                    // has moved on to an event, and leaving the fact up would
+                    // hold the arm's names and the dimmed drawing against a
+                    // marker that is no longer standing on it.
+                    setFactId(null);
+                    setPickedId(event.id);
+                    setPos(fractionOf(event.yearsAgo, activeTimeline().spanYears));
+                  })
+                }
                 onScrub={(next, id) => {
                   if (id) setPickedId(id);
                   setPos(next);
+                }}
+                // Leaving the fact by the strip is done with it, as on the
+                // arm. Not mid-drag: the card would squeeze out under the
+                // hand and every card past it would jump.
+                onScrubEnd={(id) => {
+                  if (liveFact() && id !== liveFact()!.id) setFactId(null);
                 }}
               />
             </div>

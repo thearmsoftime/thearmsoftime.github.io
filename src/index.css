@@ -381,6 +381,12 @@ html.theme-shift * {
   scrollbar-width: thin;
   scrollbar-color: color-mix(in oklch, currentColor 22%, transparent) transparent;
   overscroll-behavior-x: contain;
+  /*
+   * The strip places itself; the browser must not. Scroll anchoring would nudge
+   * it while the fact card squeezes in, and the strip would read that nudge as
+   * a hand and move the marker off the fact.
+   */
+  overflow-anchor: none;
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0,
